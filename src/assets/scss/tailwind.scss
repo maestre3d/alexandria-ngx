@@ -1,4 +1,9 @@
 @import 'tailwindcss/base';
+
+button:focus {
+    outline: none !important;
+}
+
 @import 'tailwindcss/components'; 
 @import 'alexandria-component.scss';
 @import 'tailwindcss/utilities';

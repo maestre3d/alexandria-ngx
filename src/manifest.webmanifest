@@ -1,8 +1,8 @@
 {
-  "name": "alexandria-ngx",
-  "short_name": "alexandria-ngx",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Alexandria",
+  "short_name": "Alexandria",
+  "theme_color": "#0057FF",
+  "background_color": "#f0f0f0",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

@@ -1,0 +1,25 @@
+.active {
+    background-color: var(--color-primary) !important;
+    color: #FFFFFF !important;
+    transition: all ease-in 250ms;
+}
+
+.app-bg {
+    background-color: var(--color-background-dark);
+}
+
+.app-bg-accent {
+    background-color: var(--color-background);
+}
+
+.app-bg-light {
+    background-color: var(--color-background-light);
+}
+
+html[data-theme="dark"] {
+    .active {
+        background-color: var(--color-primary) !important;
+        color: #FFFFFF !important;
+        transition: all ease-in 250ms;
+    }
+}
