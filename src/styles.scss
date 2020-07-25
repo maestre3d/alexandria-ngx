@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components'; 
-@import './custom-tailwind/custom-components.css'; // added
+@import './assets/scss/alexandria-component.scss'; // added
 @import 'tailwindcss/utilities';
-@import './custom-tailwind/custom-utilities.css'; // added
+@import './assets/scss/alexandria-util.scss'; // added
