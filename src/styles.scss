@@ -1,6 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components'; 
-@import './assets/scss/alexandria-component.scss'; // added
-@import 'tailwindcss/utilities';
-@import './assets/scss/alexandria-util.scss'; // added
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Mulish:wght@400;700;800;900&display=swap');
+
+html {
+    --color-primary: #0057FF;
+    --color-accent: #000055;
+    --color-danger: #D50000;
+    --color-success: #00c853;
+
+    --color-font: #111111;
+    --color-font-accent: #7b7b7b;
+    --color-font-alt: #ffffff;
+
+    --color-border: #e4e4e4;
+
+    --color-background-dark: #e0e0e0;
+    --color-background-light: #ffffff;
+    --color-background: #fafafa;
+}
+
+html[data-theme="dark"] {
+    --color-font: #ffffff;
+    --color-font-accent: rgba(255,255,255, 0.6);
+    --color-font-alt: #111111;
+
+    --color-border: #292929;
+    
+    --color-background-dark: #18191a;
+    --color-background-light: rgba(255,255,255, 0.1);
+    --color-background: #242526;
+}
+
+:root {
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+}

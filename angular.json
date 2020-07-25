@@ -28,11 +28,14 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/assets/scss/material-theme.scss",
+              "src/assets/scss/tailwind.scss",
               "src/styles.scss"
             ],
             "scripts": [],
             "customWebpackConfig": {
-              "path": "./webpack.config.js"
+              "path": "extra-webpack.config.js"
             }
           },
           "configurations": {
@@ -73,7 +76,7 @@
           "options": {
             "browserTarget": "alexandria-ngx:build",
             "customWebpackConfig": {
-              "path": "./webpack.config.js"
+              "path": "extra-webpack.config.js"
             }
           },
           "configurations": {
@@ -101,6 +104,9 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/assets/scss/material-theme.scss",
+              "src/assets/scss/tailwind.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -132,6 +138,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "alexandria-ngx"
 }
