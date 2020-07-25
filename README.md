@@ -1,4 +1,4 @@
-# AlexandriaNgx
+# Alexandria
 
 The Alexandria Project web application written in Angular 10+
 
