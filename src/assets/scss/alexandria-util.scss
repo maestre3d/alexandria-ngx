@@ -17,9 +17,4 @@
 }
 
 html[data-theme="dark"] {
-    .active {
-        background-color: var(--color-primary) !important;
-        color: #FFFFFF !important;
-        transition: all ease-in 250ms;
-    }
 }
