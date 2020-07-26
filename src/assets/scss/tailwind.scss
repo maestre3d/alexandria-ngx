@@ -4,6 +4,11 @@ button:focus {
     outline: none !important;
 }
 
+button {
+    border-radius: 100px !important;
+    font-weight: 700 !important;
+}
+
 @import 'tailwindcss/components'; 
 @import 'alexandria-component.scss';
 @import 'tailwindcss/utilities';

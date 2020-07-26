@@ -1,9 +1,9 @@
 <div class="animate__animated animate__fadeIn w-full">
-    <div class="text-3xl font-black font-display">Welcome back, <br> Ethan</div>
-    <button mat-flat-button color="primary" (click)="onClick()">Toggle theme</button>
+    <h1 class="text-3xl font-black font-display truncate">Welcome back, <br> Ethan</h1>
+    <!--<button mat-flat-button color="primary" (click)="onClick()">Toggle theme</button>-->
 
     <!-- Ads section -->
-    <section aria-label="Advertising section" class="flex flex-row flex-no-wrap w-full mt-6">
+    <section aria-label="Advertising section" aria-details="Check out new content made for you" class="flex flex-col flex-no-wrap w-full mt-8">
         <!-- Swiper boundaries -->
         <div class="w-full max-w-full" >
             <!-- Slider main container -->
@@ -11,19 +11,56 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                     <ng-container *ngFor="let ad of this.ads">
-                        <div class="swiper-slide">
+                        <div class="swiper-slide md:w-auto">
                             <!-- Ad card -->
-                            <div class="bg-gray-500 w-full max-w-xs rounded-lg bg-cover bg-center" style="height: 400px;"
-                            [style.background-image]="'url('+ this.ad.image +')'" [attr.aria-label]="this.ad.title + ' - ' + this.ad.description" 
-                            [attr.aria-details]="this.ad.description">
+                            <div class="bg-gray-500 w-full max-w-xs rounded-lg bg-cover bg-center md:w-64" style="height: 400px;"
+                            [style.background-image]="'url('+ ad.image +')'" [attr.aria-label]="ad.title + ' - ' + ad.description" 
+                            [attr.aria-details]="ad.description">
                                 <!-- Contrast filter -->
-                                <div class="flex flex-col flex-no-wrap justify-end rounded-lg bg-contrast-filter text-white w-full h-full">
+                                <a [routerLink]="['/ad']" [queryParams]="{id: ad.id}" rel="canonical"
+                                class="flex flex-col flex-no-wrap justify-end rounded-lg bg-contrast-filter text-white w-full h-full">
                                     <!-- Data / content -->
                                     <div class="flex flex-col w-full max-w-full px-5 py-8 break-words">
-                                        <h1 class="font-black font-display text-2xl">{{this.ad.title}}</h1>
-                                        <h2 class="font-body font-medium text-lg truncate">{{this.ad.description}}</h2>
+                                        <h1 class="font-black font-display text-2xl">{{ad.title}}</h1>
+                                        <h2 class="font-body font-medium text-lg truncate">{{ad.description}}</h2>
                                     </div>
-                                </div>
+                                </a>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent -->
+    <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
+    class="flex flex-col flex-no-wrap mt-8">
+        <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
+            <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">Get back in</h2>
+            <button mat-stroked-button color="primary" (click)="onClick()">More</button>
+        </div>
+        <!-- Swiper boundaries -->
+        <div class="w-full max-w-full mt-4" >
+            <!-- Slider main container -->
+            <div class="swiper-container" #recentSwiper>
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <ng-container *ngFor="let item of this.recentItems">
+                        <div class="swiper-slide" style="width: 192px;">
+                            <!-- Content card -->
+                            <div class="w-full max-w-xs md:w-48"
+                             [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
+                                <a [routerLink]="['/'+item.kind.toLowerCase()]" [queryParams]="{id: item.id}" rel="canonical"
+                                class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
+                                    <img [src]="item.image" [attr.aria-label]="item.name + ' picture'" 
+                                    [ngClass]="item.kind === 'MEDIA' ? 'rounded-lg': 'rounded-full'"
+                                    style="height: 128px; width: 128px;" />
+                                    <!-- Data / content -->
+                                    <div class="flex flex-col w-full max-w-full p-4 break-words">
+                                        <h1 class="font-bold text-lg text-center truncate">{{item.name}}</h1>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </ng-container>
