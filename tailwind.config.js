@@ -1,4 +1,7 @@
 module.exports = {
+  corePlugins: {
+    preflight: true,
+  },
   purge: [],
   theme: {
     fontFamily: {

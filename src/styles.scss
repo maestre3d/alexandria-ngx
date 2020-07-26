@@ -16,6 +16,8 @@ html {
     --color-background-dark: #f0f0f0;
     --color-background: #fafafa;
     --color-background-light: #ffffff;
+
+    background-color: var(--color-background-dark);
 }
 
 html[data-theme="dark"] {
@@ -41,4 +43,8 @@ html[data-theme="dark"] {
 
 body {
     font-family: 'Lato', sans-serif;
+}
+
+html, body {
+    scroll-behavior: smooth;
 }

@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { FeedRoutingModule } from './feed-routing.module';
 import { FeedComponent } from './feed.component';
-import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from '../../../common/shared.module';
 
 @NgModule({
   declarations: [FeedComponent],
   imports: [
     CommonModule,
     FeedRoutingModule,
-    MatButtonModule
+    SharedModule
   ]
 })
 export class FeedModule { }

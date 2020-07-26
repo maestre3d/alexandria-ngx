@@ -1,26 +1,26 @@
-<div mat-background class="w-screen h-screen wrapper app-bg flex flex-col items-center">
-<div class="w-full max-w-6xl pt-6 px-8 pb-16 lg:pb-0">
-    <router-outlet></router-outlet>
-</div>
-
-<div class="fixed px-6 mb-6 bottom-0">
-    <div class="flex justify-evenly items-center app-bg-accent shadow-md rounded-full max-w-xs px-4 py-3">
-    <a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}" 
-    mat-icon-button color="accent" aria-label="Feed button">
-        <mat-icon aria-hidden="false" aria-label="Feed icon">dashboard</mat-icon>
-    </a>
-    <a routerLinkActive="active" routerLink="/search" mat-icon-button color="accent" aria-label="Search button">
-        <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
-    </a>
-    <a routerLinkActive="active" routerLink="/trending" mat-icon-button color="accent" aria-label="Trending button">
-        <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
-    </a>
-    <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent" aria-label="Notification button">
-        <mat-icon aria-hidden="false" aria-label="Notification icon">notifications</mat-icon>
-    </a>
-    <a routerLinkActive="active" routerLink="/me" mat-icon-button color="accent" aria-label="Profile button">
-        <mat-icon aria-hidden="false" aria-label="Profile icon">account_circle</mat-icon>
-    </a>
+<div mat-background class="w-full h-full wrapper flex flex-col items-center">
+    <div class="w-full max-w-6xl pt-6 px-8 pb-24 lg:pb-0">
+        <router-outlet></router-outlet>
     </div>
-</div>
+
+    <div class="fixed px-6 mb-6 bottom-0">
+        <div class="navbar flex justify-evenly items-center app-bg-accent shadow-md rounded-full max-w-xs px-3 py-2">
+            <a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}" 
+            mat-icon-button color="accent" aria-label="Feed button">
+                <mat-icon aria-hidden="false" aria-label="Feed icon">dashboard</mat-icon>
+            </a>
+            <a routerLinkActive="active" routerLink="/search" mat-icon-button color="accent" aria-label="Search button">
+                <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
+            </a>
+            <a routerLinkActive="active" routerLink="/trending" mat-icon-button color="accent" aria-label="Trending button">
+                <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
+            </a>
+            <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent" aria-label="Notification button">
+                <mat-icon aria-hidden="false" aria-label="Notification icon">notifications</mat-icon>
+            </a>
+            <a routerLinkActive="active" routerLink="/me" mat-icon-button color="accent" aria-label="Profile button">
+                <mat-icon aria-hidden="false" aria-label="Profile icon">account_circle</mat-icon>
+            </a>
+        </div>
+    </div>
 </div>

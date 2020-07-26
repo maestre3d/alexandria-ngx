@@ -16,5 +16,9 @@
     background-color: var(--color-background-light);
 }
 
+.bg-contrast-filter {
+    background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.64));
+}
+
 html[data-theme="dark"] {
 }
