@@ -29,11 +29,14 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/assets/scss/material-theme.scss",
               "src/assets/scss/tailwind.scss",
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/swiper/swiper-bundle.min.js"
+            ],
             "customWebpackConfig": {
               "path": "extra-webpack.config.js"
             }
@@ -105,11 +108,14 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/assets/scss/material-theme.scss",
               "src/assets/scss/tailwind.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/swiper/swiper-bundle.min.js"
+            ]
           }
         },
         "lint": {
