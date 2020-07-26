@@ -70,6 +70,11 @@ export class ThemeService {
       this.cookieService.set(this.themeKey, newState, this.now);
 
       document.querySelector('html').setAttribute('data-theme', newState);
+      document.querySelector('html').classList.add('theme-transition');
+      document.querySelector('html').setAttribute('data-theme', newState);
+      window.setTimeout(() => {
+          document.querySelector('html').classList.remove('theme-transition');
+      }, 200);
 
       observer.next(newState);
       return;
