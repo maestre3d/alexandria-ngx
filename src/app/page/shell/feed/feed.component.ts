@@ -68,37 +68,36 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private loadSwipers(): void {
     this.adSwiper = new Swiper(this.adSwiperRef.nativeElement, {
-      // cssMode: true,
       observer: true,
       slidesPerView: 'auto',
-      // SET FREE MODE IF YOU WANT TO MOVE SWIPER IG STORIE'S LIKE
       freeMode: false,
       preloadImages: false,
       watchSlidesVisibility: false,
       spaceBetween: 16,
       autoplay: {
-        delay: 5000,
+        delay: 3000
       },
-      // mousewheel: true,
-      lazy: {
-        loadPrevNext: true,
-        loadPrevNextAmount: 3,
-        elementClass: 'swiper-lazy',
-        loadedClass: 'swiper-lazy-loaded',
-        preloaderClass: 'swiper-lazy-preloader',
+      on: {
+        init: (sw) => {
+          if (!sw) {
+            sw.autoplay.stop();
+          }
+        },
+        imagesReady: (sw) => {
+          if (!sw) {
+            sw.autoplay.start();
+          }
+        }
       }
     });
 
     this.recentSwiper = new Swiper(this.recentSwiperRef.nativeElement, {
-      // cssMode: true,
       observer: true,
       slidesPerView: 'auto',
-      // SET FREE MODE IF YOU WANT TO MOVE SWIPER IG STORIE'S LIKE
       freeMode: true,
       preloadImages: false,
       watchSlidesVisibility: false,
       spaceBetween: 32,
-      // mousewheel: true,
       lazy: {
         loadPrevNext: true,
         loadPrevNextAmount: 3,
@@ -109,21 +108,17 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.newsSwiper = new Swiper(this.newsSwiperRef.nativeElement, {
-      // cssMode: true,
       observer: true,
-      slidesPerView: 'auto',
-      // SET FREE MODE IF YOU WANT TO MOVE SWIPER IG STORIE'S LIKE
-      freeMode: true,
-      preloadImages: false,
-      watchSlidesVisibility: false,
+      slidesPerView: 1,
+      slidesPerColumn: 2,
+      slidesPerColumnFill: 'row',
       spaceBetween: 32,
-      // mousewheel: true,
-      lazy: {
-        loadPrevNext: true,
-        loadPrevNextAmount: 3,
-        elementClass: 'swiper-lazy',
-        loadedClass: 'swiper-lazy-loaded',
-        preloaderClass: 'swiper-lazy-preloader',
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          slidesPerGroup: 2,
+          slidesPerColumnFill: 'row',
+        }
       }
     });
   }

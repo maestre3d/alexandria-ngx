@@ -1,6 +1,8 @@
 import { MediaKind } from '@alexandria/enum/media-kind.enum';
 import { INotification } from '@alexandria/domain/entity/notification.entity';
 
+const now = new Date();
+
 export const Notifications: Array<INotification> = [
     {
         id: 'ff6d0bb4-f686-4d17-a569-9ac4b8997c17',
@@ -12,7 +14,8 @@ export const Notifications: Array<INotification> = [
             name: 'Dross US'
         },
         mediaID: 'zqEROBNEPHSvHQElHlZ6A',
-        kind: MediaKind.Video
+        kind: MediaKind.Video,
+        pubishTime: now
     },
     {
         id: '7a98b45a-32a6-4fef-99f3-45b022418bdc',
@@ -24,7 +27,8 @@ export const Notifications: Array<INotification> = [
             name: 'Bruno Chiellini'
         },
         mediaID: 'fwjAyDLTLTTGAojXqWEaB',
-        kind: MediaKind.Podcast
+        kind: MediaKind.Podcast,
+        pubishTime: now
     },
     {
         id: 'aeef9e85-6abf-467f-8330-5daafaca7a8a',
@@ -36,6 +40,20 @@ export const Notifications: Array<INotification> = [
             name: 'Max Planck'
         },
         mediaID: 'Kctqcecm2ZoIEsUf9ehrp',
-        kind: MediaKind.Book
+        kind: MediaKind.Book,
+        pubishTime: now
+    },
+    {
+        id: '70ba0354-3682-4877-8ef8-4995a7a59513',
+        title: 'Erwin Schrödinger uploaded a book',
+        description: `Treatise on thermodynamics`,
+        image: 'https://www.amazon.com/images/I/41khrxV5d5L._SX310_BO1,204,203,200_.jpg',
+        author: {
+            id: 'GusZWL9VVbx1pVpepx4Cy',
+            name: 'Erwin Schrödinger'
+        },
+        mediaID: 'Kctqcecm2ZoIEsUf9ehrp',
+        kind: MediaKind.Book,
+        pubishTime: now
     }
 ];

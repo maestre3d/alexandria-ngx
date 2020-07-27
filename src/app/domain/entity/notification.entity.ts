@@ -11,4 +11,5 @@ export interface INotification {
     author: IDenormalizedAuthor;
     mediaID: string;
     kind: string;
+    pubishTime: Date;
 }
