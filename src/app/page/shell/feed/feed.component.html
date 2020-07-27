@@ -11,7 +11,7 @@
       <div class="swiper-container" #adSwiper>
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
-          <ng-container *ngFor="let ad of ads">
+          <ng-container *ngFor="let ad of adService.list() | async">
             <div class="swiper-slide md:w-auto">
               <!-- Ad card -->
               <div class="bg-gray-500 w-full max-w-xs rounded-xl bg-cover bg-center md:w-64" style="height: 400px;"
@@ -47,7 +47,7 @@
       <div class="swiper-container" #recentSwiper>
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
-          <ng-container *ngFor="let item of history.items">
+          <ng-container *ngFor="let item of history$ | async">
             <div class="swiper-slide" style="width: min-content;">
               <!-- Content card -->
               <div class="w-full max-w-xs md:w-48" style="width: 192px;"
@@ -84,7 +84,7 @@
       <div class="swiper-container" #newsSwiper>
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
-          <ng-container *ngFor="let notification of notifications">
+          <ng-container *ngFor="let notification of notificationService.list() | async">
             <div class="swiper-slide" style="width: min-content;">
               <!-- Content card -->
               <div class="w-full max-w-xs md:w-48"

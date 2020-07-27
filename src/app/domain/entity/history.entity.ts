@@ -1,5 +1,5 @@
 // Uses denormalized data
-interface IHistoryItem {
+export interface IHistoryItem {
   id: string;
   name: string;
   kind: string;

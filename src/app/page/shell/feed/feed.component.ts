@@ -1,16 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { Subject, forkJoin } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
 import Swiper from 'swiper';
 
 import { ThemeService } from '@alexandria/service/theme/theme.service';
 import { AdsService } from '@alexandria/service/ads/ads.service';
-import { IAd } from '@alexandria/domain/entity/ad.entity';
 import { HistoryService } from '@alexandria/service/history/history.service';
-import { IHistory } from '@alexandria/domain/entity/history.entity';
+import { IHistoryItem } from '@alexandria/domain/entity/history.entity';
 import { NotificationsService } from '@alexandria/service/notifications/notifications.service';
-import { INotification } from '@alexandria/domain/entity/notification.entity';
 
 @Component({
   selector: 'app-feed',
@@ -22,9 +20,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   private subject: Subject<void> = new Subject();
 
   // Data
-  public ads: Array<IAd>;
-  public history: IHistory;
-  public notifications: Array<INotification>;
+  public history$: Observable<Array<IHistoryItem>>;
 
   // UI
   private adSwiper: Swiper;
@@ -40,22 +36,20 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   private newsSwiperRef: ElementRef;
 
   constructor(private themeService: ThemeService, private metaService: Meta, private titleService: Title,
-              private adService: AdsService, private historyService: HistoryService,
-              private notificationService: NotificationsService) {
+              public adService: AdsService, private historyService: HistoryService,
+              public notificationService: NotificationsService) {
   }
 
   ngOnInit(): void {
+    this.history$ = this.historyService.get('ca0770b6-7650-4a0e-b924-aa0396d953ac').pipe(map(r => r.items));
     // Get feed in parallel
+    /*
     forkJoin([
-      this.adService.list(),
-      this.historyService.get('ca0770b6-7650-4a0e-b924-aa0396d953ac'),
       this.notificationService.list(),
     ])
-    .pipe(takeUntil(this.subject)).subscribe(([ads, history, notifications]) => {
-      this.ads = ads;
-      this.history = history;
-      this.notifications = notifications;
-    });
+    .pipe(takeUntil(this.subject)).subscribe(([notifications]) => {
+      // this.notifications = notifications;
+    });*/
   }
 
   ngAfterViewInit(): void {
