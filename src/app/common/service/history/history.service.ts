@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IHistory, Histories } from '../../mock/history.mock';
 import { Observable } from 'rxjs';
+
+import { Histories } from '@alexandria/mock/history.mock';
+import { IHistory } from '@alexandria/domain/entity/history.entity';
 
 @Injectable({
   providedIn: 'root'

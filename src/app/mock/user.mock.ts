@@ -1,22 +1,5 @@
-import { UserRole } from '../enum/role.enum';
-
-// Contains 3 high-cardinality fields (id, username and email)
-export interface IUser {
-  id: string;
-  username: string;
-  displayName: string;
-  password: string;
-  email: string;
-  image ?: string;
-  cover ?: string;
-  // Use ISO 2-digit lang code
-  locale: string;
-  // Use ISO 2-digit country code
-  country: string;
-  createTime: Date;
-  updateTime: Date;
-  role: string;
-}
+import { UserRole } from '../common/enum/role.enum';
+import { IUser } from '../domain/entity/user.entity';
 
 const now = new Date();
 

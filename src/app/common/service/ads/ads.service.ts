@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IAd, Ads } from '../../mock/ad.mock';
 
+import { Ads } from '@alexandria/mock/ad.mock';
+import { IAd } from '@alexandria/domain/entity/ad.entity';
 
 @Injectable({
   providedIn: 'root'

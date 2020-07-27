@@ -1,10 +1,4 @@
-export interface ICategory {
-  id: string;
-  name: string;
-  description ?: string;
-  createTime: Date;
-  updateTime: Date;
-}
+import { ICategory } from '../domain/entity/category.entity';
 
 const now = new Date();
 

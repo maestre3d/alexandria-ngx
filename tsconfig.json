@@ -6,12 +6,22 @@
 */
 {
   "files": [],
-  "references": [
-    {
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@alexandria/config/*": ["app/common/config/*"],
+      "@alexandria/enum/*": ["app/common/enum/*"],
+      "@alexandria/mock/*": ["app/mock/*"],
+      "@alexandria/service/*": ["app/common/service/*"],
+      "@alexandria/domain/*": ["app/domain/*"],
+      "@alexandria/common/*": ["app/common/*"]
+    }
+  },
+  "references": [{
       "path": "./tsconfig.app.json"
     },
     {
       "path": "./tsconfig.spec.json"
-    }
-]
+    },
+  ]
 }

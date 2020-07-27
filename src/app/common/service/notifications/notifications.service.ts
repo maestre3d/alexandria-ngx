@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { INotification, Notifications } from '../../mock/notification.mock';
+
+import { Notifications } from '@alexandria/mock/notification.mock';
+import { INotification } from '@alexandria/domain/entity/notification.entity';
 
 @Injectable({
   providedIn: 'root'

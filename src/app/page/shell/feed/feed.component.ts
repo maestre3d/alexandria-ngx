@@ -4,13 +4,13 @@ import { Subject, forkJoin } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import Swiper from 'swiper';
 
-import { ThemeService } from '../../../common/service/theme/theme.service';
-import { IAd } from '../../../common/mock/ad.mock';
-import { IHistory } from '../../../common/mock/history.mock';
-import { AdsService } from '../../../common/service/ads/ads.service';
-import { HistoryService } from '../../../common/service/history/history.service';
-import { NotificationsService } from 'src/app/common/service/notifications/notifications.service';
-import { INotification } from 'src/app/common/mock/notification.mock';
+import { ThemeService } from '@alexandria/service/theme/theme.service';
+import { AdsService } from '@alexandria/service/ads/ads.service';
+import { IAd } from '@alexandria/domain/entity/ad.entity';
+import { HistoryService } from '@alexandria/service/history/history.service';
+import { IHistory } from '@alexandria/domain/entity/history.entity';
+import { NotificationsService } from '@alexandria/service/notifications/notifications.service';
+import { INotification } from '@alexandria/domain/entity/notification.entity';
 
 @Component({
   selector: 'app-feed',

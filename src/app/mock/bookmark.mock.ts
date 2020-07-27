@@ -1,25 +1,4 @@
-// Denormalized media
-interface IBookmarkItem {
-    id: string;
-    name: string;
-    addTime: Date;
-}
-
-interface IDenormalizedCategory {
-    id: string;
-    name: string;
-}
-
-export interface IBookmark {
-    id: string;
-    userID: string;
-    displayName: string;
-    description?: string;
-    mediaList: Array<IBookmarkItem>;
-    categories?: Array<IDenormalizedCategory>;
-    createTime: Date;
-    updateTime: Date;
-}
+import { IBookmark } from '../domain/entity/bookmark.entity';
 
 const now = new Date();
 
@@ -39,4 +18,4 @@ export const Bookmarks: Array<IBookmark> = [
         createTime: now,
         updateTime: now
     }
-]
+];

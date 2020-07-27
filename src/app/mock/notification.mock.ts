@@ -1,19 +1,5 @@
-import { MediaKind } from '../enum/media-kind.enum';
-
-interface IDenormalizedAuthor {
-    id: string;
-    name: string;
-}
-
-export interface INotification {
-    id: string;
-    title: string;
-    description: string;
-    image?: string;
-    author: IDenormalizedAuthor;
-    mediaID: string;
-    kind: string;
-}
+import { MediaKind } from '@alexandria/enum/media-kind.enum';
+import { INotification } from '@alexandria/domain/entity/notification.entity';
 
 export const Notifications: Array<INotification> = [
     {

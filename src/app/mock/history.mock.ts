@@ -1,18 +1,5 @@
-import { HistoryKind } from '../enum/history-kind.enum';
-
-// Uses denormalized data
-interface IHistoryItem {
-  id: string;
-  name: string;
-  kind: string;
-  image ?: string;
-  verified ?: boolean;
-}
-
-export interface IHistory {
-  userID: string;
-  items: Array < IHistoryItem > ;
-}
+import { HistoryKind } from '../common/enum/history-kind.enum';
+import { IHistory } from '../domain/entity/history.entity';
 
 export const Histories: Array < IHistory > = [{
   userID: 'ca0770b6-7650-4a0e-b924-aa0396d953ac',
