@@ -22,6 +22,9 @@ export interface IAuthor {
     verified: boolean;
     createTime: Date;
     updateTime: Date;
+    // Denormalized counters
+    totalViews: number;
+    totalFollowers: number;
     // Use user's ID
     contributors: Array < IContrib > ;
     rssFeedUrl ?: string;

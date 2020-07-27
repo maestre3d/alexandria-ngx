@@ -14,6 +14,8 @@ export const Authors: Array < IAuthor > = [{
     verified: false,
     createTime: now,
     updateTime: now,
+    totalViews: 8542236,
+    totalFollowers: 250741,
     contributors: [
       // Angel D Revilla
       {
@@ -33,6 +35,8 @@ export const Authors: Array < IAuthor > = [{
     verified: false,
     createTime: now,
     updateTime: now,
+    totalViews: 258741,
+    totalFollowers: 14741,
     contributors: [
       // Joel Robertson
       {
@@ -57,6 +61,8 @@ export const Authors: Array < IAuthor > = [{
     verified: true,
     createTime: now,
     updateTime: now,
+    totalViews: 2457410,
+    totalFollowers: 1485203,
     contributors: [
       // Angel D Revilla
       {
@@ -86,6 +92,8 @@ export const Authors: Array < IAuthor > = [{
     verified: true,
     createTime: now,
     updateTime: now,
+    totalViews: 4784529,
+    totalFollowers: 3852995,
     contributors: [
       // Karen Ronan
       {
@@ -110,6 +118,8 @@ export const Authors: Array < IAuthor > = [{
     verified: true,
     createTime: now,
     updateTime: now,
+    totalViews: 4785695,
+    totalFollowers: 2560939,
     contributors: [
       // Fernando Herrera
       {
