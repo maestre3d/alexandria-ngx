@@ -9,6 +9,7 @@ import { AdsService } from '@alexandria/service/ads/ads.service';
 import { HistoryService } from '@alexandria/service/history/history.service';
 import { IHistoryItem } from '@alexandria/domain/entity/history.entity';
 import { NotificationsService } from '@alexandria/service/notifications/notifications.service';
+import { HistoryKind } from '@alexandria/enum/history-kind.enum';
 
 @Component({
   selector: 'app-feed',
@@ -21,15 +22,16 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Data
   public history$: Observable<Array<IHistoryItem>>;
+  public MediaType = HistoryKind.Media;
 
   // UI
   private adSwiper: Swiper;
   @ViewChild('adSwiper')
   private adSwiperRef: ElementRef;
 
-  private recentSwiper: Swiper;
-  @ViewChild('recentSwiper')
-  private recentSwiperRef: ElementRef;
+  private historySwiper: Swiper;
+  @ViewChild('historySwiper')
+  private historySwiperRef: ElementRef;
 
   private newsSwiper: Swiper;
   @ViewChild('newsSwiper')
@@ -91,7 +93,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    this.recentSwiper = new Swiper(this.recentSwiperRef.nativeElement, {
+    this.historySwiper = new Swiper(this.historySwiperRef.nativeElement, {
       observer: true,
       slidesPerView: 'auto',
       freeMode: true,

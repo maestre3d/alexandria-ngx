@@ -18,7 +18,7 @@
                 [style.background-image]="'url('+ ad.image +')'" [attr.aria-label]="ad.title + ' - ' + ad.description"
                 [attr.aria-details]="ad.description">
                 <!-- Contrast filter -->
-                <a [routerLink]="['/ad']" [queryParams]="{id: ad.id}" rel="canonical"
+                <a [routerLink]="['/author', ad.authorID]" [queryParams]="{ad_id: ad.id}" rel="canonical"
                   class="flex flex-col flex-no-wrap justify-end rounded-xl bg-contrast-filter text-white w-full h-full">
                   <!-- Data / content -->
                   <div class="flex flex-col w-full max-w-full px-5 py-8 break-words">
@@ -34,7 +34,7 @@
     </div>
   </section>
 
-  <!-- Recent -->
+  <!-- History -->
   <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
     class="flex flex-col flex-no-wrap mt-12">
     <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
@@ -44,7 +44,7 @@
     <!-- Swiper boundaries -->
     <div class="w-full max-w-full mt-4">
       <!-- Slider main container -->
-      <div class="swiper-container" #recentSwiper>
+      <div class="swiper-container" #historySwiper>
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
           <ng-container *ngFor="let item of history$ | async">
@@ -52,10 +52,12 @@
               <!-- Content card -->
               <div class="w-full max-w-xs md:w-48" style="width: 192px;"
                 [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
-                <a [routerLink]="['/'+item.kind.toLowerCase()]" [queryParams]="{id: item.id}" rel="canonical"
+                <a [routerLink]="['/'+item.kind.toLowerCase(), item.kind !== this.MediaType ? item.id : {}]"
+                  [queryParams]="item.kind === this.MediaType ? {id: item.id} : ''" rel="canonical"
                   class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
                   <img [src]="item.image" class="object-cover" [attr.aria-label]="item.name + ' picture'"
-                    [alt]="item.name + ' picture'" [ngClass]="item.kind === 'MEDIA' ? 'rounded-xl': 'rounded-full'"
+                    [alt]="item.name + ' picture'"
+                    [ngClass]="item.kind === this.MediaType ? 'rounded-xl': 'rounded-full'"
                     style="height: 144px; width: 144px;" />
                   <!-- Data / content -->
                   <div class="flex flex-row flex-no-wrap max-w-full py-4 break-words">
@@ -123,10 +125,12 @@
               <!-- Content card -->
               <div class="w-full max-w-xs md:w-48" style="width: 192px;"
                 [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
-                <a [routerLink]="['/'+item.kind.toLowerCase()]" [queryParams]="{id: item.id}" rel="canonical"
+                <a [routerLink]="['/'+item.kind.toLowerCase(), item.kind !== this.MediaType ? item.id : {}]"
+                  [queryParams]="item.kind === this.MediaType ? {id: item.id} : ''" rel="canonical"
                   class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
                   <img [src]="item.image" class="object-cover" [attr.aria-label]="item.name + ' picture'"
-                    [alt]="item.name + ' picture'" [ngClass]="item.kind === 'MEDIA' ? 'rounded-xl': 'rounded-full'"
+                    [alt]="item.name + ' picture'"
+                    [ngClass]="item.kind === this.MediaType ? 'rounded-xl': 'rounded-full'"
                     style="height: 144px; width: 144px;" />
                   <!-- Data / content -->
                   <div class="flex flex-row flex-no-wrap max-w-full py-4 break-words">
@@ -141,5 +145,4 @@
       </div>
     </div>
   </section>
-
 </div>
