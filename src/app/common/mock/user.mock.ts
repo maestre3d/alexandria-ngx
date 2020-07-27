@@ -1,10 +1,12 @@
 import { UserRole } from '../enum/role.enum';
 
+// Contains 3 high-cardinality fields (id, username and email)
 export interface IUser {
     id: string;
     username: string;
     displayName: string;
     password: string;
+    email: string;
     image?: string;
     // Use ISO 2-digit lang code
     locale: string;
@@ -23,7 +25,8 @@ export const Users: Array<IUser> = [
         username: 'arevilla',
         displayName: 'Ángel David Revilla',
         password: '12345678',
-        image: '',
+        email: 'arevilla@yahoo.com',
+        image: 'https://laletrade.com/images/biografia/Dross.jpg',
         locale: 'es',
         country: 'ar',
         createTime: now,
@@ -35,7 +38,8 @@ export const Users: Array<IUser> = [
         username: 'jrobertson',
         displayName: 'Joel Robertson',
         password: '12345678',
-        image: '',
+        email: 'jrobertson@outlook.com',
+        image: 'https://images.unsplash.com/photo-1542909192-2f2241a99c9d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80',
         locale: 'en',
         country: 'uk',
         createTime: now,
@@ -47,7 +51,8 @@ export const Users: Array<IUser> = [
         username: 'jsantaolla',
         displayName: 'Jorge Santaolla',
         password: '12345678',
-        image: '',
+        email: 'jsantaolla96@hotmail.com',
+        image: 'https://images.unsplash.com/photo-1586796676774-c93004ae009f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80',
         locale: 'es',
         country: 'ar',
         createTime: now,
@@ -59,7 +64,8 @@ export const Users: Array<IUser> = [
         username: 'karenronan86',
         displayName: 'Karen Ronan',
         password: '12345678',
-        image: '',
+        email: 'karenronan_86@gmail.com',
+        image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
         locale: 'en',
         country: 'ir',
         createTime: now,
@@ -71,7 +77,8 @@ export const Users: Array<IUser> = [
         username: 'fernandoha98',
         displayName: 'Fernando Herrera',
         password: '12345678',
-        image: '',
+        email: 'elprogramadoor@gmail.com',
+        image: 'https://images.unsplash.com/photo-1590895178913-3d3472310a47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80',
         locale: 'es',
         country: 'mx',
         createTime: now,
@@ -82,8 +89,9 @@ export const Users: Array<IUser> = [
         id: 'ca0770b6-7650-4a0e-b924-aa0396d953ac',
         username: 'aruiz',
         displayName: 'Alonso Ruiz',
-        password: 'master123',
-        image: '',
+        password: 'root1234',
+        email: 'aruiz@damascus-engineering.com',
+        image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
         locale: 'es',
         country: 'mx',
         createTime: now,
