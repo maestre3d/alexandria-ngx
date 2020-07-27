@@ -46,13 +46,13 @@ export const Notifications: Array<INotification> = [
     {
         id: '70ba0354-3682-4877-8ef8-4995a7a59513',
         title: 'Erwin Schrödinger uploaded a book',
-        description: `Treatise on thermodynamics`,
-        image: 'https://www.amazon.com/images/I/41khrxV5d5L._SX310_BO1,204,203,200_.jpg',
+        description: `Statistical Thermodynamics`,
+        image: 'https://www.amazon.com/images/I/41twAZJ+jmL._SX322_BO1,204,203,200_.jpg',
         author: {
             id: 'GusZWL9VVbx1pVpepx4Cy',
             name: 'Erwin Schrödinger'
         },
-        mediaID: 'Kctqcecm2ZoIEsUf9ehrp',
+        mediaID: 'lJDKYv1NwGuH2v4OerZdl',
         kind: MediaKind.Book,
         pubishTime: now
     }

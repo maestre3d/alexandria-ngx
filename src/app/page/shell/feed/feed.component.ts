@@ -112,7 +112,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
       slidesPerView: 1,
       slidesPerColumn: 2,
       slidesPerColumnFill: 'row',
-      spaceBetween: 32,
+      spaceBetween: 24,
       breakpoints: {
         768: {
           slidesPerView: 2,
