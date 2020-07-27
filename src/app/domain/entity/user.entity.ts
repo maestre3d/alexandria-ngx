@@ -14,4 +14,7 @@ export interface IUser {
   createTime: Date;
   updateTime: Date;
   role: string;
+  // Denormalized counters
+  totalFollowers: number;
+  totalFollowing: number;
 }

@@ -14,7 +14,9 @@ export const Users: Array < IUser > = [{
     country: 'ar',
     createTime: now,
     updateTime: now,
-    role: UserRole.User
+    role: UserRole.User,
+    totalFollowers: 74841,
+    totalFollowing: 526
   },
   {
     id: 'dadf8e01-13c3-4a6b-b18d-8841a46c77a4',
@@ -27,7 +29,9 @@ export const Users: Array < IUser > = [{
     country: 'uk',
     createTime: now,
     updateTime: now,
-    role: UserRole.User
+    role: UserRole.User,
+    totalFollowers: 1785,
+    totalFollowing: 96
   },
   {
     id: 'f7dd213f-c5fb-4eb8-bd9c-8079ef7a35cf',
@@ -40,7 +44,9 @@ export const Users: Array < IUser > = [{
     country: 'ar',
     createTime: now,
     updateTime: now,
-    role: UserRole.Support
+    role: UserRole.Support,
+    totalFollowers: 6902,
+    totalFollowing: 48
   },
   {
     id: '43623e7e-b4f3-4682-8b61-de8c2f768f28',
@@ -53,7 +59,9 @@ export const Users: Array < IUser > = [{
     country: 'ir',
     createTime: now,
     updateTime: now,
-    role: UserRole.Marketing
+    role: UserRole.Marketing,
+    totalFollowers: 3895,
+    totalFollowing: 1452
   },
   {
     id: 'c89f051f-41b7-4bfa-a440-c82394a5ab4c',
@@ -66,7 +74,9 @@ export const Users: Array < IUser > = [{
     country: 'mx',
     createTime: now,
     updateTime: now,
-    role: UserRole.Developer
+    role: UserRole.Developer,
+    totalFollowers: 488,
+    totalFollowing: 1789
   },
   {
     id: 'ca0770b6-7650-4a0e-b924-aa0396d953ac',
@@ -79,6 +89,8 @@ export const Users: Array < IUser > = [{
     country: 'mx',
     createTime: now,
     updateTime: now,
-    role: UserRole.Admin
+    role: UserRole.Admin,
+    totalFollowers: 147520,
+    totalFollowing: 128
   }
 ];
