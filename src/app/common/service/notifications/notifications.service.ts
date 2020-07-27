@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Notification, Notifications } from '../../mock/notification.mock';
+import { INotification, Notifications } from '../../mock/notification.mock';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class NotificationsService {
 
   constructor() { }
 
-  get(id: string): Observable<Notification> {
+  get(id: string): Observable<INotification> {
     return new Observable((observer) => {
       Notifications.forEach((notification) => {
         if (notification.id === id) {
@@ -24,7 +24,7 @@ export class NotificationsService {
     });
   }
 
-  list(): Observable<Array<Notification>> {
+  list(): Observable<Array<INotification>> {
     return new Observable(observer => {
       observer.next(Notifications);
       observer.complete();

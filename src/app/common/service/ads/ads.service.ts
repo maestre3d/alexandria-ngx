@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ad, Ads } from '../../mock/ad.mock';
+import { IAd, Ads } from '../../mock/ad.mock';
 
 
 @Injectable({
@@ -10,7 +10,7 @@ export class AdsService {
 
   constructor() { }
 
-  create(ad: Ad): Observable<void> {
+  create(ad: IAd): Observable<void> {
     return new Observable((observer) => {
       Ads.push(ad);
       observer.next();
@@ -18,7 +18,7 @@ export class AdsService {
     });
   }
 
-  get(id: string): Observable<Ad> {
+  get(id: string): Observable<IAd> {
     return new Observable((observer) => {
       Ads.forEach(ad => {
         if (ad.id === id) {
@@ -33,7 +33,7 @@ export class AdsService {
     });
   }
 
-  list(): Observable<Array<Ad>> {
+  list(): Observable<Array<IAd>> {
     return new Observable((observer) => {
       observer.next(Ads);
       observer.complete();

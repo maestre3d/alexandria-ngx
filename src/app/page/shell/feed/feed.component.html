@@ -1,109 +1,110 @@
 <div class="animate__animated animate__fadeIn w-full">
-    <h1 class="text-3xl font-black font-display truncate">Welcome back, <br> Ethan</h1>
-    <!--<button mat-flat-button color="primary" (click)="onClick()">Toggle theme</button>-->
+  <!--<h1 class="text-3xl font-black font-display truncate">Welcome back, <br> Ethan</h1>-->
+  <!--<button mat-flat-button color="primary" (click)="onClick()">Toggle theme</button>-->
 
-    <!-- Ads section -->
-    <section aria-label="Advertising section" aria-details="Check out new content made for you" class="flex flex-col flex-no-wrap w-full mt-8">
-        <!-- Swiper boundaries -->
-        <div class="w-full max-w-full" >
-            <!-- Slider main container -->
-            <div class="swiper-container" #adSwiper>
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <ng-container *ngFor="let ad of this.ads">
-                        <div class="swiper-slide md:w-auto">
-                            <!-- Ad card -->
-                            <div class="bg-gray-500 w-full max-w-xs rounded-xl bg-cover bg-center md:w-64" style="height: 400px;"
-                            [style.background-image]="'url('+ ad.image +')'" [attr.aria-label]="ad.title + ' - ' + ad.description" 
-                            [attr.aria-details]="ad.description">
-                                <!-- Contrast filter -->
-                                <a [routerLink]="['/ad']" [queryParams]="{id: ad.id}" rel="canonical"
-                                class="flex flex-col flex-no-wrap justify-end rounded-xl bg-contrast-filter text-white w-full h-full">
-                                    <!-- Data / content -->
-                                    <div class="flex flex-col w-full max-w-full px-5 py-8 break-words">
-                                        <h1 class="font-black font-display text-2xl">{{ad.title}}</h1>
-                                        <h2 class="font-body font-medium text-lg truncate">{{ad.description}}</h2>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </ng-container>
-                </div>
+  <!-- Ads section -->
+  <section aria-label="Advertising section" aria-details="Check out new content made for you"
+    class="flex flex-col flex-no-wrap w-full mt-8">
+    <!-- Swiper boundaries -->
+    <div class="w-full max-w-full">
+      <!-- Slider main container -->
+      <div class="swiper-container" #adSwiper>
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <ng-container *ngFor="let ad of ads">
+            <div class="swiper-slide md:w-auto">
+              <!-- Ad card -->
+              <div class="bg-gray-500 w-full max-w-xs rounded-xl bg-cover bg-center md:w-64" style="height: 400px;"
+                [style.background-image]="'url('+ ad.image +')'" [attr.aria-label]="ad.title + ' - ' + ad.description"
+                [attr.aria-details]="ad.description">
+                <!-- Contrast filter -->
+                <a [routerLink]="['/ad']" [queryParams]="{id: ad.id}" rel="canonical"
+                  class="flex flex-col flex-no-wrap justify-end rounded-xl bg-contrast-filter text-white w-full h-full">
+                  <!-- Data / content -->
+                  <div class="flex flex-col w-full max-w-full px-5 py-8 break-words">
+                    <h1 class="font-black font-display text-2xl">{{ad.title}}</h1>
+                    <h2 class="font-body font-medium text-lg truncate">{{ad.description}}</h2>
+                  </div>
+                </a>
+              </div>
             </div>
+          </ng-container>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Recent -->
-    <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
+  <!-- Recent -->
+  <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
     class="flex flex-col flex-no-wrap mt-8">
-        <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
-            <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">Get back in</h2>
-            <button mat-stroked-button color="primary" (click)="onClick()">More</button>
-        </div>
-        <!-- Swiper boundaries -->
-        <div class="w-full max-w-full mt-4" >
-            <!-- Slider main container -->
-            <div class="swiper-container" #recentSwiper>
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <ng-container *ngFor="let item of this.logs">
-                        <div class="swiper-slide" style="width: min-content;">
-                            <!-- Content card -->
-                            <div class="w-full max-w-xs md:w-48" style="width: 192px;"
-                             [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
-                                <a [routerLink]="['/'+item.kind.toLowerCase()]" [queryParams]="{id: item.id}" rel="canonical"
-                                class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
-                                    <img [src]="item.image" class="object-cover" [attr.aria-label]="item.name + ' picture'" [alt]="item.name + ' picture'"
-                                    [ngClass]="item.kind === 'MEDIA' ? 'rounded-xl': 'rounded-full'"
-                                    style="height: 144px; width: 144px;" />
-                                    <!-- Data / content -->
-                                    <div class="flex flex-row flex-no-wrap max-w-full py-4 break-words">
-                                        <h1 class="font-bold text-lg text-center truncate max-w-full">{{item.name}}</h1>
-                                        <mat-icon *ngIf="item.verified" class="text-blue ml-1">verified</mat-icon>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </ng-container>
-                </div>
+    <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
+      <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">Get back in</h2>
+      <button mat-stroked-button color="primary" (click)="onClick()">More</button>
+    </div>
+    <!-- Swiper boundaries -->
+    <div class="w-full max-w-full mt-4">
+      <!-- Slider main container -->
+      <div class="swiper-container" #recentSwiper>
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <ng-container *ngFor="let item of history.items">
+            <div class="swiper-slide" style="width: min-content;">
+              <!-- Content card -->
+              <div class="w-full max-w-xs md:w-48" style="width: 192px;"
+                [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
+                <a [routerLink]="['/'+item.kind.toLowerCase()]" [queryParams]="{id: item.id}" rel="canonical"
+                  class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
+                  <img [src]="item.image" class="object-cover" [attr.aria-label]="item.name + ' picture'"
+                    [alt]="item.name + ' picture'" [ngClass]="item.kind === 'MEDIA' ? 'rounded-xl': 'rounded-full'"
+                    style="height: 144px; width: 144px;" />
+                  <!-- Data / content -->
+                  <div class="flex flex-row flex-no-wrap max-w-full py-4 break-words">
+                    <h1 class="font-bold text-lg text-center truncate max-w-full">{{item.name}}</h1>
+                    <mat-icon *ngIf="item.verified" class="text-blue ml-1">verified</mat-icon>
+                  </div>
+                </a>
+              </div>
             </div>
+          </ng-container>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- News -->
-    <section aria-label="News section" aria-details="These are newer content made for you"
+  <!-- News -->
+  <section aria-label="News section" aria-details="These are newer content made for you"
     class="flex flex-col flex-no-wrap mt-8">
-        <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
-            <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">News</h2>
-            <a mat-stroked-button color="primary" routerLink="/notification" class="rounded-full" rel="canonical">More</a>
-        </div>
-        <!-- Swiper boundaries -->
-        <div class="w-full max-w-full mt-4" >
-            <!-- Slider main container -->
-            <div class="swiper-container" #recentSwiper>
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <ng-container *ngFor="let item of this.logs">
-                        <div class="swiper-slide" style="width: min-content;">
-                            <!-- Content card -->
-                            <div class="w-full max-w-xs md:w-48" style="width: 192px;"
-                             [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
-                                <a [routerLink]="['/'+item.kind.toLowerCase()]" [queryParams]="{id: item.id}" rel="canonical"
-                                class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
-                                    <img [src]="item.image" class="object-cover" [attr.aria-label]="item.name + ' picture'" [alt]="item.name + ' picture'"
-                                    [ngClass]="item.kind === 'MEDIA' ? 'rounded-xl': 'rounded-full'"
-                                    style="height: 144px; width: 144px;" />
-                                    <!-- Data / content -->
-                                    <div class="flex flex-row flex-no-wrap max-w-full py-4 break-words">
-                                        <h1 class="font-bold text-lg text-center truncate max-w-full">{{item.name}}</h1>
-                                        <mat-icon *ngIf="item.verified" class="text-blue ml-1">verified</mat-icon>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </ng-container>
-                </div>
+    <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
+      <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">News</h2>
+      <a mat-stroked-button color="primary" routerLink="/notification" class="rounded-full" rel="canonical">More</a>
+    </div>
+    <!-- Swiper boundaries -->
+    <div class="w-full max-w-full mt-4">
+      <!-- Slider main container -->
+      <div class="swiper-container" #newsSwiper>
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <ng-container *ngFor="let notification of notifications">
+            <div class="swiper-slide" style="width: min-content;">
+              <!-- Content card -->
+              <div class="w-full max-w-xs md:w-48"
+                [attr.aria-label]="notification.title + ' - ' + notification.description">
+                <a [routerLink]="['/media']" [queryParams]="{id: notification.mediaID}" rel="canonical"
+                  class="flex flex-row justify-center items-center flex-no-wrap w-full h-full">
+                  <img [src]="notification.image" class="object-cover rounded-xl"
+                    [attr.aria-label]="notification.kind.toLowerCase() + ' picture'"
+                    [alt]="notification.kind.toLowerCase() + ' picture'" style="height: 144px; width: 144px;" />
+                  <!-- Data / content -->
+                  <div class="flex flex-col flex-no-wrap max-w-full py-4 break-words">
+                    <h1 class="font-bold text-lg text-center truncate max-w-full">{{notification.title}}</h1>
+                    <span>{{notification.description}}</span>
+                  </div>
+                </a>
+              </div>
             </div>
+          </ng-container>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </div>

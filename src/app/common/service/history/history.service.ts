@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Log, Logs } from '../../mock/log.mock';
+import { IHistory, Histories } from '../../mock/history.mock';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContentLogService {
+export class HistoryService {
 
   constructor() { }
 
-  create(log: Log): Observable<void> {
+  create(history: IHistory): Observable<void> {
     return new Observable((observer) => {
-      Logs.push(log);
+      Histories.push(history);
       observer.next();
       observer.complete();
     });
   }
 
-  get(id: string): Observable<Log> {
+  get(id: string): Observable<IHistory> {
     return new Observable((observer) => {
-      Logs.forEach((log) => {
-        if (log.id === id) {
-          observer.next(log);
+      Histories.forEach((history) => {
+        if (history.userID === id) {
+          observer.next(history);
           observer.complete();
           return;
         }
@@ -32,12 +32,12 @@ export class ContentLogService {
     });
   }
 
-  list(nextToken?: string, limit?: number): Observable<Array<Log>> {
+  list(nextToken?: string, limit?: number): Observable<Array<IHistory>> {
     nextToken = nextToken ? nextToken : '';
     limit = limit || limit >= 1 ? limit : 10;
 
     return new Observable((observer) => {
-      observer.next(Logs);
+      observer.next(Histories);
       observer.complete();
     });
   }

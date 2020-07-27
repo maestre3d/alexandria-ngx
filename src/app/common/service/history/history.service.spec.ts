@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ContentLogService } from './content-log.service';
+import { HistoryService } from './history.service';
 
-describe('ContentLogService', () => {
-  let service: ContentLogService;
+describe('HistoryService', () => {
+  let service: HistoryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ContentLogService);
+    service = TestBed.inject(HistoryService);
   });
 
   it('should be created', () => {
