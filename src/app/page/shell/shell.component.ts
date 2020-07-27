@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationsService } from '../../common/service/notifications/notifications.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-shell',
@@ -19,13 +20,14 @@ export class ShellComponent implements OnInit, OnDestroy {
   private isSearching = false;
 
   constructor(private router: Router, private notificationService: NotificationsService,
-              private routerActive: ActivatedRoute) {
+              private routerActive: ActivatedRoute, private title: Title) {
   }
 
   ngOnInit(): void {
     // Cannot forkJoin router with services
     this.notificationService.count().pipe(takeUntil(this.subject)).subscribe(total => {
       this.totalNotification = total;
+      this.title.setTitle(`(${this.totalNotification}) ${this.title.getTitle()}`);
     });
 
     this.routerActive.queryParamMap.pipe(takeUntil(this.subject)).subscribe(queries => {
