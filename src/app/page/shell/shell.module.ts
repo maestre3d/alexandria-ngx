@@ -3,11 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ShellRoutingModule } from './shell-routing.module';
 import { ShellComponent } from './shell.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from 'src/app/common/shared.module';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
@@ -15,11 +12,8 @@ import { MatDividerModule } from '@angular/material/divider';
   imports: [
     CommonModule,
     ShellRoutingModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule,
+    SharedModule,
+    MatBadgeModule,
     MatDividerModule
   ]
 })

@@ -21,7 +21,10 @@
                     <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
                 </a>
                 <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent" aria-label="Notification button">
-                    <mat-icon aria-hidden="false" aria-label="Notification icon">notifications</mat-icon>
+                    <mat-icon matBadge="15" matBadgeColor="warn" aria-hidden="false" aria-label="Notification icon">notifications</mat-icon>
+                    <span class="cdk-visually-hidden">
+                        You have 15 notifications
+                    </span>
                 </a>
                 <a routerLinkActive="active" routerLink="/me" mat-icon-button color="accent" aria-label="Profile button">
                     <mat-icon aria-hidden="false" aria-label="Profile icon">account_circle</mat-icon>
@@ -48,7 +51,10 @@
                 <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
             </a>
             <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent" aria-label="Notification button">
-                <mat-icon aria-hidden="false" aria-label="Notification icon">notifications</mat-icon>
+                <mat-icon aria-hidden="false" matBadge="15" matBadgeColor="warn" aria-label="Notification icon">notifications</mat-icon>
+                <span class="cdk-visually-hidden">
+                    You have 15 notifications
+                </span>
             </a>
             <a routerLinkActive="active" routerLink="/me" mat-icon-button color="accent" aria-label="Profile button">
                 <mat-icon aria-hidden="false" aria-label="Profile icon">account_circle</mat-icon>
