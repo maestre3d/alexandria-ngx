@@ -27,6 +27,7 @@ export class ShellComponent implements OnInit, OnDestroy {
     // Cannot forkJoin router with services
     this.notificationService.count().pipe(takeUntil(this.subject)).subscribe(total => {
       this.totalNotification = total;
+      this.title.setTitle('Alexandria');
       this.title.setTitle(`(${this.totalNotification}) ${this.title.getTitle()}`);
     });
 
