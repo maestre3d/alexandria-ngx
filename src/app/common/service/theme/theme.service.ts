@@ -32,6 +32,7 @@ export class ThemeService {
 
       // DO NOT SEND ANY ERROR, PREFER SENDING DEFAULT VALUES TO AVOID
       // APP CRASHES
+      observer.complete();
       return;
     });
   }
@@ -49,10 +50,12 @@ export class ThemeService {
         // Verify if theme is valid, then update browser cookies
         this.cookieService.set(this.themeKey, theme, this.now);
         observer.next();
+        observer.complete();
         return;
       }
 
       observer.error(new Error('theme_kind is not valid'));
+      observer.complete();
       return;
     });
   }
@@ -77,6 +80,7 @@ export class ThemeService {
       }, 200);
 
       observer.next(newState);
+      observer.complete();
       return;
     });
   }
