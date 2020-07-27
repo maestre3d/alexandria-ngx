@@ -29,7 +29,7 @@ export class ShellComponent implements OnInit, OnDestroy {
     });
 
     this.routerActive.queryParamMap.pipe(takeUntil(this.subject)).subscribe(queries => {
-      this.searchValue = queries.get('query') || '';
+      this.searchValue = queries.get('q') || '';
     });
   }
 
@@ -42,11 +42,11 @@ export class ShellComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       if (!this.isSearching) {
         this.isSearching = true;
-        this.router.navigate(['/search'], { queryParams: {query: this.searchValue} });
+        this.router.navigate(['/search'], { queryParams: {q: this.searchValue} });
         return;
       }
 
       this.isSearching = false;
-    }, 750);
+    }, 1500);
   }
 }
