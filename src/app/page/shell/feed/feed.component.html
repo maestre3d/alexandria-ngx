@@ -22,7 +22,7 @@
                   class="flex flex-col flex-no-wrap justify-end rounded-xl bg-contrast-filter text-white w-full h-full">
                   <!-- Data / content -->
                   <div class="flex flex-col w-full max-w-full px-5 py-8 break-words">
-                    <h1 class="font-black font-display text-2xl">{{ad.title}}</h1>
+                    <h1 class="font-black font-display text-2xl truncate-line">{{ad.title}}</h1>
                     <h2 class="font-body font-medium text-lg truncate">{{ad.description}}</h2>
                   </div>
                 </a>
@@ -86,16 +86,18 @@
         <div class="swiper-wrapper">
           <ng-container *ngFor="let notification of notificationService.list() | async">
             <!-- Content card -->
-            <div class="swiper-slide">
+            <div class="swiper-slide" style="max-height: 112px;">
               <a [routerLink]="['/media']" [queryParams]="{id: notification.mediaID}" rel="canonical"
-              class="flex flex-row flex-no-wrap items-center w-full">
-                <img [src]="notification.image" class="object-cover rounded-xl" [attr.aria-label]="notification.author.name + ' picture'"
-                  [alt]="notification.author.name + ' picture'"
-                  style="height: 112px; width: 112px;" />
+                class="flex flex-row flex-no-wrap items-center w-full">
+                <img [src]="notification.image" class="object-cover rounded-xl"
+                  [attr.aria-label]="notification.author.name + ' picture'"
+                  [alt]="notification.author.name + ' picture'" style="height: 112px; width: 112px;" />
                 <!-- Data / content -->
-                <div class="flex flex-col flex-no-wrap mx-5 max-w-xxs md:max-w-full">
-                  <h1 class="font-bold text-xl break-words">{{notification.title}}</h1>
-                  <p class="break-words">{{notification.description}}</p>
+                <div class="flex flex-col flex-no-wrap mx-5 max-h-full max-w-xxs md:max-w-full">
+                  <h1 class="font-bold text-xl truncate-line">
+                    {{notification.title}}
+                  </h1>
+                  <p class="truncate-line">{{notification.description}}</p>
                 </div>
               </a>
             </div>
