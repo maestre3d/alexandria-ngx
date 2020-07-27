@@ -1,3 +1,12 @@
 .navbar > * {
     margin: 0 .2rem;
 }
+
+::ng-deep .mat-form-field-wrapper {
+    padding: 0;
+    margin: 0;
+}
+
+::ng-deep .mat-form-field-infix {
+    padding: 0.4em 0 .8em 0 !important;
+}

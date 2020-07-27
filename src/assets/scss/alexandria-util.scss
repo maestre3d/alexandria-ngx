@@ -20,5 +20,9 @@
     background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.64));
 }
 
+.rounded-xl {
+    border-radius: 16px;
+}
+
 html[data-theme="dark"] {
 }

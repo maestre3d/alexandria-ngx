@@ -13,7 +13,7 @@
                     <ng-container *ngFor="let ad of this.ads">
                         <div class="swiper-slide md:w-auto">
                             <!-- Ad card -->
-                            <div class="bg-gray-500 w-full max-w-xs rounded-lg bg-cover bg-center md:w-64" style="height: 400px;"
+                            <div class="bg-gray-500 w-full max-w-xs rounded-xl bg-cover bg-center md:w-64" style="height: 400px;"
                             [style.background-image]="'url('+ ad.image +')'" [attr.aria-label]="ad.title + ' - ' + ad.description" 
                             [attr.aria-details]="ad.description">
                                 <!-- Contrast filter -->
@@ -53,8 +53,8 @@
                              [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
                                 <a [routerLink]="['/'+item.kind.toLowerCase()]" [queryParams]="{id: item.id}" rel="canonical"
                                 class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
-                                    <img [src]="item.image" [attr.aria-label]="item.name + ' picture'" 
-                                    [ngClass]="item.kind === 'MEDIA' ? 'rounded-lg': 'rounded-full'"
+                                    <img [src]="item.image" [attr.aria-label]="item.name + ' picture'" [alt]="item.name + ' picture'"
+                                    [ngClass]="item.kind === 'MEDIA' ? 'rounded-xl': 'rounded-full'"
                                     style="height: 128px; width: 128px;" />
                                     <!-- Data / content -->
                                     <div class="flex flex-col w-full max-w-full p-4 break-words">
