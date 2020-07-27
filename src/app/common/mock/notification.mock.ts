@@ -4,7 +4,7 @@ export interface Notification {
     id: string;
     title: string;
     description: string;
-    image: string | 'https://cdn.damascus-engineering.com/alexandria/default/media.png';
+    image: string | 'https://cdn.damascus-engineering.com/alexandria/user/1b4cc750-c551-4767-a232-e91b52e68fa0.jpeg?d=300x300';
     authorID: string;
     mediaID: string;
     kind: string | MediaKind.Video;
@@ -32,10 +32,19 @@ export const Notifications: Array<Notification> = [
     {
         id: 'JBiZjSvmWoFiZmMYMhgZv',
         title: 'Dross US just uploaded a book',
-        description: `Pluton's moon: Ysak war`,
+        description: `Pluto's moon: Ysaak war`,
         image: '',
         authorID: 'iI5R8RDYduL1p31q2tlnt',
         mediaID: 'EueGFl58lSJxcuJ7S2bjP',
         kind: MediaKind.Book
+    },
+    {
+        id: 'kBVOnBrFmugS2BjJUvDyD',
+        title: 'Max Planck just uploaded a document',
+        description: `Treatise on thermodynamics`,
+        image: '',
+        authorID: 'zlCRGJLwapfsWuM2cZ9au',
+        mediaID: 'wCIzuhFi3MYTBnqgQnoma',
+        kind: MediaKind.Doc
     }
 ];
