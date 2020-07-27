@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { ThemeKind } from '../enum/theme.enum';
+import { ThemeKind } from '../../enum/theme.enum';
 
 @Injectable({
   providedIn: 'root'

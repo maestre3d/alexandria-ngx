@@ -1,70 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ThemeService } from '../../../common/service/theme.service';
-import { MediaKind } from '../../../common/enum/media_kind.enum';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import Swiper from 'swiper';
 import { Meta, Title } from '@angular/platform-browser';
+import { Subject, forkJoin } from 'rxjs';
+import { takeUntil, switchMap } from 'rxjs/operators';
+import Swiper from 'swiper';
 
-interface Ad {
-  id: string;
-  title: string;
-  description?: string;
-  kind: string;
-  image: string;
-}
-
-interface Item {
-  id: string;
-  name: string;
-  kind: string;
-  image: string;
-}
-
-enum ItemKind {
-  Media = 'MEDIA',
-  Author = 'AUTHOR',
-  User = 'USER'
-}
-
-const Ads: Array<Ad> = [
-  {
-    id: 'CvI3g7chm3M6mOovo3gYZ',
-    title: 'The Cold War',
-    description: 'Dive into the space race.',
-    kind: MediaKind.Video,
-    image: 'https://images.unsplash.com/photo-1457979406492-d1e6b97f3f55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
-  },
-  {
-    id: 'YZm8ggeY3G77J6rJXGSsL',
-    title: 'Learn Astrophysics',
-    description: 'Check out the top authors.',
-    kind: MediaKind.Book,
-    image: 'https://images.unsplash.com/photo-1579532040113-c94c4a38a1e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=516&q=80'
-  },
-  {
-    id: 'OEtmQCPHvLa4GmVM7JAQZ',
-    title: 'Renaissance 101',
-    description: 'DaVinci, Michelangelo and more.',
-    kind: MediaKind.Podcast,
-    image: 'https://images.unsplash.com/photo-1560579210-69248380602a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80'
-  }
-];
-
-const Items: Array<Item> = [
-  {
-    id: 'GusZWL9VVbx1pVpepx4Cy',
-    name: 'Jules Schrödinger',
-    kind: ItemKind.Author,
-    image: 'https://media.nature.com/lw800/magazine-assets/d41586-018-06034-8/d41586-018-06034-8_16060838.jpg'
-  },
-  {
-    id: '0KYRKx7WWHxQHW6mbBkEZ',
-    name: 'Cosmology for dummies',
-    kind: ItemKind.Media,
-    image: 'https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=620&q=80'
-  }
-];
+import { ThemeService } from '../../../common/service/theme/theme.service';
+import { Ad } from '../../../common/mock/ad.mock';
+import { Logs, Log } from '../../../common/mock/log.mock';
+import { AdsService } from '../../../common/service/ads/ads.service';
+import { ContentLogService } from '../../../common/service/content-log/content-log.service';
 
 @Component({
   selector: 'app-feed',
@@ -76,8 +20,8 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   private subject: Subject<void> = new Subject();
 
   // Data
-  public ads = Ads;
-  public recentItems = Items;
+  public ads: Array<Ad>;
+  public logs: Array<Log>;
 
   // UI
   private adSwiper: Swiper;
@@ -88,10 +32,20 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('recentSwiper')
   private recentSwiperRef: ElementRef;
 
-  constructor(private themeService: ThemeService, private metaService: Meta, private titleService: Title) {
+  constructor(private themeService: ThemeService, private metaService: Meta, private titleService: Title,
+              private adService: AdsService, private contentLogService: ContentLogService) {
   }
 
   ngOnInit(): void {
+    // Get feed in parallel
+    forkJoin([
+      this.adService.list(),
+      this.contentLogService.list(),
+    ])
+    .pipe(takeUntil(this.subject)).subscribe(([ads, logs]) => {
+      this.ads = ads;
+      this.logs = logs;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -104,7 +58,9 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
       preloadImages: false,
       watchSlidesVisibility: false,
       spaceBetween: 16,
-      autoplay: true,
+      autoplay: {
+        delay: 5000,
+      },
       // mousewheel: true,
       lazy: {
         loadPrevNext: true,
@@ -123,7 +79,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
       freeMode: true,
       preloadImages: false,
       watchSlidesVisibility: false,
-      spaceBetween: 4,
+      spaceBetween: 32,
       // mousewheel: true,
       lazy: {
         loadPrevNext: true,

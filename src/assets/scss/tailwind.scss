@@ -4,7 +4,7 @@ button:focus {
     outline: none !important;
 }
 
-button {
+button, .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
     border-radius: 100px !important;
     font-weight: 700 !important;
 }
