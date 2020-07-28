@@ -25,6 +25,8 @@ export interface IMedia {
   categories ?: Array < ICategoryDenormalized > ;
   // Use author id
   authors: Array < IAuthorDenormalized > ;
+  totalViews: number;
+  totalLikes: number;
 
   // SPECIFIC USE CASES
   isbn ?: string;

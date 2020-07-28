@@ -29,6 +29,8 @@ export const MediaList: Array < IMedia > = [{
         name: 'Erwin Schrödinger'
       },
     ],
+    totalViews: 5125845,
+    totalLikes: 258723,
     isbn: '9780486319285',
     totalPages: 1250
   },
@@ -55,6 +57,8 @@ export const MediaList: Array < IMedia > = [{
       id: 'GusZWL9VVbx1pVpepx4Cy',
       name: 'Erwin Schrödinger'
     }],
+    totalViews: 10478632,
+    totalLikes: 174965,
     isbn: '9780123849571',
     totalPages: 408
   },
@@ -79,6 +83,8 @@ export const MediaList: Array < IMedia > = [{
       id: 'X08Pf3vSk5N0yQXUOt1pB',
       name: 'Bruno Chiellini'
     }],
+    totalViews: 18965,
+    totalLikes: 6871,
     // 120 / 2 hr min
     totalDuration: 7200
   },
@@ -103,6 +109,8 @@ export const MediaList: Array < IMedia > = [{
       id: 'iI5R8RDYduL1p31q2tlnt',
       name: 'Dross US'
     }],
+    totalViews: 2471598,
+    totalLikes: 307199,
     // 60 min / 1 hr
     totalDuration: 3600
   }
