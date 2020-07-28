@@ -14,7 +14,7 @@
           <ng-container *ngFor="let ad of adService.list() | async">
             <div class="swiper-slide md:w-auto">
               <!-- Ad card -->
-              <div class="bg-gray-500 w-full max-w-xs rounded-xl bg-cover bg-center md:w-64" style="height: 400px;"
+              <div class="bg-gray-500 w-full max-w-sm rounded-xl bg-cover bg-center md:w-64" style="height: 400px;"
                 [style.background-image]="'url('+ ad.image +')'" [attr.aria-label]="ad.title + ' - ' + ad.description"
                 [attr.aria-details]="ad.description">
                 <!-- Contrast filter -->
