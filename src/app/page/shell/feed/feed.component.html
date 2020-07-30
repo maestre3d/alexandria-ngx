@@ -5,7 +5,7 @@
   <!-- Ads section -->
   <section aria-label="Advertising section" aria-details="Check out new content made for you"
     class="flex flex-col flex-no-wrap w-full mt-8">
-    <app-list-vertical-card [aggregates]="ads$ | async" [isAd]="true">
+    <app-list-vertical-card [props]="ads$ | async">
     </app-list-vertical-card>
   </section>
 
@@ -32,21 +32,9 @@
       <div class="swiper-container" #newsSwiper>
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
-          <ng-container *ngFor="let notification of notificationService.list() | async">
+          <ng-container *ngFor="let newsItem of news$ | async">
             <!-- Content card -->
-            <div class="swiper-slide">
-              <a [routerLink]="['/media']" [queryParams]="{id: notification.mediaID}" rel="canonical"
-                class="flex flex-row flex-no-wrap items-center w-full pb-4">
-                <img [src]="notification.image" class="object-cover rounded-xl"
-                  [attr.aria-label]="notification.author.name + ' picture'"
-                  [alt]="notification.author.name + ' picture'" style="height: 112px; width: 112px;" />
-                <!-- Data / content -->
-                <div class="flex flex-col flex-no-wrap mx-5 max-h-full max-w-xxs md:max-w-full">
-                  <h1 class="font-bold text-xl truncate-line">{{notification.title}}</h1>
-                  <p class="truncate-line">{{notification.description}}</p>
-                </div>
-              </a>
-            </div>
+            <app-horizontal-item [props]="newsItem"></app-horizontal-item>
           </ng-container>
         </div>
       </div>

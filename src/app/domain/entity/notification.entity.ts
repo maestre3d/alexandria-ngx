@@ -9,7 +9,7 @@ export interface INotification {
     description: string;
     image?: string;
     author: IDenormalizedAuthor;
-    mediaID: string;
+    aggregateID: string;
     kind: string;
     pubishTime: Date;
 }

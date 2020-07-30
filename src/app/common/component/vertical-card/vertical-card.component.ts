@@ -8,7 +8,6 @@ import { IVerticalCardProps } from '@alexandria/common/interface/vertical-card.i
 })
 export class VerticalCardComponent implements OnInit {
   @Input() props: IVerticalCardProps;
-  @Input() isAd: boolean;
 
   constructor() { }
 

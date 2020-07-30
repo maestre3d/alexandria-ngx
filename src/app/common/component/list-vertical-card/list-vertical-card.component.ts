@@ -8,8 +8,7 @@ import { IVerticalCardProps } from '@alexandria/common/interface/vertical-card.i
   styleUrls: ['./list-vertical-card.component.scss']
 })
 export class ListVerticalCardComponent implements OnInit, AfterViewInit {
-  @Input() aggregates: Array<IVerticalCardProps>;
-  @Input() isAd: boolean;
+  @Input() props: Array<IVerticalCardProps>;
 
   private genericSwiper: Swiper;
   @ViewChild('genericSwiper')

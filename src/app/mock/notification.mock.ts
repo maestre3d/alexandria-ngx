@@ -13,7 +13,7 @@ export const Notifications: Array<INotification> = [
             id: 'iI5R8RDYduL1p31q2tlnt',
             name: 'Dross US'
         },
-        mediaID: 'zqEROBNEPHSvHQElHlZ6A',
+        aggregateID: 'zqEROBNEPHSvHQElHlZ6A',
         kind: MediaKind.Video,
         pubishTime: now
     },
@@ -26,7 +26,7 @@ export const Notifications: Array<INotification> = [
             id: 'X08Pf3vSk5N0yQXUOt1pB',
             name: 'Bruno Chiellini'
         },
-        mediaID: 'fwjAyDLTLTTGAojXqWEaB',
+        aggregateID: 'fwjAyDLTLTTGAojXqWEaB',
         kind: MediaKind.Podcast,
         pubishTime: now
     },
@@ -39,7 +39,7 @@ export const Notifications: Array<INotification> = [
             id: 'zlCRGJLwapfsWuM2cZ9au',
             name: 'Max Planck'
         },
-        mediaID: 'Kctqcecm2ZoIEsUf9ehrp',
+        aggregateID: 'Kctqcecm2ZoIEsUf9ehrp',
         kind: MediaKind.Book,
         pubishTime: now
     },
@@ -52,7 +52,7 @@ export const Notifications: Array<INotification> = [
             id: 'GusZWL9VVbx1pVpepx4Cy',
             name: 'Erwin Schrödinger'
         },
-        mediaID: 'lJDKYv1NwGuH2v4OerZdl',
+        aggregateID: 'lJDKYv1NwGuH2v4OerZdl',
         kind: MediaKind.Book,
         pubishTime: now
     }

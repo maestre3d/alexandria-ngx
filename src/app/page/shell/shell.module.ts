@@ -16,6 +16,7 @@ import { MatDividerModule } from '@angular/material/divider';
     SharedModule,
     MatBadgeModule,
     MatDividerModule
-  ]
+  ],
+  bootstrap: [ShellComponent]
 })
 export class ShellModule { }

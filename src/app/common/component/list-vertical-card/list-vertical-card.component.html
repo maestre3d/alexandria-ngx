@@ -4,10 +4,10 @@
   <div class="swiper-container" #genericSwiper>
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
-      <ng-container *ngFor="let item of aggregates">
+      <ng-container *ngFor="let item of props">
         <div class="swiper-slide md:w-auto">
           <!-- Ad card -->
-          <app-vertical-card [isAd]="isAd" [props]="item">
+          <app-vertical-card [props]="item">
           </app-vertical-card>
         </div>
       </ng-container>

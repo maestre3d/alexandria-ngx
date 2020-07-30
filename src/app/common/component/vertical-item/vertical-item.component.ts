@@ -8,7 +8,6 @@ import { IVerticalItemProps } from '../../interface/vertical-item.interface';
 })
 export class VerticalItemComponent implements OnInit {
   @Input() props: IVerticalItemProps;
-  @Input() isAd: boolean;
 
   constructor() { }
 

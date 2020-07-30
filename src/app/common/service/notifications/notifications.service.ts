@@ -5,7 +5,7 @@ import { Notifications } from '@alexandria/mock/notification.mock';
 import { INotification } from '@alexandria/domain/entity/notification.entity';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class NotificationsService {
 
