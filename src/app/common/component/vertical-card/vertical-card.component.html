@@ -1,0 +1,13 @@
+<div class="bg-gray-500 w-full max-w-sm rounded-xl bg-cover bg-center md:w-64" style="height: 400px;"
+  [style.background-image]="'url('+ backgroundURL +')'" [attr.aria-label]="title + ' - ' + description"
+  [attr.aria-details]="description">
+  <!-- Contrast filter -->
+  <a [routerLink]="[uri, aggregateID]" [queryParams]="{ad_id: externalID}" rel="canonical"
+    class="flex flex-col flex-no-wrap justify-end rounded-xl bg-contrast-filter text-white w-full h-full">
+    <!-- Data / content -->
+    <div class="flex flex-col w-full max-w-full px-5 py-8 break-words">
+      <h1 class="font-black font-display text-2xl truncate-line">{{title}}</h1>
+      <h2 class="font-body font-medium text-lg truncate">{{description}}</h2>
+    </div>
+  </a>
+</div>

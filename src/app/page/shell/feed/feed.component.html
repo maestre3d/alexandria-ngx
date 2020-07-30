@@ -14,19 +14,9 @@
           <ng-container *ngFor="let ad of adService.list() | async">
             <div class="swiper-slide md:w-auto">
               <!-- Ad card -->
-              <div class="bg-gray-500 w-full max-w-sm rounded-xl bg-cover bg-center md:w-64" style="height: 400px;"
-                [style.background-image]="'url('+ ad.image +')'" [attr.aria-label]="ad.title + ' - ' + ad.description"
-                [attr.aria-details]="ad.description">
-                <!-- Contrast filter -->
-                <a [routerLink]="['/author', ad.authorID]" [queryParams]="{ad_id: ad.id}" rel="canonical"
-                  class="flex flex-col flex-no-wrap justify-end rounded-xl bg-contrast-filter text-white w-full h-full">
-                  <!-- Data / content -->
-                  <div class="flex flex-col w-full max-w-full px-5 py-8 break-words">
-                    <h1 class="font-black font-display text-2xl truncate-line">{{ad.title}}</h1>
-                    <h2 class="font-body font-medium text-lg truncate">{{ad.description}}</h2>
-                  </div>
-                </a>
-              </div>
+              <app-vertical-card [title]="ad.title" [aggregateID]="ad.authorID" [backgroundURL]="ad.image"
+                [description]="ad.description" [uri]="'/author'" [externalID]="ad.id">
+              </app-vertical-card>
             </div>
           </ng-container>
         </div>
