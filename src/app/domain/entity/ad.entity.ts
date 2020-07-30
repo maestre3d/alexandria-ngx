@@ -3,11 +3,12 @@ export interface IAd {
     title: string;
     description ?: string;
     image ?: string;
-    authorID: string;
+    aggregateID: string;
+    kind: string;
     // Use category's ID
     categories: Array < string > ;
     // Use ISO 2-digit country code
-    country: string;
+    region: string;
     // Use ISO 2-digit lang code
     lang: string;
     createTime: Date;

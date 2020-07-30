@@ -6,6 +6,7 @@ import Swiper from 'swiper';
 
 import { ThemeService } from '@alexandria/service/theme/theme.service';
 import { AdsService } from '@alexandria/service/ads/ads.service';
+import { AdKind } from '@alexandria/enum/ad-kind.enum';
 import { HistoryService } from '@alexandria/service/history/history.service';
 import { IHistoryItem } from '@alexandria/domain/entity/history.entity';
 import { NotificationsService } from '@alexandria/service/notifications/notifications.service';
@@ -53,10 +54,12 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
       r.forEach((ad) => {
         aggregates.push({
           id: ad.id,
-          aggregateID: ad.authorID,
+          aggregateID: ad.aggregateID,
           title: ad.title,
           description: ad.description,
-          backgroundURL: ad.image
+          backgroundURL: ad.image,
+          uri: ad.kind.toLowerCase(),
+          useQuery: ad.kind === AdKind.Media
         });
       });
 
