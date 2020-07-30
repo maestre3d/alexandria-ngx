@@ -1,5 +1,5 @@
 <div class="animate__animated animate__fadeIn w-full">
-  <h1 class="text-4xl font-black font-display truncate md:hidden">Alexandria</h1>
+  <!--<h1 class="text-4xl font-black font-display truncate md:hidden">Alexandria</h1>-->
   <!--<button mat-flat-button color="primary" (click)="onClick()">Toggle theme</button>-->
 
   <!-- Ads section -->
@@ -13,7 +13,7 @@
   <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
     class="flex flex-col flex-no-wrap mt-12">
     <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
-      <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">Get back in</h2>
+      <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Get back in</h2>
       <button mat-stroked-button color="primary" (click)="onClick()">More</button>
     </div>
     <app-list-vertical-item [props]="history$ | async"></app-list-vertical-item>
@@ -23,30 +23,18 @@
   <section aria-label="News section" aria-details="Find new content made for you"
     class="flex flex-col flex-no-wrap mt-8">
     <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
-      <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">News</h2>
+      <h2 class="w-1/2 truncate-line text-2xl font-display font-black">News</h2>
       <a mat-stroked-button color="primary" routerLink="/notification" class="rounded-full" rel="canonical">More</a>
     </div>
-    <!-- Swiper boundaries -->
-    <div class="w-full max-w-full mt-4">
-      <!-- Slider main container -->
-      <div class="swiper-container" #newsSwiper>
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-          <ng-container *ngFor="let newsItem of news$ | async">
-            <!-- Content card -->
-            <app-horizontal-item [props]="newsItem"></app-horizontal-item>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+    <app-list-horizontal-item [props]="this.news$ | async"></app-list-horizontal-item>
   </section>
 
   <!-- Trending -->
   <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
     class="flex flex-col flex-no-wrap mt-8">
     <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
-      <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">Trending</h2>
-      <button mat-stroked-button color="primary" (click)="onClick()">More</button>
+      <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Trending</h2>
+      <a mat-stroked-button color="primary" routerLink="/trending" class="rounded-full">More</a>
     </div>
     <app-list-vertical-item [props]="trending$ | async"></app-list-vertical-item>
   </section>

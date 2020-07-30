@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } fr
 import { Meta, Title } from '@angular/platform-browser';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
-import Swiper from 'swiper';
 
 import { ThemeService } from '@alexandria/service/theme/theme.service';
 import { AdsService } from '@alexandria/service/ads/ads.service';
@@ -21,7 +20,7 @@ import { IHorizontalItemProps } from '@alexandria/common/interface/horizontal-it
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss']
 })
-export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FeedComponent implements OnInit, OnDestroy {
   // Observers
   private subject: Subject<void> = new Subject();
 
@@ -31,10 +30,6 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   public news$: Observable<Array<IHorizontalItemProps>>;
   public trending$: Observable<Array<IVerticalItemProps>>;
 
-  // UI
-  private newsSwiper: Swiper;
-  @ViewChild('newsSwiper')
-  private newsSwiperRef: ElementRef;
 
   constructor(private themeService: ThemeService, private metaService: Meta, private titleService: Title,
               public adService: AdsService, private historyService: HistoryService,
@@ -57,10 +52,6 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loadTrending();
   }
 
-  ngAfterViewInit(): void {
-    this.loadSwipers();
-  }
-
   ngOnDestroy(): void {
     this.subject.next();
     this.subject.complete();
@@ -68,23 +59,6 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onClick(): void {
     this.themeService.toggle().pipe(takeUntil(this.subject)).subscribe((theme: string) => {
-    });
-  }
-
-  private loadSwipers(): void {
-    this.newsSwiper = new Swiper(this.newsSwiperRef.nativeElement, {
-      observer: true,
-      slidesPerView: 1,
-      slidesPerColumn: 2,
-      slidesPerColumnFill: 'row',
-      spaceBetween: 24,
-      breakpoints: {
-        768: {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-          slidesPerColumnFill: 'row',
-        }
-      }
     });
   }
 
@@ -98,8 +72,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
           description: ad.description,
           backgroundURL: ad.image,
           uri: ad.kind.toLowerCase(),
-          useQuery: ad.kind === AdKind.Media,
-          adID: ad.id
+          query: ad.kind === AdKind.Media ? {id: ad.aggregateID, ad: ad.id} : {ad: ad.id}
         });
       });
 
@@ -116,7 +89,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
           uri: item.kind.toLowerCase(),
           displayName: item.name,
           image: item.image,
-          useQuery: item.kind === HistoryKind.Media,
+          query: item.kind === HistoryKind.Media ? {id: item.id} : '',
           isRounded: item.kind === HistoryKind.Author,
           isVerified: item.verified
         });
@@ -135,9 +108,8 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
           displayName: item.title,
           description: item.description,
           image: item.image,
-          queryParams: {id: item.aggregateID, ad: item.id},
-          useQuery: true,
-          isRounded: false
+          query: {id: item.aggregateID, ad: item.id},
+          isRounded: true
         });
       });
       return props;
@@ -153,7 +125,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
           uri: item.kind.toLowerCase(),
           displayName: item.displayName,
           image: item.image,
-          useQuery: item.kind === TrendingKind.Media,
+          query: item.kind === TrendingKind.Media ? {id: item.aggregateID, notification: item.id} : {notification: item.id},
           isRounded: item.kind === TrendingKind.Author,
           isVerified: item.verified
         });

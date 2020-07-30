@@ -2,8 +2,8 @@
   [style.background-image]="'url('+ props.backgroundURL +')'"
   [attr.aria-label]="props.title + ' - ' + props.description" [attr.aria-details]="props.description">
   <!-- Contrast filter -->
-  <a [routerLink]="['/'+props.uri, !props.useQuery ? props.aggregateID : {}]"
-    [queryParams]="props.useQuery ? props.adID ? {ad: props.adID, id: props.aggregateID}:{id: props.aggregateID} : props.adID ? {ad: props.adID}: ''"
+  <a [routerLink]="['/'+props.uri, props.query && props.query.id ? {} : props.aggregateID]"
+    [queryParams]="props.query"
     rel="canonical"
     class="flex flex-col flex-no-wrap justify-end rounded-xl bg-contrast-filter text-white w-full h-full">
     <!-- Data / content -->

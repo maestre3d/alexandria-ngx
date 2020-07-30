@@ -4,6 +4,5 @@ export interface IVerticalCardProps {
     description: string;
     backgroundURL?: string;
     uri: string;
-    useQuery?: boolean;
-    adID?: string;
+    query?: any;
 }

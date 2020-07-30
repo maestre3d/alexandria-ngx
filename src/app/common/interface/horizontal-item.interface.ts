@@ -4,7 +4,6 @@ export interface IHorizontalItemProps {
     description: string;
     image?: string;
     uri: string;
-    useQuery?: boolean;
     isRounded?: boolean;
-    queryParams?: any;
+    query?: any;
 }

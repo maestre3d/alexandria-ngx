@@ -1,0 +1,13 @@
+<div class="w-full max-w-full mt-4">
+  <!-- Slider main container -->
+  <div class="swiper-container" #genericSwiper>
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <ng-container *ngFor="let item of props">
+        <div class="swiper-slide md:w-auto">
+          <app-horizontal-item [props]="item"></app-horizontal-item>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

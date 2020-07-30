@@ -1,6 +1,5 @@
 <div class="w-full max-w-xs md:w-48" style="width: 192px;" [attr.aria-label]="props.displayName + ' ' + props.uri">
-  <a [routerLink]="['/'+props.uri, !props.useQuery ? props.aggregateID : {}]"
-    [queryParams]="props.useQuery ? props.adID ? {ad: props.adID, id: props.aggregateID}:{id: props.aggregateID} : props.adID ? {ad: props.adID}: ''"
+  <a [routerLink]="['/'+props.uri, props.query && props.query.id ? {} : props.aggregateID]" [queryParams]="props.query"
     rel="canonical" class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
     <img [src]="props.image" class="object-cover" [attr.aria-label]="props.displayName + ' picture'"
       [alt]="props.displayName + ' picture'" [ngClass]="!props.isRounded ? 'rounded-xl': 'rounded-full'"

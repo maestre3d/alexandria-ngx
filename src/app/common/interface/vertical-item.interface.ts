@@ -4,8 +4,7 @@ export interface IVerticalItemProps {
   displayName: string;
   image ?: string;
 
-  useQuery ?: boolean;
   isRounded ?: boolean;
   isVerified ?: boolean;
-  adID?: string;
+  query?: any;
 }
