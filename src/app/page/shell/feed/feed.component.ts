@@ -8,13 +8,12 @@ import { ThemeService } from '@alexandria/service/theme/theme.service';
 import { AdsService } from '@alexandria/service/ads/ads.service';
 import { AdKind } from '@alexandria/enum/ad-kind.enum';
 import { HistoryService } from '@alexandria/service/history/history.service';
-import { IHistoryItem } from '@alexandria/domain/entity/history.entity';
 import { NotificationsService } from '@alexandria/service/notifications/notifications.service';
 import { HistoryKind } from '@alexandria/enum/history-kind.enum';
-import { ITrending } from '@alexandria/domain/entity/trending.entity';
 import { TrendingService } from '@alexandria/service/trending/trending.service';
 import { IVerticalCardProps } from '@alexandria/common/interface/vertical-card.interface';
-import { IVerticalSmallItemProps } from '@alexandria/common/interface/vertical-small-card-item.interface';
+import { IVerticalItemProps } from '@alexandria/common/interface/vertical-item.interface';
+import { TrendingKind } from '@alexandria/enum/trending-kind.enum';
 
 @Component({
   selector: 'app-feed',
@@ -27,22 +26,13 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Data
   public ads$: Observable<Array<IVerticalCardProps>>;
-  public history$: Observable<Array<IVerticalSmallItemProps>>;
-  public trending$: Observable<Array<ITrending>>;
-  public MediaType = HistoryKind.Media;
+  public history$: Observable<Array<IVerticalItemProps>>;
+  public trending$: Observable<Array<IVerticalItemProps>>;
 
   // UI
-  private historySwiper: Swiper;
-  @ViewChild('historySwiper')
-  private historySwiperRef: ElementRef;
-
   private newsSwiper: Swiper;
   @ViewChild('newsSwiper')
   private newsSwiperRef: ElementRef;
-
-  private trendingSwiper: Swiper;
-  @ViewChild('trendingSwiper')
-  private trendigSwiperRef: ElementRef;
 
   constructor(private themeService: ThemeService, private metaService: Meta, private titleService: Title,
               public adService: AdsService, private historyService: HistoryService,
@@ -67,7 +57,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
       return aggregates;
     }));
     this.history$ = this.historyService.get('ca0770b6-7650-4a0e-b924-aa0396d953ac').pipe(map(r => {
-      const props: Array<IVerticalSmallItemProps> = [];
+      const props: Array<IVerticalItemProps> = [];
       r.items.forEach((item) => {
         props.push({
           aggregateID: item.id,
@@ -81,7 +71,21 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       return props;
     }));
-    this.trending$ = this.trendingService.list();
+    this.trending$ = this.trendingService.list().pipe(map(r => {
+      const props: Array<IVerticalItemProps> = [];
+      r.forEach((item) => {
+        props.push({
+          aggregateID: item.id,
+          uri: item.kind.toLowerCase(),
+          displayName: item.displayName,
+          image: item.image,
+          useQuery: item.kind === TrendingKind.Media,
+          isRounded: item.kind === TrendingKind.Author,
+          isVerified: item.verified
+        });
+      });
+      return props;
+    }));
     // Get feed in parallel
     /*
     forkJoin([
@@ -107,22 +111,6 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private loadSwipers(): void {
-    this.historySwiper = new Swiper(this.historySwiperRef.nativeElement, {
-      observer: true,
-      slidesPerView: 'auto',
-      freeMode: true,
-      preloadImages: false,
-      watchSlidesVisibility: false,
-      spaceBetween: 32,
-      lazy: {
-        loadPrevNext: true,
-        loadPrevNextAmount: 3,
-        elementClass: 'swiper-lazy',
-        loadedClass: 'swiper-lazy-loaded',
-        preloaderClass: 'swiper-lazy-preloader',
-      }
-    });
-
     this.newsSwiper = new Swiper(this.newsSwiperRef.nativeElement, {
       observer: true,
       slidesPerView: 1,
@@ -135,22 +123,6 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
           slidesPerGroup: 2,
           slidesPerColumnFill: 'row',
         }
-      }
-    });
-
-    this.trendingSwiper = new Swiper(this.trendigSwiperRef.nativeElement, {
-      observer: true,
-      slidesPerView: 'auto',
-      freeMode: true,
-      preloadImages: false,
-      watchSlidesVisibility: false,
-      spaceBetween: 32,
-      lazy: {
-        loadPrevNext: true,
-        loadPrevNextAmount: 3,
-        elementClass: 'swiper-lazy',
-        loadedClass: 'swiper-lazy-loaded',
-        preloaderClass: 'swiper-lazy-preloader',
       }
     });
   }

@@ -5,13 +5,15 @@
     "outDir": "./out-tsc/app",
     "types": [],
     "baseUrl": "src",
+    "experimentalDecorators": true,
     "paths": {
       "@alexandria/config/*": ["app/common/config/*"],
       "@alexandria/enum/*": ["app/common/enum/*"],
       "@alexandria/mock/*": ["app/mock/*"],
       "@alexandria/service/*": ["app/common/service/*"],
       "@alexandria/domain/*": ["app/domain/*"],
-      "@alexandria/common/*": ["app/common/*"]
+      "@alexandria/common/*": ["app/common/*"],
+      "@alexandria/component/*": ["app/common/component/*"]
     }
   },
   "files": [

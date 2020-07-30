@@ -8,15 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 
-import { VerticalCardComponent } from '@alexandria/common/component/vertical-card/vertical-card.component';
-import { ListVerticalCardComponent } from '@alexandria/common/component/list-vertical-card/list-vertical-card.component';
-
 
 @NgModule({
-  declarations: [
-    VerticalCardComponent,
-    ListVerticalCardComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule,
@@ -31,10 +25,7 @@ import { ListVerticalCardComponent } from '@alexandria/common/component/list-ver
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
-    FormsModule,
-
-    VerticalCardComponent,
-    ListVerticalCardComponent
+    FormsModule
   ]
 })
 export class SharedModule { }

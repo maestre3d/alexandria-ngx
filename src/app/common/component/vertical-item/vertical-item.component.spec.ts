@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerticalSmallItemComponent } from './vertical-small-item.component';
+import { VerticalItemComponent } from './vertical-item.component';
 
 describe('VerticalSmallItemComponent', () => {
-  let component: VerticalSmallItemComponent;
-  let fixture: ComponentFixture<VerticalSmallItemComponent>;
+  let component: VerticalItemComponent;
+  let fixture: ComponentFixture<VerticalItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VerticalSmallItemComponent ]
+      declarations: [ VerticalItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VerticalSmallItemComponent);
+    fixture = TestBed.createComponent(VerticalItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

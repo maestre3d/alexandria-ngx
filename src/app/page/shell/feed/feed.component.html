@@ -16,21 +16,7 @@
       <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">Get back in</h2>
       <button mat-stroked-button color="primary" (click)="onClick()">More</button>
     </div>
-    <!-- Swiper boundaries -->
-    <div class="w-full max-w-full mt-4">
-      <!-- Slider main container -->
-      <div class="swiper-container" #historySwiper>
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-          <ng-container *ngFor="let item of history$ | async">
-            <div class="swiper-slide" style="width: min-content;">
-              <!-- Content card -->
-              <app-vertical-small-item [isAd]="false" [props]="item" ></app-vertical-small-item>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+    <app-list-vertical-item [props]="history$ | async"></app-list-vertical-item>
   </section>
 
   <!-- News -->
@@ -74,35 +60,6 @@
       <h2 class="w-1/2 truncate text-xl font-display font-black md:text-2xl">Trending</h2>
       <button mat-stroked-button color="primary" (click)="onClick()">More</button>
     </div>
-    <!-- Swiper boundaries -->
-    <div class="w-full max-w-full mt-4">
-      <!-- Slider main container -->
-      <div class="swiper-container" #trendingSwiper>
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-          <ng-container *ngFor="let item of trending$ | async">
-            <div class="swiper-slide" style="width: min-content;">
-              <!-- Content card -->
-              <div class="w-full max-w-xs md:w-48" style="width: 192px;"
-                [attr.aria-label]="item.displayName + ' ' + item.kind.toLowerCase()">
-                <a [routerLink]="['/'+item.kind.toLowerCase(), item.kind !== this.MediaType ? item.aggregateID : {}]"
-                  [queryParams]="item.kind === this.MediaType ? {id: item.aggregateID} : ''" rel="canonical"
-                  class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
-                  <img [src]="item.image" class="object-cover" [attr.aria-label]="item.displayName + ' picture'"
-                    [alt]="item.displayName + ' picture'"
-                    [ngClass]="item.kind === this.MediaType ? 'rounded-xl': 'rounded-full'"
-                    style="height: 144px; width: 144px;" />
-                  <!-- Data / content -->
-                  <div class="flex flex-row flex-no-wrap max-w-full py-4 break-words">
-                    <h1 class="font-bold text-lg text-center truncate max-w-full">{{item.displayName}}</h1>
-                    <mat-icon *ngIf="item.verified" class="text-blue ml-1">verified</mat-icon>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+    <app-list-vertical-item [props]="trending$ | async"></app-list-vertical-item>
   </section>
 </div>

@@ -1,4 +1,4 @@
-export interface IVerticalSmallItemProps {
+export interface IVerticalItemProps {
   aggregateID: string;
   uri: string;
   displayName: string;
