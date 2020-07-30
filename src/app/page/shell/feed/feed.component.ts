@@ -12,6 +12,7 @@ import { NotificationsService } from '@alexandria/service/notifications/notifica
 import { HistoryKind } from '@alexandria/enum/history-kind.enum';
 import { ITrending } from '@alexandria/domain/entity/trending.entity';
 import { TrendingService } from '@alexandria/service/trending/trending.service';
+import { IVerticalCardProps } from '@alexandria/common/interface/vertical-card.interface';
 
 @Component({
   selector: 'app-feed',
@@ -23,15 +24,12 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   private subject: Subject<void> = new Subject();
 
   // Data
+  public ads$: Observable<Array<IVerticalCardProps>>;
   public history$: Observable<Array<IHistoryItem>>;
   public trending$: Observable<Array<ITrending>>;
   public MediaType = HistoryKind.Media;
 
   // UI
-  private adSwiper: Swiper;
-  @ViewChild('adSwiper')
-  private adSwiperRef: ElementRef;
-
   private historySwiper: Swiper;
   @ViewChild('historySwiper')
   private historySwiperRef: ElementRef;
@@ -50,6 +48,20 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.ads$ = this.adService.list().pipe(map(r => {
+      const aggregates: Array<IVerticalCardProps> = [];
+      r.forEach((ad) => {
+        aggregates.push({
+          id: ad.id,
+          aggregateID: ad.authorID,
+          title: ad.title,
+          description: ad.description,
+          backgroundURL: ad.image
+        });
+      });
+
+      return aggregates;
+    }));
     this.history$ = this.historyService.get('ca0770b6-7650-4a0e-b924-aa0396d953ac').pipe(map(r => r.items));
     this.trending$ = this.trendingService.list();
     // Get feed in parallel
@@ -77,30 +89,6 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private loadSwipers(): void {
-    this.adSwiper = new Swiper(this.adSwiperRef.nativeElement, {
-      observer: true,
-      slidesPerView: 'auto',
-      freeMode: false,
-      preloadImages: false,
-      watchSlidesVisibility: false,
-      spaceBetween: 16,
-      autoplay: {
-        delay: 3000
-      },
-      on: {
-        init: (sw) => {
-          if (!sw) {
-            sw.autoplay.stop();
-          }
-        },
-        imagesReady: (sw) => {
-          if (!sw) {
-            sw.autoplay.start();
-          }
-        }
-      }
-    });
-
     this.historySwiper = new Swiper(this.historySwiperRef.nativeElement, {
       observer: true,
       slidesPerView: 'auto',

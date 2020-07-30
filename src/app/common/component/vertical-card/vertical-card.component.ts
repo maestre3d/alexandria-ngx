@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IVerticalCardProps } from '@alexandria/common/interface/vertical-card.interface';
+import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'app-vertical-card',
@@ -6,13 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./vertical-card.component.scss']
 })
 export class VerticalCardComponent implements OnInit {
-  @Input() backgroundURL: string;
-  @Input() title: string;
-  @Input() description: string;
-
-  @Input() uri: string;
-  @Input() aggregateID: string;
-  @Input() externalID?: string;
+  @Input() aggregate: IVerticalCardProps;
+  @Input() Uri: string;
+  @Input() useQuery: boolean;
 
   constructor() { }
 

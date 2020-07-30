@@ -5,23 +5,7 @@
   <!-- Ads section -->
   <section aria-label="Advertising section" aria-details="Check out new content made for you"
     class="flex flex-col flex-no-wrap w-full mt-8">
-    <!-- Swiper boundaries -->
-    <div class="w-full max-w-full">
-      <!-- Slider main container -->
-      <div class="swiper-container" #adSwiper>
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-          <ng-container *ngFor="let ad of adService.list() | async">
-            <div class="swiper-slide md:w-auto">
-              <!-- Ad card -->
-              <app-vertical-card [title]="ad.title" [aggregateID]="ad.authorID" [backgroundURL]="ad.image"
-                [description]="ad.description" [uri]="'/author'" [externalID]="ad.id">
-              </app-vertical-card>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+    <app-list-vertical-card [aggregates]="ads$ | async" [Uri]="'/author'" [useQuery]="false"></app-list-vertical-card>
   </section>
 
   <!-- History -->

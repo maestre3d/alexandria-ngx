@@ -1,0 +1,16 @@
+<!-- Swiper boundaries -->
+<div class="w-full max-w-full">
+  <!-- Slider main container -->
+  <div class="swiper-container" #genericSwiper>
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <ng-container *ngFor="let item of aggregates">
+        <div class="swiper-slide md:w-auto">
+          <!-- Ad card -->
+          <app-vertical-card [Uri]="Uri" [useQuery]="useQuery" [aggregate]="item">
+          </app-vertical-card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 
-import { VerticalCardComponent } from '@alexandria/common/component/vertical-card/vertical-card.component'
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { VerticalCardComponent } from '@alexandria/common/component/vertical-card/vertical-card.component';
+import { ListVerticalCardComponent } from '@alexandria/common/component/list-vertical-card/list-vertical-card.component';
+
 
 @NgModule({
   declarations: [
-    VerticalCardComponent
+    VerticalCardComponent,
+    ListVerticalCardComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,8 @@ import { RouterModule } from '@angular/router';
     MatFormFieldModule,
     FormsModule,
 
-    VerticalCardComponent
+    VerticalCardComponent,
+    ListVerticalCardComponent
   ]
 })
 export class SharedModule { }
