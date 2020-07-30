@@ -19,7 +19,7 @@ export const Ads: Array < IAd > = [{
   {
     id: 'YZm8ggeY3G77J6rJXGSsL',
     title: 'Learn Astrophysics',
-    description: 'Check out the top authors.',
+    description: 'Check out the top author.',
     image: 'https://images.unsplash.com/photo-1579532040113-c94c4a38a1e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=516&q=80',
     // Schrodinger
     authorID: 'GusZWL9VVbx1pVpepx4Cy',
@@ -39,6 +39,20 @@ export const Ads: Array < IAd > = [{
     authorID: 'iI5R8RDYduL1p31q2tlnt',
     // Art, History
     categories: ['0b248f8f-9541-493c-ab52-bc35ec50d152', 'c45f07bc-bf46-416e-88ce-2a4827393222'],
+    country: 'us',
+    lang: 'en',
+    createTime: now,
+    updateTime: now
+  },
+  {
+    id: 'toxk35LoyIFtS4TVs2AIY',
+    title: 'General Relativity',
+    description: 'How gravity influences the universe.',
+    image: 'https://i.pinimg.com/originals/b7/fd/14/b7fd14ea8230eea29e957c38bb812fcd.jpg',
+    // Albert Einstein
+    authorID: 'H70Ou7X1KYOmmtquoXpTT',
+    // Quantum Physics
+    categories: ['2f096cf0-6cc3-4e01-a7fc-fd8095e597f9'],
     country: 'us',
     lang: 'en',
     createTime: now,

@@ -127,5 +127,36 @@ export const Authors: Array < IAuthor > = [{
         role: AuthorRole.Root
       }
     ]
+  },
+  {
+    id: 'H70Ou7X1KYOmmtquoXpTT',
+    name: 'Albert Einstein',
+    displayName: 'Albert Einstein',
+    nick: 'alberteinstein',
+    image: 'https://m.dw.com/image/44213310_101.jpg',
+    country: 'de',
+    community: true,
+    verified: true,
+    createTime: now,
+    updateTime: now,
+    totalViews: 4785695,
+    totalFollowers: 2560939,
+    contributors: [
+      // Fernando Herrera
+      {
+        id: 'c89f051f-41b7-4bfa-a440-c82394a5ab4c',
+        role: AuthorRole.Contrib
+      },
+      // Jorge Santaolla
+      {
+        id: 'f7dd213f-c5fb-4eb8-bd9c-8079ef7a35cf',
+        role: AuthorRole.Contrib
+      },
+      // Alonso Ruiz
+      {
+        id: 'ca0770b6-7650-4a0e-b924-aa0396d953ac',
+        role: AuthorRole.Contrib
+      }
+    ]
   }
 ];

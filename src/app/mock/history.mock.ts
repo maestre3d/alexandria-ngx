@@ -28,6 +28,13 @@ export const Histories: Array < IHistory > = [{
       kind: HistoryKind.Author,
       image: 'https://hollywoodbowles.com/wp-content/uploads/2019/08/5D233C8C-6388-4AB9-97D8-22FC35E06716.jpeg',
       verified: true
+    },
+    {
+      id: 'H70Ou7X1KYOmmtquoXpTT',
+      name: 'Albert Einstein',
+      kind: HistoryKind.Author,
+      image: 'https://m.dw.com/image/44213310_101.jpg',
+      verified: true
     }
   ]
 }];
