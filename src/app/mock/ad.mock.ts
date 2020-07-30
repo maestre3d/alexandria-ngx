@@ -47,7 +47,7 @@ export const Ads: Array < IAd > = [{
   {
     id: 'toxk35LoyIFtS4TVs2AIY',
     title: 'General Relativity',
-    description: 'How gravity influences the universe.',
+    description: 'How gravity influence the universe.',
     image: 'https://i.pinimg.com/originals/b7/fd/14/b7fd14ea8230eea29e957c38bb812fcd.jpg',
     // Albert Einstein
     authorID: 'H70Ou7X1KYOmmtquoXpTT',

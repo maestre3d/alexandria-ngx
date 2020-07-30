@@ -5,6 +5,8 @@ export interface ITrending {
     displayName: string;
     // Denormalized picture
     image?: string;
+    // Denormalized verify state
+    verified?: boolean;
     // Acronymn for Mass Fluctuation Ratio
     MassFluctuationRatio: number;
     // Use ISO 2-digit country code

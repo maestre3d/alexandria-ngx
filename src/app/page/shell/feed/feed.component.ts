@@ -10,6 +10,8 @@ import { HistoryService } from '@alexandria/service/history/history.service';
 import { IHistoryItem } from '@alexandria/domain/entity/history.entity';
 import { NotificationsService } from '@alexandria/service/notifications/notifications.service';
 import { HistoryKind } from '@alexandria/enum/history-kind.enum';
+import { ITrending } from '@alexandria/domain/entity/trending.entity';
+import { TrendingService } from '@alexandria/service/trending/trending.service';
 
 @Component({
   selector: 'app-feed',
@@ -22,6 +24,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Data
   public history$: Observable<Array<IHistoryItem>>;
+  public trending$: Observable<Array<ITrending>>;
   public MediaType = HistoryKind.Media;
 
   // UI
@@ -37,13 +40,18 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('newsSwiper')
   private newsSwiperRef: ElementRef;
 
+  private trendingSwiper: Swiper;
+  @ViewChild('trendingSwiper')
+  private trendigSwiperRef: ElementRef;
+
   constructor(private themeService: ThemeService, private metaService: Meta, private titleService: Title,
               public adService: AdsService, private historyService: HistoryService,
-              public notificationService: NotificationsService) {
+              public notificationService: NotificationsService, public trendingService: TrendingService) {
   }
 
   ngOnInit(): void {
     this.history$ = this.historyService.get('ca0770b6-7650-4a0e-b924-aa0396d953ac').pipe(map(r => r.items));
+    this.trending$ = this.trendingService.list();
     // Get feed in parallel
     /*
     forkJoin([
@@ -121,6 +129,22 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
           slidesPerGroup: 2,
           slidesPerColumnFill: 'row',
         }
+      }
+    });
+
+    this.trendingSwiper = new Swiper(this.trendigSwiperRef.nativeElement, {
+      observer: true,
+      slidesPerView: 'auto',
+      freeMode: true,
+      preloadImages: false,
+      watchSlidesVisibility: false,
+      spaceBetween: 32,
+      lazy: {
+        loadPrevNext: true,
+        loadPrevNextAmount: 3,
+        elementClass: 'swiper-lazy',
+        loadedClass: 'swiper-lazy-loaded',
+        preloaderClass: 'swiper-lazy-preloader',
       }
     });
   }

@@ -117,24 +117,24 @@
     <!-- Swiper boundaries -->
     <div class="w-full max-w-full mt-4">
       <!-- Slider main container -->
-      <div class="swiper-container" #recentSwiper>
+      <div class="swiper-container" #trendingSwiper>
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
-          <ng-container *ngFor="let item of history$ | async">
+          <ng-container *ngFor="let item of trending$ | async">
             <div class="swiper-slide" style="width: min-content;">
               <!-- Content card -->
               <div class="w-full max-w-xs md:w-48" style="width: 192px;"
-                [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
-                <a [routerLink]="['/'+item.kind.toLowerCase(), item.kind !== this.MediaType ? item.id : {}]"
-                  [queryParams]="item.kind === this.MediaType ? {id: item.id} : ''" rel="canonical"
+                [attr.aria-label]="item.displayName + ' ' + item.kind.toLowerCase()">
+                <a [routerLink]="['/'+item.kind.toLowerCase(), item.kind !== this.MediaType ? item.aggregateID : {}]"
+                  [queryParams]="item.kind === this.MediaType ? {id: item.aggregateID} : ''" rel="canonical"
                   class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
-                  <img [src]="item.image" class="object-cover" [attr.aria-label]="item.name + ' picture'"
-                    [alt]="item.name + ' picture'"
+                  <img [src]="item.image" class="object-cover" [attr.aria-label]="item.displayName + ' picture'"
+                    [alt]="item.displayName + ' picture'"
                     [ngClass]="item.kind === this.MediaType ? 'rounded-xl': 'rounded-full'"
                     style="height: 144px; width: 144px;" />
                   <!-- Data / content -->
                   <div class="flex flex-row flex-no-wrap max-w-full py-4 break-words">
-                    <h1 class="font-bold text-lg text-center truncate max-w-full">{{item.name}}</h1>
+                    <h1 class="font-bold text-lg text-center truncate max-w-full">{{item.displayName}}</h1>
                     <mat-icon *ngIf="item.verified" class="text-blue ml-1">verified</mat-icon>
                   </div>
                 </a>
