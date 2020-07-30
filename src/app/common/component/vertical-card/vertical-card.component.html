@@ -3,7 +3,7 @@
   [attr.aria-label]="props.title + ' - ' + props.description" [attr.aria-details]="props.description">
   <!-- Contrast filter -->
   <a [routerLink]="['/'+props.uri, !props.useQuery ? props.aggregateID : {}]"
-    [queryParams]="props.useQuery ? isAd ? {ad: props.id, id: props.aggregateID}:{id: props.aggregateID} : {ad: props.id}"
+    [queryParams]="props.useQuery ? isAd ? {ad: props.adID, id: props.aggregateID}:{id: props.aggregateID} : isAd ? {ad: props.adID}: ''"
     rel="canonical"
     class="flex flex-col flex-no-wrap justify-end rounded-xl bg-contrast-filter text-white w-full h-full">
     <!-- Data / content -->

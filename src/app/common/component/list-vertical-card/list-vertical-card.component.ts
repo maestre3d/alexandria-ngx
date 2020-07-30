@@ -9,7 +9,6 @@ import { IVerticalCardProps } from '@alexandria/common/interface/vertical-card.i
 })
 export class ListVerticalCardComponent implements OnInit, AfterViewInit {
   @Input() aggregates: Array<IVerticalCardProps>;
-  @Input() useQuery: boolean;
   @Input() isAd: boolean;
 
   private genericSwiper: Swiper;

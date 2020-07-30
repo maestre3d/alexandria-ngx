@@ -14,6 +14,7 @@ import { HistoryKind } from '@alexandria/enum/history-kind.enum';
 import { ITrending } from '@alexandria/domain/entity/trending.entity';
 import { TrendingService } from '@alexandria/service/trending/trending.service';
 import { IVerticalCardProps } from '@alexandria/common/interface/vertical-card.interface';
+import { IVerticalSmallItemProps } from '@alexandria/common/interface/vertical-small-card-item.interface';
 
 @Component({
   selector: 'app-feed',
@@ -26,7 +27,7 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Data
   public ads$: Observable<Array<IVerticalCardProps>>;
-  public history$: Observable<Array<IHistoryItem>>;
+  public history$: Observable<Array<IVerticalSmallItemProps>>;
   public trending$: Observable<Array<ITrending>>;
   public MediaType = HistoryKind.Media;
 
@@ -53,19 +54,33 @@ export class FeedComponent implements OnInit, AfterViewInit, OnDestroy {
       const aggregates: Array<IVerticalCardProps> = [];
       r.forEach((ad) => {
         aggregates.push({
-          id: ad.id,
           aggregateID: ad.aggregateID,
           title: ad.title,
           description: ad.description,
           backgroundURL: ad.image,
           uri: ad.kind.toLowerCase(),
-          useQuery: ad.kind === AdKind.Media
+          useQuery: ad.kind === AdKind.Media,
+          adID: ad.id
         });
       });
 
       return aggregates;
     }));
-    this.history$ = this.historyService.get('ca0770b6-7650-4a0e-b924-aa0396d953ac').pipe(map(r => r.items));
+    this.history$ = this.historyService.get('ca0770b6-7650-4a0e-b924-aa0396d953ac').pipe(map(r => {
+      const props: Array<IVerticalSmallItemProps> = [];
+      r.items.forEach((item) => {
+        props.push({
+          aggregateID: item.id,
+          uri: item.kind.toLowerCase(),
+          displayName: item.name,
+          image: item.image,
+          useQuery: item.kind === HistoryKind.Media,
+          isRounded: item.kind === HistoryKind.Author,
+          isVerified: item.verified
+        });
+      });
+      return props;
+    }));
     this.trending$ = this.trendingService.list();
     // Get feed in parallel
     /*

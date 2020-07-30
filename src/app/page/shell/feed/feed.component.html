@@ -5,7 +5,7 @@
   <!-- Ads section -->
   <section aria-label="Advertising section" aria-details="Check out new content made for you"
     class="flex flex-col flex-no-wrap w-full mt-8">
-    <app-list-vertical-card [aggregates]="ads$ | async" [isAd]="true" [useQuery]="false">
+    <app-list-vertical-card [aggregates]="ads$ | async" [isAd]="true">
     </app-list-vertical-card>
   </section>
 
@@ -25,22 +25,7 @@
           <ng-container *ngFor="let item of history$ | async">
             <div class="swiper-slide" style="width: min-content;">
               <!-- Content card -->
-              <div class="w-full max-w-xs md:w-48" style="width: 192px;"
-                [attr.aria-label]="item.name + ' ' + item.kind.toLowerCase()">
-                <a [routerLink]="['/'+item.kind.toLowerCase(), item.kind !== this.MediaType ? item.id : {}]"
-                  [queryParams]="item.kind === this.MediaType ? {id: item.id} : ''" rel="canonical"
-                  class="flex flex-col justify-center items-center flex-no-wrap w-full h-full">
-                  <img [src]="item.image" class="object-cover" [attr.aria-label]="item.name + ' picture'"
-                    [alt]="item.name + ' picture'"
-                    [ngClass]="item.kind === this.MediaType ? 'rounded-xl': 'rounded-full'"
-                    style="height: 144px; width: 144px;" />
-                  <!-- Data / content -->
-                  <div class="flex flex-row flex-no-wrap max-w-full py-4 break-words">
-                    <h1 class="font-bold text-lg text-center truncate max-w-full">{{item.name}}</h1>
-                    <mat-icon *ngIf="item.verified" class="text-blue ml-1">verified</mat-icon>
-                  </div>
-                </a>
-              </div>
+              <app-vertical-small-item [isAd]="false" [props]="item" ></app-vertical-small-item>
             </div>
           </ng-container>
         </div>
