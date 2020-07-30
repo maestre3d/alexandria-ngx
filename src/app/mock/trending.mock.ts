@@ -1,5 +1,5 @@
 import { ITrending } from '../domain/entity/trending.entity';
-import { TrendingKind } from '../common/enum/trending-king.enum';
+import { TrendingKind } from '../common/enum/trending-kind.enum';
 
 const now = new Date();
 
