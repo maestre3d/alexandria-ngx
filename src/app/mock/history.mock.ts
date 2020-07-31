@@ -14,13 +14,13 @@ export const Histories: Array < IHistory > = [{
       id: 'lJDKYv1NwGuH2v4OerZdl',
       name: 'Statistical Thermodynamics',
       kind: HistoryKind.Media,
-      image: 'https://images.unsplash.com/photo-1502085026219-54ac00e06fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1407&q=80'
+      image: 'https://www.amazon.com/images/I/41twAZJ+jmL._SX322_BO1,204,203,200_.jpg'
     },
     {
       id: 'Kctqcecm2ZoIEsUf9ehrp',
       name: 'Treatise on thermodynamics',
       kind: HistoryKind.Media,
-      image: 'https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=620&q=80'
+      image: 'https://www.amazon.com/images/I/41khrxV5d5L._SX310_BO1,204,203,200_.jpg'
     },
     {
       id: 'XrtpNzixu8jOHK0kBkRTU',
