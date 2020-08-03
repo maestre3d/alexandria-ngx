@@ -22,10 +22,10 @@ export class ShellComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private routerActive: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef,
               private mediaMatcher: MediaMatcher) {
+    // Using tailwind responsive breakpoints (md)
     this.mobileQuery = mediaMatcher.matchMedia('(min-width: 768px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this.mobileQueryListener);
-
   }
 
   ngOnInit(): void {
