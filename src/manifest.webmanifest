@@ -1,11 +1,43 @@
 {
   "name": "Alexandria",
   "short_name": "Alexandria",
+  "description": "Alexandria is an streaming platform where you can share knowledge through media you like",
   "theme_color": "#0057FF",
-  "background_color": "#f0f0f0",
+  "background_color": "#0057FF",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/?source=pwa",
+  "shortcuts": [
+    {
+      "name": "Alexandria Search",
+      "short_name": "Search",
+      "description": "Find a book, podcast or video",
+      "url": "/search?source=pwa",
+      "icons": [{ "src": "assets/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Trending",
+      "short_name": "Trending",
+      "description": "Find out the hotest trends",
+      "url": "/trending?source=pwa",
+      "icons": [{ "src": "assets/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "My Notifications",
+      "short_name": "Notifications",
+      "description": "Track your new content",
+      "url": "/notification?source=pwa",
+      "icons": [{ "src": "assets/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "My Profile",
+      "short_name": "Me",
+      "description": "Check out your user profile",
+      "url": "/me?source=pwa",
+      "icons": [{ "src": "assets/icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ],
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
