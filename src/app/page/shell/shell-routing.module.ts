@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('./feed/feed.module').then(m => m.FeedModule),
       },
       {
+        path: 'search',
+        loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+      },
+      {
         path: '**',
         loadChildren: () => import('../shared/not-found/not-found.module').then(m => m.NotFoundModule),
       }

@@ -42,14 +42,16 @@ export class ShellComponent implements OnInit, OnDestroy {
   }
 
   onQuery(event: KeyboardEvent): void {
-    setTimeout(() => {
-      if (!this.isSearching) {
-        this.isSearching = true;
-        this.router.navigate(['/search'], { queryParams: {q: this.searchValue} });
-        return;
-      }
+    if (this.searchValue !== '') {
+      setTimeout(() => {
+        if (!this.isSearching) {
+          this.isSearching = true;
+          this.router.navigate(['/search'], { queryParams: {q: this.searchValue} });
+          return;
+        }
 
-      this.isSearching = false;
-    }, 1500);
+        this.isSearching = false;
+      }, 1500);
+    }
   }
 }
