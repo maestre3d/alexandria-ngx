@@ -1,64 +1,76 @@
 <div mat-background class="w-full h-full wrapper flex flex-col items-center">
-    <div class="hidden fixed w-full h-20 app-bg-accent md:flex md:flex-col md:justify-center md:items-center md:z-10"
-        *ngIf="mobileQuery.matches">
-        <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-6xl md:px-4">
-            <a routerLink="/">
-                <span class="font-black text-2xl font-display">Alexandria</span>
-            </a>
-            <div>
-                <mat-form-field appearance="outline" style="width: 300px;" [floatLabel]="'never'">
-                    <!-- <mat-label>Search</mat-label> -->
-                    <input matInput type="text" placeholder="Art, astrophysics, finance ..." [(ngModel)]="searchValue" (keyup)="onQuery($event)">
-                    <span matSuffix class="flex flex-row flex-no-wrap justify-center items-center">
-                        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                        <mat-icon matSuffix aria-hidden="false" aria-label="Search icon">search</mat-icon>
-                    </span>
-                </mat-form-field>
-            </div>
-            <div class="flex flex-row flex-no-wrap navbar">
-                <a routerLinkActive="active" routerLink="/trending" mat-icon-button color="accent" aria-label="Trending button">
-                    <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
-                </a>
-                <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent" aria-label="Notification button">
-                    <mat-icon [matBadge]="totalNotification" matBadgeColor="warn" aria-hidden="false" aria-label="Notification icon">notifications</mat-icon>
-                    <span class="cdk-visually-hidden">
-                        You have {{totalNotification}} notifications
-                    </span>
-                </a>
-                <a routerLinkActive="active" routerLink="/me" mat-icon-button color="accent" aria-label="Profile button">
-                    <mat-icon aria-hidden="false" aria-label="Profile icon">account_circle</mat-icon>
-                </a>
-            </div>
-        </div>
+  <div class="hidden fixed w-full h-20 app-bg-accent md:flex md:flex-col md:justify-center md:items-center md:z-10"
+    *ngIf="mobileQuery.matches">
+    <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-6xl md:px-4">
+      <a routerLink="/">
+        <span class="font-black text-2xl font-display">Alexandria</span>
+      </a>
+      <div>
+        <mat-form-field appearance="outline" style="width: 300px;" [floatLabel]="'never'">
+          <!-- <mat-label>Search</mat-label> -->
+          <input matInput type="text" placeholder="Art, astrophysics, finance ..." [(ngModel)]="searchValue"
+            (keyup)="onQuery($event)">
+          <span matSuffix class="flex flex-row flex-no-wrap justify-center items-center">
+            <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
+              (click)="searchValue=''">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-icon matSuffix aria-hidden="false" aria-label="Search icon">search</mat-icon>
+          </span>
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row flex-no-wrap navbar">
+        <a routerLinkActive="active" routerLink="/trending" mat-icon-button color="accent" aria-label="Trending button">
+          <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
+        </a>
+        <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent"
+          aria-label="Notification button">
+          <mat-icon [matBadge]="totalNotification" matBadgeColor="warn" aria-hidden="false"
+            aria-label="Notification icon">notifications</mat-icon>
+          <span class="cdk-visually-hidden">
+            You have {{totalNotification}} notifications
+          </span>
+        </a>
+        <a routerLinkActive="active" class="justify-center items-center" style="display: flex;" routerLink="/me"
+          mat-icon-button color="accent" aria-label="Profile button">
+          <img aria-hidden="false" aria-label="Profile icon" alt="Your profile picture"
+            style="height: 24px; width: 24px;" class="object-cover rounded-full"
+            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80" />
+        </a>
+      </div>
     </div>
+  </div>
 
-    <div class="w-full max-w-6xl pt-4 px-8 pb-24 md:pt-24 md:pb-10">
-        <router-outlet></router-outlet>
-    </div>
+  <div class="w-full max-w-6xl pt-4 px-8 pb-24 md:pt-24 md:pb-10">
+    <router-outlet></router-outlet>
+  </div>
 
-    <div class="fixed px-6 mb-6 bottom-0 md:hidden" *ngIf="!mobileQuery.matches">
-        <div class="navbar flex justify-evenly items-center app-bg-accent shadow-md rounded-full max-w-xs px-3 py-2">
-            <a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}" 
-            mat-icon-button color="accent" aria-label="Feed button">
-                <mat-icon aria-hidden="false" aria-label="Feed icon">dashboard</mat-icon>
-            </a>
-            <a routerLinkActive="active" routerLink="/search" mat-icon-button color="accent" aria-label="Search button">
-                <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
-            </a>
-            <a routerLinkActive="active" routerLink="/trending" mat-icon-button color="accent" aria-label="Trending button">
-                <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
-            </a>
-            <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent" aria-label="Notification button">
-                <mat-icon aria-hidden="false" [matBadge]="totalNotification" matBadgeColor="warn" aria-label="Notification icon">notifications</mat-icon>
-                <span class="cdk-visually-hidden">
-                    You have {{totalNotification}} notifications
-                </span>
-            </a>
-            <a routerLinkActive="active" routerLink="/me" mat-icon-button color="accent" aria-label="Profile button">
-                <mat-icon aria-hidden="false" aria-label="Profile icon">account_circle</mat-icon>
-            </a>
-        </div>
+  <div class="fixed px-6 mb-6 bottom-0 md:hidden" *ngIf="!mobileQuery.matches">
+    <div class="navbar flex justify-evenly items-center app-bg-accent shadow-md rounded-full max-w-xs px-3 py-2">
+      <a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}" mat-icon-button
+        color="accent" aria-label="Feed button">
+        <mat-icon aria-hidden="false" aria-label="Feed icon">dashboard</mat-icon>
+      </a>
+      <a routerLinkActive="active" routerLink="/search" mat-icon-button color="accent" aria-label="Search button">
+        <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
+      </a>
+      <a routerLinkActive="active" routerLink="/trending" mat-icon-button color="accent" aria-label="Trending button">
+        <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
+      </a>
+      <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent"
+        aria-label="Notification button">
+        <mat-icon aria-hidden="false" [matBadge]="totalNotification" matBadgeColor="warn"
+          aria-label="Notification icon">notifications</mat-icon>
+        <span class="cdk-visually-hidden">
+          You have {{totalNotification}} notifications
+        </span>
+      </a>
+      <a routerLinkActive="active" class="justify-center items-center" style="display: flex;" routerLink="/me"
+        mat-icon-button color="accent" aria-label="Profile button">
+        <img aria-hidden="false" aria-label="Profile icon" alt="Your profile picture" style="height: 24px; width: 24px;"
+          class="object-cover rounded-full"
+          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80" />
+      </a>
     </div>
+  </div>
 </div>
