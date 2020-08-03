@@ -33,7 +33,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   public trending$: Observable<Array<IVerticalItemProps>>;
   public user: IUser;
 
-  constructor(private themeService: ThemeService, public adService: AdsService,
+  constructor(private themeService: ThemeService, public adService: AdsService, private title: Title,
               private historyService: HistoryService, public notificationService: NotificationsService,
               public trendingService: TrendingService, public authService: AuthService) {
   }
@@ -47,6 +47,11 @@ export class FeedComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.subject)).subscribe(([notifications]) => {
       // this.notifications = notifications;
     });*/
+
+    this.notificationService.count().pipe(takeUntil(this.subject)).subscribe(total => {
+      this.title.setTitle('Alexandria');
+      this.title.setTitle(`(${total}) ${this.title.getTitle()}`);
+    });
 
     this.loadAds();
     this.loadHistory();

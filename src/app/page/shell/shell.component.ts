@@ -19,17 +19,11 @@ export class ShellComponent implements OnInit, OnDestroy {
   public searchValue = '';
   private isSearching = false;
 
-  constructor(private router: Router, private notificationService: NotificationsService,
-              private routerActive: ActivatedRoute, private title: Title) {
+  constructor(private router: Router, private routerActive: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     // Cannot forkJoin router with services
-    this.notificationService.count().pipe(takeUntil(this.subject)).subscribe(total => {
-      this.totalNotification = total;
-      this.title.setTitle('Alexandria');
-      this.title.setTitle(`(${this.totalNotification}) ${this.title.getTitle()}`);
-    });
 
     this.routerActive.queryParamMap.pipe(takeUntil(this.subject)).subscribe(queries => {
       this.searchValue = queries.get('q') || '';
@@ -51,7 +45,7 @@ export class ShellComponent implements OnInit, OnDestroy {
         }
 
         this.isSearching = false;
-      }, 1500);
+      }, 1000);
     }
   }
 }
