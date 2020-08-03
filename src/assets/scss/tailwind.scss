@@ -9,8 +9,11 @@ button, .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
     font-weight: 700 !important;
 }
 
-input[type="text"], input:active, input:focus, input:-internal-autofill-selected {
-    background-color: rgba(0,0,0, 0) !important;
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px var(--color-background) inset !important;
 }
 
 input {
