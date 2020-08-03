@@ -2,6 +2,9 @@
 export interface IUser {
   id: string;
   username: string;
+  name: string;
+  middleName?: string;
+  lastName: string;
   displayName: string;
   password: string;
   email: string;

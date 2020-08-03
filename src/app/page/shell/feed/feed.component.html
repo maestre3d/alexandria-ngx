@@ -1,5 +1,8 @@
 <div class="animate__animated animate__fadeIn w-full">
-  <!--<h1 class="text-4xl font-black font-display truncate md:hidden">Alexandria</h1>-->
+  <h1 class="font-display truncate-line md:hidden" *ngIf="user">
+    <b class="text-3xl font-black">Welcome back, </b><br>
+    <span class="text-2xl">{{user.name}}<span *ngIf="user.middleName"> {{user.middleName}}</span></span>
+  </h1>
   <!--<button mat-flat-button color="primary" (click)="onClick()">Toggle theme</button>-->
 
   <!-- Ads section -->

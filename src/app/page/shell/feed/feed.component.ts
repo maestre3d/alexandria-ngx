@@ -14,6 +14,8 @@ import { IVerticalCardProps } from '@alexandria/common/interface/vertical-card.i
 import { IVerticalItemProps } from '@alexandria/common/interface/vertical-item.interface';
 import { TrendingKind } from '@alexandria/enum/trending-kind.enum';
 import { IHorizontalItemProps } from '@alexandria/common/interface/horizontal-item.interface';
+import { AuthService } from '@alexandria/service/auth/auth.service';
+import { IUser } from '@alexandria/domain/entity/user.entity';
 
 @Component({
   selector: 'app-feed',
@@ -29,11 +31,11 @@ export class FeedComponent implements OnInit, OnDestroy {
   public history$: Observable<Array<IVerticalItemProps>>;
   public news$: Observable<Array<IHorizontalItemProps>>;
   public trending$: Observable<Array<IVerticalItemProps>>;
+  public user: IUser;
 
-
-  constructor(private themeService: ThemeService, private metaService: Meta, private titleService: Title,
-              public adService: AdsService, private historyService: HistoryService,
-              public notificationService: NotificationsService, public trendingService: TrendingService) {
+  constructor(private themeService: ThemeService, public adService: AdsService,
+              private historyService: HistoryService, public notificationService: NotificationsService,
+              public trendingService: TrendingService, public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -50,6 +52,7 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.loadHistory();
     this.loadNews();
     this.loadTrending();
+    this.loadUser();
   }
 
   ngOnDestroy(): void {
@@ -132,5 +135,13 @@ export class FeedComponent implements OnInit, OnDestroy {
       });
       return props;
     }));
+  }
+
+  private loadUser(): void {
+    this.authService.getLogged().pipe(takeUntil(this.subject)).subscribe((user: IUser) => {
+      this.user = user;
+    }, (err: Error) => {
+      console.error(err);
+    });
   }
 }
