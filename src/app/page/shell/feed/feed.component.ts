@@ -108,7 +108,7 @@ export class FeedComponent implements OnInit, OnDestroy {
           displayName: item.title,
           description: item.description,
           image: item.image,
-          query: {id: item.aggregateID, ad: item.id},
+          query: {id: item.aggregateID, notification: item.id},
           isRounded: true
         });
       });
@@ -125,7 +125,7 @@ export class FeedComponent implements OnInit, OnDestroy {
           uri: item.kind.toLowerCase(),
           displayName: item.displayName,
           image: item.image,
-          query: item.kind === TrendingKind.Media ? {id: item.aggregateID, notification: item.id} : {notification: item.id},
+          query: item.kind === TrendingKind.Media ? {id: item.aggregateID, trend: item.id} : {trend: item.id},
           isRounded: item.kind === TrendingKind.Author,
           isVerified: item.verified
         });
