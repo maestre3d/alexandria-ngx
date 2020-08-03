@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import { Subject, Observable } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+import { Subject, Observable, pipe } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 
 import { ThemeService } from '@alexandria/service/theme/theme.service';
@@ -16,6 +16,9 @@ import { TrendingKind } from '@alexandria/enum/trending-kind.enum';
 import { IHorizontalItemProps } from '@alexandria/common/interface/horizontal-item.interface';
 import { AuthService } from '@alexandria/service/auth/auth.service';
 import { IUser } from '@alexandria/domain/entity/user.entity';
+import { Store, select } from '@ngrx/store';
+import { ThemeKind } from '@alexandria/enum/theme.enum';
+import { toggle } from '@alexandria/common/store/action/theme.action';
 
 @Component({
   selector: 'app-feed',
@@ -35,7 +38,8 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   constructor(private themeService: ThemeService, public adService: AdsService, private title: Title,
               private historyService: HistoryService, public notificationService: NotificationsService,
-              public trendingService: TrendingService, public authService: AuthService) {
+              public trendingService: TrendingService, public authService: AuthService,
+              private store: Store<{theme: ThemeKind}>) {
   }
 
   ngOnInit(): void {
@@ -58,6 +62,10 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.loadNews();
     this.loadTrending();
     this.loadUser();
+
+    this.store.select('theme').pipe(takeUntil(this.subject)).subscribe((theme: string) => {
+      console.log(theme);
+    });
   }
 
   ngOnDestroy(): void {
@@ -66,8 +74,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   onClick(): void {
-    this.themeService.toggle().pipe(takeUntil(this.subject)).subscribe((theme: string) => {
-    });
+    this.store.dispatch(toggle());
   }
 
   private loadAds(): void {

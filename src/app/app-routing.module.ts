@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, RouterPreloader, PreloadingStrategy, PreloadAllModules } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./page/shell/shell.module').then(m => m.ShellModule)
   },
   {
-    path: 'authenticate',
+    path: 'accounts/authenticate',
     loadChildren: () => import('./page/auth/auth.module').then(m => m.AuthModule)
   },
   {

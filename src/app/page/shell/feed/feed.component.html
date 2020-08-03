@@ -1,43 +1,51 @@
-<div class="animate__animated animate__fadeIn w-full">
+<div class="w-full">
   <h1 class="font-display truncate-line md:hidden" *ngIf="user">
     <b class="text-3xl font-black">Welcome back, </b><br>
     <span class="text-2xl">{{user.name}}<span *ngIf="user.middleName"> {{user.middleName}}</span></span>
   </h1>
 
   <!-- Ads section -->
-  <section aria-label="Advertising section" aria-details="Check out new content made for you"
-    class="flex flex-col flex-no-wrap w-full mt-8">
-    <app-list-vertical-card [props]="ads$ | async">
-    </app-list-vertical-card>
-  </section>
+  <ng-container *ngIf="ads$ | async as ads">
+    <section aria-label="Advertising section" aria-details="Check out new content made for you"
+      class="flex flex-col flex-no-wrap w-full mt-8 animate__animated animate__fadeIn">
+      <app-list-vertical-card [props]="ads"></app-list-vertical-card>
+    </section>
+  </ng-container>
 
   <!-- History -->
-  <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
-    class="flex flex-col flex-no-wrap mt-12">
-    <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
-      <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Get back in</h2>
-      <button mat-stroked-button color="primary" (click)="onClick()">More</button>
-    </div>
-    <app-list-vertical-item [props]="history$ | async"></app-list-vertical-item>
-  </section>
+  <ng-container *ngIf="history$ | async as history">
+    <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
+      class="flex flex-col flex-no-wrap mt-12 animate__animated animate__fadeIn">
+      <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
+        <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Get back in</h2>
+        <button mat-stroked-button color="primary" (click)="onClick()">More</button>
+      </div>
+      <app-list-vertical-item [props]="history"></app-list-vertical-item>
+    </section>
+  </ng-container>
 
   <!-- News -->
-  <section aria-label="News section" aria-details="Find new content made for you"
-    class="flex flex-col flex-no-wrap mt-8">
-    <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
-      <h2 class="w-1/2 truncate-line text-2xl font-display font-black">News</h2>
-      <a mat-stroked-button color="primary" routerLink="/notification" class="rounded-full" rel="canonical">More</a>
-    </div>
-    <app-list-horizontal-item [props]="this.news$ | async"></app-list-horizontal-item>
-  </section>
+  <ng-container *ngIf="this.news$ | async as news">
+    <section aria-label="News section" aria-details="Find new content made for you"
+      class="flex flex-col flex-no-wrap mt-8 animate__animated animate__fadeIn">
+      <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
+        <h2 class="w-1/2 truncate-line text-2xl font-display font-black">News</h2>
+        <a mat-stroked-button color="primary" routerLink="/notification" class="rounded-full" rel="canonical">More</a>
+      </div>
+      <app-list-horizontal-item [props]="news"></app-list-horizontal-item>
+    </section>
+  </ng-container>
 
   <!-- Trending -->
-  <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
-    class="flex flex-col flex-no-wrap mt-8">
-    <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
-      <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Trending</h2>
-      <a mat-stroked-button color="primary" routerLink="/trending" class="rounded-full">More</a>
-    </div>
-    <app-list-vertical-item [props]="trending$ | async"></app-list-vertical-item>
-  </section>
+  <ng-container *ngIf="trending$ | async as trending">
+    <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
+      class="flex flex-col flex-no-wrap mt-8 animate__animated animate__fadeIn">
+      <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
+        <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Trending</h2>
+        <a mat-stroked-button color="primary" routerLink="/trending" class="rounded-full">More</a>
+      </div>
+      <app-list-vertical-item [props]="trending"></app-list-vertical-item>
+    </section>
+  </ng-container>
+
 </div>
