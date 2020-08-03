@@ -1,5 +1,6 @@
 <div mat-background class="w-full h-full wrapper flex flex-col items-center">
-    <div class="hidden fixed w-full h-20 app-bg-accent md:flex md:flex-col md:justify-center md:items-center md:z-10">
+    <div class="hidden fixed w-full h-20 app-bg-accent md:flex md:flex-col md:justify-center md:items-center md:z-10"
+        *ngIf="mobileQuery.matches">
         <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-6xl md:px-4">
             <a routerLink="/">
                 <span class="font-black text-2xl font-display">Alexandria</span>
@@ -32,13 +33,12 @@
             </div>
         </div>
     </div>
-    <mat-divider></mat-divider>
 
     <div class="w-full max-w-6xl pt-4 px-8 pb-24 md:pt-24 md:pb-10">
         <router-outlet></router-outlet>
     </div>
 
-    <div class="fixed px-6 mb-6 bottom-0 md:hidden">
+    <div class="fixed px-6 mb-6 bottom-0 md:hidden" *ngIf="!mobileQuery.matches">
         <div class="navbar flex justify-evenly items-center app-bg-accent shadow-md rounded-full max-w-xs px-3 py-2">
             <a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}" 
             mat-icon-button color="accent" aria-label="Feed button">

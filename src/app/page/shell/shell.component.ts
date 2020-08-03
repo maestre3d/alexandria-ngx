@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NotificationsService } from '../../common/service/notifications/notifications.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Title } from '@angular/platform-browser';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-shell',
@@ -18,8 +17,15 @@ export class ShellComponent implements OnInit, OnDestroy {
   // UI
   public searchValue = '';
   private isSearching = false;
+  public mobileQuery: MediaQueryList;
+  private mobileQueryListener: () => void;
 
-  constructor(private router: Router, private routerActive: ActivatedRoute) {
+  constructor(private router: Router, private routerActive: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef,
+              private mediaMatcher: MediaMatcher) {
+    this.mobileQuery = mediaMatcher.matchMedia('(min-width: 768px)');
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+
   }
 
   ngOnInit(): void {
@@ -33,6 +39,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subject.next();
     this.subject.complete();
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
 
   onQuery(event: KeyboardEvent): void {
