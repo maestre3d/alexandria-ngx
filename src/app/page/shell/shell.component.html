@@ -21,25 +21,52 @@
       </div>
       <div class="flex flex-row flex-no-wrap navbar">
         <a routerLinkActive="active" routerLink="/trending" mat-icon-button color="accent" aria-label="Trending button">
-          <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
+          <mat-icon aria-hidden="false" aria-label="Trending icon" fontSet="material-icons-outlined">explore</mat-icon>
         </a>
         <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent"
           aria-label="Notification button">
           <mat-icon [matBadge]="totalNotification" matBadgeColor="warn" aria-hidden="false"
-            aria-label="Notification icon">notifications</mat-icon>
+            aria-label="Notification icon" fontSet="material-icons-outlined">notifications</mat-icon>
           <span class="cdk-visually-hidden">
             You have {{totalNotification}} notifications
           </span>
         </a>
-        <a routerLinkActive="active" class="justify-center items-center" style="display: flex;" routerLink="/me"
-          mat-icon-button color="accent" aria-label="Profile button">
+        <button class="justify-center items-center" style="display: flex;" mat-icon-button color="accent"
+          aria-label="Profile menu button" [matMenuTriggerFor]="menu">
           <img aria-hidden="false" aria-label="Profile icon" alt="Your profile picture"
             style="height: 24px; width: 24px;" class="object-cover rounded-full"
             src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80" />
-        </a>
+        </button>
       </div>
     </div>
   </div>
+  <mat-menu #menu="matMenu" xPosition="before" class="px-2 rounded-xl">
+    <a mat-menu-item routerLinkActive="active" routerLink="/me" class="rounded-lg mb-2" aria-label="Profile link">
+      <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
+      <span class="font-body font-bold">Me</span>
+    </a>
+    <a mat-menu-item routerLinkActive="active" class="text-sm" class="rounded-lg mb-2" routerLink="/collections"
+      aria-label="My Collections link">
+      <mat-icon fontSet="material-icons-outlined">bookmarks</mat-icon>
+      <span class="font-body font-bold">Collections</span>
+    </a>
+    <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;" (click)="onThemeChange()"
+      aria-label="Change theme between dark or light mode">
+      <ng-container *ngIf="isDarkMode | async; else darkTemplate">
+        <mat-icon fontSet="material-icons-outlined">brightness_5</mat-icon>
+        <span class="font-body font-bold">Light Mode</span>
+      </ng-container>
+      <ng-template #darkTemplate>
+        <mat-icon fontSet="material-icons-outlined">brightness_4</mat-icon>
+        <span class="font-body font-bold">Dark Mode</span>
+      </ng-template>
+    </button>
+    <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;"
+      aria-label="Log out button">
+      <mat-icon fontSet="material-icons-outlined">exit_to_app</mat-icon>
+      <span class="font-body">Log out</span>
+    </button>
+  </mat-menu>
 
   <div class="w-full max-w-6xl pt-4 px-8 pb-24 md:pt-24 md:pb-10">
     <router-outlet></router-outlet>
@@ -52,25 +79,25 @@
         <mat-icon aria-hidden="false" aria-label="Feed icon">dashboard</mat-icon>
       </a>
       <a routerLinkActive="active" routerLink="/search" mat-icon-button color="accent" aria-label="Search button">
-        <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Search icon" fontSet="material-icons-outlined">search</mat-icon>
       </a>
       <a routerLinkActive="active" routerLink="/trending" mat-icon-button color="accent" aria-label="Trending button">
-        <mat-icon aria-hidden="false" aria-label="Trending icon">explore</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Trending icon" fontSet="material-icons-outlined">explore</mat-icon>
       </a>
       <a routerLinkActive="active" routerLink="/notification" mat-icon-button color="accent"
         aria-label="Notification button">
-        <mat-icon aria-hidden="false" [matBadge]="totalNotification" matBadgeColor="warn"
-          aria-label="Notification icon">notifications</mat-icon>
+        <mat-icon aria-hidden="false" [matBadge]="totalNotification" matBadgeColor="warn" aria-label="Notification icon"
+          fontSet="material-icons-outlined">notifications</mat-icon>
         <span class="cdk-visually-hidden">
           You have {{totalNotification}} notifications
         </span>
       </a>
-      <a routerLinkActive="active" class="justify-center items-center" style="display: flex;" routerLink="/me"
-        mat-icon-button color="accent" aria-label="Profile button">
+      <button class="justify-center items-center" style="display: flex;" mat-icon-button color="accent"
+        aria-label="Profile menu button" [matMenuTriggerFor]="menu">
         <img aria-hidden="false" aria-label="Profile icon" alt="Your profile picture" style="height: 24px; width: 24px;"
           class="object-cover rounded-full"
           src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80" />
-      </a>
+      </button>
     </div>
   </div>
 </div>

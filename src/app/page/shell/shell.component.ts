@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Config } from '@alexandria/config/alexandria.config';
+import { Store } from '@ngrx/store';
+import { ThemeKind } from '@alexandria/enum/theme.enum';
+import { toggle } from '@alexandria/common/store/action/theme.action';
 
 @Component({
   selector: 'app-shell',
@@ -18,12 +21,13 @@ export class ShellComponent implements OnInit, OnDestroy {
   public totalNotification: number;
   // UI
   public searchValue = '';
+  public isDarkMode: Observable<boolean>;
   private isSearching = false;
   public mobileQuery: MediaQueryList;
   private mobileQueryListener: () => void;
 
   constructor(private router: Router, private routerActive: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef,
-              private mediaMatcher: MediaMatcher) {
+              private mediaMatcher: MediaMatcher, private store: Store<{theme: ThemeKind}>) {
     // Using tailwind responsive breakpoints (md)
     this.mobileQuery = mediaMatcher.matchMedia('(min-width: 768px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -40,6 +44,10 @@ export class ShellComponent implements OnInit, OnDestroy {
     this.routerActive.queryParamMap.pipe(takeUntil(this.subject)).subscribe(queries => {
       this.searchValue = queries.get('q') || '';
     });
+
+    this.isDarkMode = this.store.select('theme').pipe(map(theme => {
+      return theme === ThemeKind.Dark ? true : false;
+    }));
   }
 
   ngOnDestroy(): void {
@@ -62,5 +70,9 @@ export class ShellComponent implements OnInit, OnDestroy {
         this.isSearching = false;
       }, 1000);
     }
+  }
+
+  onThemeChange(): void {
+    this.store.dispatch(toggle());
   }
 }

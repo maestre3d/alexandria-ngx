@@ -1,7 +1,13 @@
 .active {
     background-color: var(--color-primary) !important;
-    color: #FFFFFF !important;
     transition: all ease-in 250ms;
+    * {
+        color: #FFFFFF !important;
+    }
+
+    .mat-icon {
+        font-family: 'Material Icons', 'sans-serif';
+    }
 }
 
 .app-bg {

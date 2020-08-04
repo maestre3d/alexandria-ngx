@@ -6,7 +6,7 @@ import { ShellRoutingModule } from './shell-routing.module';
 import { ShellComponent } from './shell.component';
 
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [ShellComponent],
@@ -15,7 +15,7 @@ import { MatDividerModule } from '@angular/material/divider';
     ShellRoutingModule,
     SharedModule,
     MatBadgeModule,
-    MatDividerModule
+    MatMenuModule
   ],
   bootstrap: [ShellComponent]
 })
