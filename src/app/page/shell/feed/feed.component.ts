@@ -19,6 +19,7 @@ import { IUser } from '@alexandria/domain/entity/user.entity';
 import { Store, select } from '@ngrx/store';
 import { ThemeKind } from '@alexandria/enum/theme.enum';
 import { toggle } from '@alexandria/common/store/action/theme.action';
+import { Config } from '@alexandria/config/alexandria.config';
 
 @Component({
   selector: 'app-feed',
@@ -53,8 +54,7 @@ export class FeedComponent implements OnInit, OnDestroy {
     });*/
 
     this.notificationService.count().pipe(takeUntil(this.subject)).subscribe(total => {
-      this.title.setTitle('Alexandria');
-      this.title.setTitle(`(${total}) ${this.title.getTitle()}`);
+      this.title.setTitle(`(${total}) ${Config.Name}`);
     });
 
     this.loadAds();

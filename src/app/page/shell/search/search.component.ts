@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
+import { Config } from '@alexandria/config/alexandria.config';
 
 @Component({
   selector: 'app-search',
@@ -25,7 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.activeRoute.queryParamMap.pipe(takeUntil(this.subject$)).subscribe((param) => {
       this.query = param.get('q');
       if (this.query && this.query !== '') {
-        this.title.setTitle(`${this.query} • Alexandria Search`);
+        this.title.setTitle(`${this.query} • ${Config.Name} Search`);
       }
     }, (err) => {
       console.error(err);

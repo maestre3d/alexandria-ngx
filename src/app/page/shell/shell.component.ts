@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { Config } from '@alexandria/config/alexandria.config';
 
 @Component({
   selector: 'app-shell',
@@ -13,6 +14,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   // RxJS
   private subject: Subject<void> = new Subject();
   // Data
+  public appName = Config.Name;
   public totalNotification: number;
   // UI
   public searchValue = '';

@@ -1,5 +1,3 @@
-import { Version } from "@angular/core";
-
 interface IConfig {
     Name: string;
     Version: string;
