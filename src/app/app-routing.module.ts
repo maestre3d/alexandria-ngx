@@ -3,16 +3,15 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'accounts',
+    loadChildren: () => import('./page/account/account.module').then(m => m.AccountModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./page/shell/shell.module').then(m => m.ShellModule)
   },
   {
-    path: 'accounts/authenticate',
-    loadChildren: () => import('./page/auth/auth.module').then(m => m.AuthModule)
-  },
-  {
     path: '**',
-    pathMatch: 'full',
     loadChildren: () => import('./page/shared/not-found/not-found.module').then(m => m.NotFoundModule)
   }
 ];
