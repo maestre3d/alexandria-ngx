@@ -1,3 +1,7 @@
 button, .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
     font-family: 'Lato', sans-serif !important;
 }
+
+::ng-deep .mat-menu-panel {
+    border-radius: 16px !important;
+}
