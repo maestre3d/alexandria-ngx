@@ -72,3 +72,10 @@ $dark-theme:   mat-dark-theme((
 html[data-theme="dark"] {
   @include angular-material-color($dark-theme);
 }
+
+:root {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+}
