@@ -62,10 +62,6 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.loadNews();
     this.loadTrending();
     this.loadUser();
-
-    this.store.select('theme').pipe(takeUntil(this.subject)).subscribe((theme: string) => {
-      console.log(theme);
-    });
   }
 
   ngOnDestroy(): void {
