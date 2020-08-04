@@ -15,7 +15,7 @@
               (click)="searchValue=''">
               <mat-icon>close</mat-icon>
             </button>
-            <mat-icon matSuffix class="ml-2 mb-1" aria-hidden="false" aria-label="Search icon">search</mat-icon>
+            <mat-icon matSuffix class="ml-2 mb-1" aria-hidden="false" color="accent" aria-label="Search icon">search</mat-icon>
           </span>
         </mat-form-field>
       </div>
@@ -42,29 +42,29 @@
   </div>
   <mat-menu #menu="matMenu" xPosition="before" class="px-2 rounded-xl">
     <a mat-menu-item routerLinkActive="active" routerLink="/me" class="rounded-lg mb-2" aria-label="Profile link">
-      <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
-      <span class="font-body font-bold">Me</span>
+      <mat-icon fontSet="material-icons-outlined" color="accent">account_circle</mat-icon>
+      <span class="font-body font-bold accent">Me</span>
     </a>
     <a mat-menu-item routerLinkActive="active" class="text-sm" class="rounded-lg mb-2" routerLink="/collections"
       aria-label="My Collections link">
-      <mat-icon fontSet="material-icons-outlined">bookmarks</mat-icon>
-      <span class="font-body font-bold">Collections</span>
+      <mat-icon fontSet="material-icons-outlined" color="accent">bookmarks</mat-icon>
+      <span class="font-body font-bold accent">Collections</span>
     </a>
-    <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;" (click)="onThemeChange()"
+    <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;" (click)="onThemeChange()" color="accent"
       aria-label="Change theme between dark or light mode">
       <ng-container *ngIf="isDarkMode | async; else darkTemplate">
         <mat-icon fontSet="material-icons-outlined">brightness_5</mat-icon>
-        <span class="font-body font-bold">Light Mode</span>
+        <span class="font-body font-bold accent">Light Mode</span>
       </ng-container>
       <ng-template #darkTemplate>
         <mat-icon fontSet="material-icons-outlined">brightness_4</mat-icon>
-        <span class="font-body font-bold">Dark Mode</span>
+        <span class="font-body font-bold accent">Dark Mode</span>
       </ng-template>
     </button>
-    <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;"
+    <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;" color="accent"
       aria-label="Log out button">
       <mat-icon fontSet="material-icons-outlined">exit_to_app</mat-icon>
-      <span class="font-body">Log out</span>
+      <span class="font-body accent">Log out</span>
     </button>
   </mat-menu>
 
