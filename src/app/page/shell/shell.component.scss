@@ -14,3 +14,7 @@
 .accent {
     color: var(--color-accent);
 }
+
+::ng-deep .mat-menu-panel {
+    border-radius: 16px !important;
+}
