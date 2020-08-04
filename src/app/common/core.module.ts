@@ -3,12 +3,17 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { NotificationsService } from './service/notifications/notifications.service';
 import { themeReducer } from './store/reducer/theme.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ThemeEffects } from '@alexandria/common/store/effect/theme.effect';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({ theme: themeReducer})
+    StoreModule.forRoot({ theme: themeReducer }),
+    EffectsModule.forRoot([
+      ThemeEffects
+    ])
   ],
   providers: [
     NotificationsService
