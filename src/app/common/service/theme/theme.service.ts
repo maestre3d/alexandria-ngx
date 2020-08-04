@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 import { ThemeKind } from '../../enum/theme.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  private themeKey = 'theme';
-  private now: Date = new Date();
+  private themeKey = 'prefers-color';
+  private renderer: Renderer2;
 
-  constructor(private cookieService: CookieService) {
-    this.now.setFullYear(this.now.getFullYear() + 1);
+  constructor(private rendererFactory: RendererFactory2) {
+    this.renderer = rendererFactory.createRenderer(null, null);
   }
 
   /**
@@ -20,12 +19,12 @@ export class ThemeService {
   provide(): Observable<string> {
     return new Observable((observer) => {
       // Get theme (light/dark) from browser cookies
-      let theme = this.cookieService.get(this.themeKey);
+      let theme = localStorage.getItem(this.themeKey);
       // If value is not available, send default theme scheme
       theme = theme !== '' ? theme : ThemeKind.Light;
 
       // Store updated value
-      this.cookieService.set(this.themeKey, theme, this.now);
+      localStorage.setItem(this.themeKey, theme);
 
       // Send back new data
       observer.next(theme);
@@ -48,7 +47,13 @@ export class ThemeService {
 
       if (theme === ThemeKind.Light || theme === ThemeKind.Dark) {
         // Verify if theme is valid, then update browser cookies
-        this.cookieService.set(this.themeKey, theme, this.now);
+        localStorage.setItem(this.themeKey, theme);
+        this.renderer.setAttribute(document.querySelector('html'), 'data-theme', theme);
+        this.renderer.addClass(document.querySelector('html'), 'theme-transition');
+        window.setTimeout(() => {
+            this.renderer.removeClass(document.querySelector('html'), 'theme-transition');
+        }, 200);
+
         observer.next();
         observer.complete();
         return;
@@ -66,17 +71,16 @@ export class ThemeService {
   toggle(): Observable<string> {
     return new Observable((observer) => {
       // Get current theme
-      const currentState = this.cookieService.get(this.themeKey);
+      const currentState = localStorage.getItem(this.themeKey);
 
-      // Invert theming and store new state in browser cookies
+      // Invert theming and store new state in browser local storage
       const newState = currentState === ThemeKind.Light ? ThemeKind.Dark : ThemeKind.Light;
-      this.cookieService.set(this.themeKey, newState, this.now);
+      localStorage.setItem(this.themeKey, newState);
 
-      document.querySelector('html').setAttribute('data-theme', newState);
-      document.querySelector('html').classList.add('theme-transition');
-      document.querySelector('html').setAttribute('data-theme', newState);
+      this.renderer.setAttribute(document.querySelector('html'), 'data-theme', newState);
+      this.renderer.addClass(document.querySelector('html'), 'theme-transition');
       window.setTimeout(() => {
-          document.querySelector('html').classList.remove('theme-transition');
+          this.renderer.removeClass(document.querySelector('html'), 'theme-transition');
       }, 200);
 
       observer.next(newState);
@@ -90,7 +94,10 @@ export class ThemeService {
    */
   load(): void {
     // Get current theme
-    const currentState = this.cookieService.get(this.themeKey);
-    document.querySelector('html').setAttribute('data-theme', currentState);
+    const currentState = localStorage.getItem(this.themeKey);
+    if (!currentState) {
+      localStorage.setItem(this.themeKey, ThemeKind.Light);
+    }
+    this.renderer.setAttribute(document.querySelector('html'), 'data-theme', currentState ? currentState : ThemeKind.Light);
   }
 }

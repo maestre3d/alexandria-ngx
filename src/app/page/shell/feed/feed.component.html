@@ -6,7 +6,7 @@
 
   <!-- Ads section -->
   <ng-container *ngIf="ads$ | async as ads">
-    <section aria-label="Advertising section" aria-details="Check out new content made for you"
+    <section title="Advertising section" aria-label="Advertising section" aria-details="Check out new content made for you"
       class="flex flex-col flex-no-wrap w-full mt-8 animate__animated animate__fadeIn">
       <app-list-vertical-card [props]="ads"></app-list-vertical-card>
     </section>
@@ -14,7 +14,7 @@
 
   <!-- History -->
   <ng-container *ngIf="history$ | async as history">
-    <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
+    <section title="History section" aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
       class="flex flex-col flex-no-wrap mt-12 animate__animated animate__fadeIn">
       <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
         <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Get back in</h2>
@@ -26,7 +26,7 @@
 
   <!-- News -->
   <ng-container *ngIf="this.news$ | async as news">
-    <section aria-label="News section" aria-details="Find new content made for you"
+    <section title="News section" aria-label="News section" aria-details="Find new content made for you"
       class="flex flex-col flex-no-wrap mt-8 animate__animated animate__fadeIn">
       <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
         <h2 class="w-1/2 truncate-line text-2xl font-display font-black">News</h2>
@@ -38,7 +38,7 @@
 
   <!-- Trending -->
   <ng-container *ngIf="trending$ | async as trending">
-    <section aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
+    <section title="Trending section" aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
       class="flex flex-col flex-no-wrap mt-8 animate__animated animate__fadeIn">
       <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
         <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Trending</h2>
