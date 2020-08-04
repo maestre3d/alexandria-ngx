@@ -1,8 +1,8 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { IUser } from '../../../domain/entity/user.entity';
 import { signIn, signOut } from '../action/credential.action';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
-export const initialState: IUser = null;
+export const initialState: CognitoUser = null;
 
 const credReducerFunc = createReducer(
     initialState,
@@ -10,6 +10,6 @@ const credReducerFunc = createReducer(
     on(signOut, state => state)
 );
 
-export function credentialReducer(state: IUser, action: Action): IUser {
+export function credentialReducer(state: CognitoUser, action: Action): CognitoUser {
     return credReducerFunc(state, action);
 }
