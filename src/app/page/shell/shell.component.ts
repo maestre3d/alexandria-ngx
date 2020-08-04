@@ -25,7 +25,11 @@ export class ShellComponent implements OnInit, OnDestroy {
     // Using tailwind responsive breakpoints (md)
     this.mobileQuery = mediaMatcher.matchMedia('(min-width: 768px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    if (this.mobileQuery.addEventListener !== undefined) {
+      this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+    } else {
+      this.mobileQuery.onchange = this.mobileQueryListener;
+    }
   }
 
   ngOnInit(): void {
@@ -39,7 +43,9 @@ export class ShellComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subject.next();
     this.subject.complete();
-    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+    if (this.mobileQuery.removeEventListener !== undefined) {
+      this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
+    }
   }
 
   onQuery(event: KeyboardEvent): void {
