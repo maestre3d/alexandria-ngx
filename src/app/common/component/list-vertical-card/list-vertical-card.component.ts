@@ -25,12 +25,22 @@ export class ListVerticalCardComponent implements OnInit, AfterViewInit {
 
   private loadSwiper(): void {
     this.genericSwiper = new Swiper(this.genericSwiperRef.nativeElement, {
+      direction: 'horizontal',
       observer: true,
       slidesPerView: 'auto',
       freeMode: false,
       preloadImages: false,
       watchSlidesVisibility: false,
-      spaceBetween: 16
+      spaceBetween: 16,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      mousewheel: {
+        forceToAxis: true,
+        releaseOnEdges: true,
+        invert: true
+      }
     });
   }
 }
