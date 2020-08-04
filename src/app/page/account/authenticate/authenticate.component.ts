@@ -8,6 +8,8 @@ import { Config } from '@alexandria/config/alexandria.config';
   styleUrls: ['./authenticate.component.scss']
 })
 export class AuthenticateComponent implements OnInit {
+  // UI
+  public isSignIn = true;
 
   constructor(private title: Title) {}
 
