@@ -5,6 +5,8 @@ import { NotificationsService } from './service/notifications/notifications.serv
 import { themeReducer } from './store/reducer/theme.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ThemeEffects } from '@alexandria/common/store/effect/theme.effect';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   declarations: [],
@@ -13,7 +15,11 @@ import { ThemeEffects } from '@alexandria/common/store/effect/theme.effect';
     StoreModule.forRoot({ theme: themeReducer }),
     EffectsModule.forRoot([
       ThemeEffects
-    ])
+    ]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [
     NotificationsService
