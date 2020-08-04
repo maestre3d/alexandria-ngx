@@ -149,5 +149,8 @@
       }
     }
   },
-  "defaultProject": "alexandria-ngx"
+  "defaultProject": "alexandria-ngx",
+  "cli": {
+    "analytics": false
+  }
 }
