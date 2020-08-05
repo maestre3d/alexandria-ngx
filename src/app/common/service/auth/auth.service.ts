@@ -14,7 +14,7 @@ export class AuthService {
 
   private storage = new CookieStorage({
     domain: Config.Domain,
-    expires: this.removePolicy.getMilliseconds(),
+    expires: this.removePolicy.getTime(),
     path: '/',
     secure: true
   });
@@ -25,7 +25,7 @@ export class AuthService {
   });
 
   constructor() {
-    this.removePolicy.setDate(new Date().getDate() + 30);
+    this.removePolicy.setDate(new Date().getMonth() + 1);
   }
 
   getUserPool(): CognitoUserPool {
