@@ -1,0 +1,9 @@
+.bg-container {
+    background-color: var(--color-background-dark);
+}
+
+@media (min-width: 768px) {
+    .bg-container {
+        background-color: var(--color-background);
+    }
+}

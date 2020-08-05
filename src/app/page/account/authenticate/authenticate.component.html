@@ -1,49 +1,39 @@
-<div class="w-screen h-screen flex justify-center items-center">
-  <div class="w-full h-auto max-h-full md:max-w-xs flex flex-col items-center p-8">
-    <!-- Sign In -->
-    <div class="flex flex-col items-center bg-container rounded-xl shadow-xl w-full">
-      <h1 class="font-display font-black text-2xl mt-8">Alexandria</h1>
-      <ng-container *ngIf="isSignIn; else registerTemplate">
-        <form title="Sign in form" aria-label="Sign in formulary" [formGroup]="signInFormGroup" (ngSubmit)="onSignIn()"
-          class="flex flex-col items-center w-full p-8">
-          <mat-form-field class="w-full" appearance="outline" [floatLabel]="'never'">
-            <mat-label>Username</mat-label>
-            <input matInput type="text" placeholder="Enter your username" tabindex="1" formControlName="username">
-            <span matSuffix class="flex flex-row flex-no-wrap justify-center items-center">
-              <mat-icon matSuffix aria-hidden="false" aria-label="User icon">account_circle</mat-icon>
-            </span>
-          </mat-form-field>
-          <mat-form-field class="w-full" appearance="outline" [floatLabel]="'never'">
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Enter your password" tabindex="2" formControlName="password"
-              [type]="isPwdHidding ? 'password' : 'text'">
-            <span matSuffix class="flex flex-row flex-no-wrap justify-center items-center">
-              <button mat-button *ngIf="signInFormGroup.get('password').value" matSuffix mat-icon-button type="button"
-                [attr.aria-pressed]="isPwdHidding" [attr.aria-label]="'Hide password'"
-                (click)="isPwdHidding = !isPwdHidding">
-                <mat-icon>{{isPwdHidding ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-icon matSuffix aria-hidden="false" class="ml-2 mb-1" aria-label="Password icon">vpn_key</mat-icon>
-            </span>
-          </mat-form-field>
-          <button type="submit" class="w-full" [disabled]="!signInFormGroup.valid || isHandling" mat-flat-button
-            color="primary" aria-label="Sign In button" aria-details="Press to sign in" tabindex="3">
-            Sign In
-          </button>
-        </form>
-      </ng-container>
-      <ng-template #registerTemplate>
-      </ng-template>
+<div class="flex flex-col items-center justify-center w-full max-w-full">
+  <form title="Sign in form" aria-label="Sign in formulary" [formGroup]="signInFormGroup" (ngSubmit)="onSignIn()"
+    class="flex flex-col items-center w-full px-8 py-6">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" placeholder="Enter your username or email" tabindex="1" formControlName="username">
+      <span matSuffix class="flex flex-row flex-no-wrap justify-center items-center">
+        <mat-icon matSuffix aria-hidden="false" color="accent" aria-label="User icon">account_circle</mat-icon>
+      </span>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Enter your password" tabindex="2" formControlName="password"
+        [type]="isPwdHidding ? 'password' : 'text'">
+      <span matSuffix class="flex flex-row flex-no-wrap justify-center items-center">
+        <button mat-button *ngIf="signInFormGroup.get('password').value" matSuffix mat-icon-button type="button"
+          [attr.aria-pressed]="isPwdHidding" [attr.aria-label]="'Hide password'" (click)="isPwdHidding = !isPwdHidding">
+          <mat-icon color="accent">{{isPwdHidding ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-icon matSuffix aria-hidden="false" color="accent" class="ml-2 mb-1" aria-label="Password icon">
+          vpn_key
+        </mat-icon>
+      </span>
+    </mat-form-field>
+    <button type="submit" class="w-full" [disabled]="!signInFormGroup.valid || isHandling" mat-flat-button
+      color="primary" aria-label="Sign In button" aria-details="Press to sign in" tabindex="3">
+      Sign In
+    </button>
+    <span class="mb-4"></span>
+    <button type="button" mat-button color="accent">Forgot password?</button>
+  </form>
 
-      <ng-container *ngIf="isCredIncorrect">
-        <span class="animate__animated animate__fadeIn text-sm font-medium text-red-400 mb-8 truncate-line">
-            Incorrect username or password
-        </span>
-      </ng-container>
-    </div>
-    <!-- Sign Up -->
-    <div class="flex flex-col items-center bg-container rounded-xl shadow-lg w-full p-6 my-6">
-        <p>Need an account? <a class="ml-1 text-blue font-bold">Sign Up</a></p>
-    </div>
-  </div>
+  <!-- Custom errors -->
+  <ng-container *ngIf="isCredIncorrect">
+    <span class="animate__animated animate__fadeIn text-sm font-medium text-red-700 mb-6 truncate-line">
+      Incorrect username or password
+    </span>
+  </ng-container>
 </div>

@@ -28,27 +28,15 @@ export class AuthService {
     this.removePolicy.setDate(new Date().getDate() + 30);
   }
 
-  signIn(username: string, password: string): Observable<CognitoUserSession> {
-    return new Observable((observer) => {
-      const cognitoUser = new CognitoUser({
-        Username: username,
-        Pool: this.userPool
-      });
+  getUserPool(): CognitoUserPool {
+    return this.userPool;
+  }
 
-      cognitoUser.authenticateUser(new AuthenticationDetails({
-        Username: username,
-        Password: password
-      }), {
-        onSuccess: (result, mfaEnabled) => {
-          this.storage.setItem('aws-cg-session', result.getAccessToken().getJwtToken());
-          observer.next(result);
-          observer.complete();
-        },
-        onFailure: (err) => {
-          observer.error(err);
-          observer.complete();
-        }
-      });
+  getCognitoUser(username: string): CognitoUser {
+    return new CognitoUser({
+      Username: username,
+      Storage: this.storage,
+      Pool: this.userPool
     });
   }
 

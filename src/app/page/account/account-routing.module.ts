@@ -1,10 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AccountComponent } from './account.component';
 
 const routes: Routes = [
   {
-    path: 'authenticate',
-    loadChildren: () => import('./authenticate/authenticate.module').then(m => m.AuthenticateModule)
+    path: '',
+    component: AccountComponent,
+    children: [
+      {
+        path: 'authenticate',
+        loadChildren: () => import('./authenticate/authenticate.module').then(m => m.AuthenticateModule)
+      },
+      {
+        path: 'signup',
+        loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule)
+      },
+    ]
   },
   {
     path: '**',

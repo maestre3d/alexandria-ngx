@@ -1,0 +1,42 @@
+<div class="w-screen h-screen flex justify-center items-center">
+    
+    <div class="w-full h-auto max-h-full md:max-w-sm flex flex-col items-center p-4 md:p-8">
+      <!-- Form container -->
+      <div class="flex flex-col items-center w-full bg-container rounded-xl pt-8 md:pb-8 md:shadow-xl">
+        <h1 class="font-display font-black text-2xl mt-2 md:text-3xl">{{appName}}</h1>
+        <!-- Sign In Form -->
+        <div class="w-full max-w-full">
+            <router-outlet></router-outlet>
+        </div>
+  
+        <!-- OAuth2 Providers -->
+        <div class="flex flex-row flex-no-wrap justify-center items-center w-full px-8 pb-6">
+          <mat-divider class="flex-auto"></mat-divider>
+          <small class="text-xs mx-2">OR</small>
+          <mat-divider class="flex-auto"></mat-divider>
+        </div>
+        <div class="flex flex-col items-center w-full">
+            <button color="accent" mat-stroked-button aria-label="Sign in Facebook button" aria-details="Sign in with Facebook">
+                <mat-icon>facebook</mat-icon>
+                Continue with Facebook
+            </button>
+            <span class="py-2"></span>
+            <button color="accent" mat-stroked-button aria-label="Sign in Google button" aria-details="Sign in with Google">
+                Continue with Google
+            </button>
+        </div>
+      </div>
+  
+      <!-- Form Switch -->
+      <div class="flex flex-col items-center w-full bg-container rounded-xl md:shadow-lg p-6 my-6 text-sm" style="color: var(--color-accent);">
+        <ng-container *ngIf="isSignIn; else signInTemplate">
+            <p>Need an account? <a class="ml-1 text-blue font-bold" routerLink="/accounts/signup">Sign Up</a></p>
+        </ng-container>
+        <ng-template #signInTemplate>
+            <p>Already got an account? <a class="ml-1 text-blue font-bold" routerLink="/accounts/authenticate">Sign In</a></p>
+        </ng-template>
+        
+      </div>
+    </div>
+  </div>
+  

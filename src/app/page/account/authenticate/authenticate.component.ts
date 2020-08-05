@@ -3,8 +3,11 @@ import { Title } from '@angular/platform-browser';
 import { Config } from '@alexandria/config/alexandria.config';
 import { AuthService } from '@alexandria/service/auth/auth.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
+import { MatDialog } from '@angular/material/dialog';
+import { TemporalPasswordDialogComponent } from './dialog/temporal-password/temporal-password-dialog.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-authenticate',
@@ -14,10 +17,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AuthenticateComponent implements OnInit, OnDestroy {
   // rxJS
   private subject$: Subject<void> = new Subject();
+  // Data
+  private cognitoUser: CognitoUser;
   // UI
   public isHandling = false;
   public isCredIncorrect = false;
-  public isPwdHidding = false;
+  public isPwdHidding = true;
   // Sign In Form
   public isSignIn = true;
   public signInFormGroup = new FormGroup({
@@ -25,7 +30,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
-  constructor(private title: Title, private auth: AuthService) {}
+  constructor(private title: Title, public dialog: MatDialog, private auth: AuthService) {}
 
   ngOnInit(): void {
     this.title.setTitle(`Sign In • ${Config.Name}`);
@@ -39,15 +44,53 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
   onSignIn(): void {
     if (!this.isHandling) {
       this.isHandling = true;
-      this.auth.signIn(this.signInFormGroup.get('username').value, this.signInFormGroup.get('password').value)
-        .pipe(takeUntil(this.subject$)).subscribe(session => {
-          console.log(session.getAccessToken().payload);
-        }, err => {
+      const username = this.signInFormGroup.get('username').value;
+      const password = this.signInFormGroup.get('password').value;
+
+      this.cognitoUser = this.auth.getCognitoUser(username);
+      // cognitoUser.getSignInUserSession();
+
+      this.cognitoUser.authenticateUser(new AuthenticationDetails({
+        Username: username,
+        Password: password
+      }), {
+        onSuccess: (session, isMFA) => {
           this.isHandling = false;
-          this.isCredIncorrect = err.code === 'NotAuthorizedException' ? true : false;
-        }, () => {
+          console.log(this.cognitoUser.getSignInUserSession());
+        },
+        newPasswordRequired: (userAttr, reqAttr) => {
+          this.onForceChangePassword(reqAttr);
+        },
+        mfaRequired: (name, params) => {
           this.isHandling = false;
-        });
+        },
+        onFailure: (err) => {
+          console.error(err);
+          this.isCredIncorrect = true;
+          this.isHandling = false;
+        }
+      });
     }
+  }
+
+  onForceChangePassword(reqAttr: any): void {
+    const dialogRef = this.dialog.open(TemporalPasswordDialogComponent, {
+      ariaLabel: 'Change temporary password',
+      data: { password: '' }
+    });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((newPassword: string) => {
+      if (newPassword !== '') {
+        this.cognitoUser.completeNewPasswordChallenge(newPassword, reqAttr, {
+          onSuccess: s => {
+            this.isHandling = false;
+          },
+          onFailure: err => {
+            console.error(err);
+            this.isHandling = false;
+          }
+        });
+      }
+    });
   }
 }
