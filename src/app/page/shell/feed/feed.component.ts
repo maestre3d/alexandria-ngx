@@ -16,7 +16,7 @@ import { TrendingKind } from '@alexandria/enum/trending-kind.enum';
 import { IHorizontalItemProps } from '@alexandria/common/interface/horizontal-item.interface';
 import { AuthService } from '@alexandria/service/auth/auth.service';
 import { IUser } from '@alexandria/domain/entity/user.entity';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { ThemeKind } from '@alexandria/enum/theme.enum';
 import { toggle } from '@alexandria/common/store/action/theme.action';
 import { Config } from '@alexandria/config/alexandria.config';
@@ -36,6 +36,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   public news$: Observable<Array<IHorizontalItemProps>>;
   public trending$: Observable<Array<IVerticalItemProps>>;
   public user: IUser;
+  public appName = Config.Name;
 
   constructor(private themeService: ThemeService, public adService: AdsService, private title: Title,
               private historyService: HistoryService, public notificationService: NotificationsService,
