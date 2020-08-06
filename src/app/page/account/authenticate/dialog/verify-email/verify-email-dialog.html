@@ -18,7 +18,7 @@
   <button mat-button (click)="onNoClick()" aria-label="Cancel email verification" aria-details="Cancel the current email verification operation" tabindex="3">
     Skip
   </button>
-  <button mat-flat-button color="primary" [mat-dialog-close]="codeForm.value" cdkFocusInitial aria-label="Proceed email verification"
+  <button mat-flat-button color="primary" [mat-dialog-close]="codeForm.value" cdkFocusInitial aria-label="Proceed email verification" [disabled]="!codeForm.valid"
     aria-details="Proceed with the current verify email operation" tabindex="2">
     Confirm email
   </button>
