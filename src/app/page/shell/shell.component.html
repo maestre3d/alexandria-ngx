@@ -1,6 +1,8 @@
 <div mat-background class="w-full h-full wrapper flex flex-col items-center">
   <div class="hidden fixed w-full h-20 app-bg-accent md:flex md:flex-col md:justify-center md:items-center md:z-10"
     *ngIf="mobileQuery.matches">
+
+    <!-- Desktop navbar -->
     <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-6xl md:px-4">
       <a routerLink="/">
         <span class="font-black text-2xl font-display">{{appName}}</span>
@@ -15,7 +17,8 @@
               (click)="searchValue=''">
               <mat-icon>close</mat-icon>
             </button>
-            <mat-icon matSuffix class="ml-2 mb-1" aria-hidden="false" color="accent" aria-label="Search icon">search</mat-icon>
+            <mat-icon matSuffix class="ml-2 mb-1" aria-hidden="false" color="accent" aria-label="Search icon">search
+            </mat-icon>
           </span>
         </mat-form-field>
       </div>
@@ -35,43 +38,18 @@
           aria-label="Profile menu button" [matMenuTriggerFor]="menu">
           <img aria-hidden="false" aria-label="Profile icon" alt="Your profile picture"
             style="height: 24px; width: 24px;" class="object-cover rounded-full"
-            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80" />
+            [src]="user && user.image && user.image !== '' ? user.image+'?d=100x100' : 'https://cdn.damascus-engineering.com/alexandria/user/generic-male.jpeg?d=100x100'" />
         </button>
       </div>
     </div>
   </div>
-  <mat-menu #menu="matMenu" xPosition="before" class="px-2 rounded-xl">
-    <a mat-menu-item routerLinkActive="active" routerLink="/me" class="rounded-lg mb-2" aria-label="Profile link">
-      <mat-icon fontSet="material-icons-outlined" color="accent">account_circle</mat-icon>
-      <span class="font-body font-bold accent">Me</span>
-    </a>
-    <a mat-menu-item routerLinkActive="active" class="text-sm" class="rounded-lg mb-2" routerLink="/collections"
-      aria-label="My Collections link">
-      <mat-icon fontSet="material-icons-outlined" color="accent">bookmarks</mat-icon>
-      <span class="font-body font-bold accent">Collections</span>
-    </a>
-    <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;" (click)="onThemeChange()" color="accent"
-      aria-label="Change theme between dark or light mode">
-      <ng-container *ngIf="isDarkMode | async; else darkTemplate">
-        <mat-icon fontSet="material-icons-outlined">brightness_5</mat-icon>
-        <span class="font-body font-bold accent">Light Mode</span>
-      </ng-container>
-      <ng-template #darkTemplate>
-        <mat-icon fontSet="material-icons-outlined">brightness_4</mat-icon>
-        <span class="font-body font-bold accent">Dark Mode</span>
-      </ng-template>
-    </button>
-    <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;" color="accent"
-      aria-label="Log out button">
-      <mat-icon fontSet="material-icons-outlined">exit_to_app</mat-icon>
-      <span class="font-body accent">Log out</span>
-    </button>
-  </mat-menu>
 
+  <!-- Viewport -->
   <div class="w-full max-w-6xl pt-4 px-8 pb-24 md:pt-24 md:pb-10">
     <router-outlet></router-outlet>
   </div>
 
+  <!-- Mobile navbar -->
   <div class="fixed px-6 mb-6 bottom-0 md:hidden" *ngIf="!mobileQuery.matches">
     <div class="navbar flex justify-evenly items-center app-bg-accent shadow-md rounded-full max-w-xs px-3 py-2">
       <a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}" mat-icon-button
@@ -96,8 +74,50 @@
         aria-label="Profile menu button" [matMenuTriggerFor]="menu">
         <img aria-hidden="false" aria-label="Profile icon" alt="Your profile picture" style="height: 24px; width: 24px;"
           class="object-cover rounded-full"
-          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80" />
+          [src]="user && user.image && user.image !== '' ? user.image+'?d=100x100' : 'https://cdn.damascus-engineering.com/alexandria/user/generic-male.jpeg?d=100x100'" />
       </button>
     </div>
   </div>
+
+  <!-- Dialogs/CDK -->
+  <!-- User menu -->
+  <mat-menu #menu="matMenu" xPosition="before" class="px-2 rounded-xl">
+    <a mat-menu-item routerLinkActive="active" [routerLink]="user ? '/me': '/accounts/authenticate'" class="rounded-lg mb-2" aria-label="Profile link">
+      <mat-icon fontSet="material-icons-outlined" color="accent">account_circle</mat-icon>
+      <ng-container *ngIf="user; else userSignedTemplate">
+        <span class="font-body font-bold accent">{{user.username}}</span>
+      </ng-container>
+      <ng-template #userSignedTemplate>
+        <span class="font-body font-bold accent">Sign In</span>
+      </ng-template>
+    </a>
+    <button mat-menu-item class="text-sm rounded-none mb-2" style="border-radius: 0.5rem !important;"
+      (click)="onThemeChange()" color="accent" aria-label="Change theme between dark or light mode">
+      <mat-icon fontSet="material-icons-outlined">brightness_4</mat-icon>
+      <ng-container *ngIf="isDarkMode | async; else darkTemplate">
+        <span class="font-body font-bold accent">Light Mode</span>
+      </ng-container>
+      <ng-template #darkTemplate>
+        <span class="font-body font-bold accent">Dark Mode</span>
+      </ng-template>
+    </button>
+    <a mat-menu-item routerLinkActive="active" class="text-sm" class="rounded-lg mb-2" routerLink="/setting"
+      aria-label="My Collections link">
+      <mat-icon fontSet="material-icons-outlined" color="accent">settings</mat-icon>
+      <span class="font-body font-bold accent">Settings</span>
+    </a>
+    <!-- Authentication required -->
+    <ng-container *ngIf="user && user !== null">
+      <a mat-menu-item routerLinkActive="active" class="text-sm" class="rounded-lg mb-2" routerLink="/collection"
+        aria-label="My Collections link">
+        <mat-icon fontSet="material-icons-outlined" color="accent">bookmarks</mat-icon>
+        <span class="font-body font-bold accent">Collections</span>
+      </a>
+      <button mat-menu-item class="text-sm rounded-none" style="border-radius: 0.5rem !important;" color="accent"
+        aria-label="Log out button" (click)="onSignOut()">
+        <mat-icon fontSet="material-icons-outlined">exit_to_app</mat-icon>
+        <span class="font-body accent">Log out</span>
+      </button>
+    </ng-container>
+  </mat-menu>
 </div>

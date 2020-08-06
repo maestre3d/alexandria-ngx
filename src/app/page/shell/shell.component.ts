@@ -7,6 +7,8 @@ import { Config } from '@alexandria/config/alexandria.config';
 import { Store } from '@ngrx/store';
 import { ThemeKind } from '@alexandria/enum/theme.enum';
 import { toggle } from '@alexandria/common/store/action/theme.action';
+import { AuthService } from '@alexandria/service/auth/auth.service';
+import { IUser } from '@alexandria/domain/entity/user.entity';
 
 @Component({
   selector: 'app-shell',
@@ -19,6 +21,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   // Data
   public appName = Config.Name;
   public totalNotification: number;
+  public user: IUser = null;
   // UI
   public searchValue = '';
   public isDarkMode: Observable<boolean>;
@@ -27,7 +30,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   private mobileQueryListener: () => void;
 
   constructor(private router: Router, private routerActive: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef,
-              private mediaMatcher: MediaMatcher, private store: Store<{theme: ThemeKind}>) {
+              private mediaMatcher: MediaMatcher, private store: Store<{theme: ThemeKind}>, private authService: AuthService) {
     // Using tailwind responsive breakpoints (md)
     this.mobileQuery = mediaMatcher.matchMedia('(min-width: 768px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -48,6 +51,12 @@ export class ShellComponent implements OnInit, OnDestroy {
     this.isDarkMode = this.store.select('theme').pipe(map(theme => {
       return theme === ThemeKind.Dark ? true : false;
     }));
+
+    this.authService.getLogged().pipe(takeUntil(this.subject)).subscribe((user: IUser) => {
+      this.user = user;
+    }, (err: Error) => {
+      console.error(err);
+    });
   }
 
   ngOnDestroy(): void {
@@ -74,5 +83,12 @@ export class ShellComponent implements OnInit, OnDestroy {
 
   onThemeChange(): void {
     this.store.dispatch(toggle());
+  }
+
+  onSignOut(): void {
+    if (this.user) {
+      this.authService.logOut();
+      this.router.navigate(['/']);
+    }
   }
 }
