@@ -58,11 +58,9 @@ export class FeedComponent implements OnInit, OnDestroy {
       this.title.setTitle(`(${total}) ${Config.Name}`);
     });
 
-    this.loadAds();
-    this.loadHistory();
-    this.loadNews();
-    this.loadTrending();
     this.loadUser();
+    this.loadAds();
+    this.loadTrending();
   }
 
   ngOnDestroy(): void {
@@ -93,38 +91,42 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   private loadHistory(): void {
-    this.history$ = this.historyService.get('ca0770b6-7650-4a0e-b924-aa0396d953ac').pipe(map(r => {
-      const props: Array<IVerticalItemProps> = [];
-      r.items.forEach((item) => {
-        props.push({
-          aggregateID: item.id,
-          uri: item.kind.toLowerCase(),
-          displayName: item.name,
-          image: item.image,
-          query: item.kind === HistoryKind.Media ? {id: item.id} : '',
-          isRounded: item.kind === HistoryKind.Author,
-          isVerified: item.verified
+    this.history$ = this.historyService.get(this.user.id).pipe(map(r => {
+      if (r && r !== null) {
+        const props: Array<IVerticalItemProps> = [];
+        r.items.forEach((item) => {
+          props.push({
+            aggregateID: item.id,
+            uri: item.kind.toLowerCase(),
+            displayName: item.name,
+            image: item.image,
+            query: item.kind === HistoryKind.Media ? {id: item.id} : '',
+            isRounded: item.kind === HistoryKind.Author,
+            isVerified: item.verified
+          });
         });
-      });
-      return props;
+        return props;
+      }
     }));
   }
 
   private loadNews(): void {
     this.news$ = this.notificationService.list().pipe(map(r => {
-      const props: Array<IHorizontalItemProps> = [];
-      r.forEach((item) => {
-        props.push({
-          aggregateID: item.aggregateID,
-          uri: 'media',
-          displayName: item.title,
-          description: item.description,
-          image: item.image,
-          query: {id: item.aggregateID, notification: item.id},
-          isRounded: true
+      if (r && r !== null) {
+        const props: Array<IHorizontalItemProps> = [];
+        r.forEach((item) => {
+          props.push({
+            aggregateID: item.aggregateID,
+            uri: 'media',
+            displayName: item.title,
+            description: item.description,
+            image: item.image,
+            query: {id: item.aggregateID, notification: item.id},
+            isRounded: true
+          });
         });
-      });
-      return props;
+        return props;
+      }
     }));
   }
 
@@ -148,7 +150,11 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   private loadUser(): void {
     this.authService.getLogged().pipe(takeUntil(this.subject)).subscribe((user: IUser) => {
-      this.user = user;
+      if (user && user !== null) {
+        this.user = user;
+        this.loadHistory();
+        this.loadNews();
+      }
     }, (err: Error) => {
       console.error(err);
     });
