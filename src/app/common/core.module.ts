@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { NotificationsService } from './service/notifications/notifications.service';
 import { themeReducer } from './store/reducer/theme.reducer';
-import { credentialReducer } from './store/reducer/credential.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ThemeEffects } from '@alexandria/common/store/effect/theme.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -13,7 +12,7 @@ import { environment } from '../../environments/environment';
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({ theme: themeReducer, creds: credentialReducer }),
+    StoreModule.forRoot({ theme: themeReducer }),
     EffectsModule.forRoot([
       ThemeEffects
     ]),
