@@ -52,7 +52,6 @@ export class AuthService {
 
   logOut(): any {
     const cognitoUser = this.getCurrentUser();
-    console.log(cognitoUser);
     if (cognitoUser !== null) {
       return cognitoUser.signOut();
     }
