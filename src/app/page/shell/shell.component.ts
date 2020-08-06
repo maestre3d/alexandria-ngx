@@ -88,7 +88,7 @@ export class ShellComponent implements OnInit, OnDestroy {
   onSignOut(): void {
     if (this.user) {
       this.authService.logOut();
-      this.router.navigate(['/']);
+      window.location.reload();
     }
   }
 }
