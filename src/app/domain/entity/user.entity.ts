@@ -2,22 +2,22 @@
 export interface IUser {
   id: string;
   username: string;
-  name: string;
+  name?: string;
   middleName?: string;
-  lastName: string;
-  displayName: string;
-  password: string;
+  lastName?: string;
+  displayName?: string;
+  password?: string;
   email: string;
-  image ?: string;
-  cover ?: string;
+  image?: string;
+  cover?: string;
   // Use ISO 2-digit lang code
-  locale: string;
+  locale?: string;
   // Use ISO 2-digit country code
-  country: string;
-  createTime: Date;
-  updateTime: Date;
-  role: string;
+  country?: string;
+  createTime?: Date;
+  updateTime?: Date;
+  role?: string;
   // Denormalized counters
-  totalFollowers: number;
-  totalFollowing: number;
+  totalFollowers?: number;
+  totalFollowing?: number;
 }
