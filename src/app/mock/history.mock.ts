@@ -2,7 +2,7 @@ import { HistoryKind } from '../common/enum/history-kind.enum';
 import { IHistory } from '../domain/entity/history.entity';
 
 export const Histories: Array < IHistory > = [{
-  userID: 'ca0770b6-7650-4a0e-b924-aa0396d953ac',
+  userID: '2c592610-2441-40d3-8350-6cca694feb9c',
   items: [{
       id: 'GusZWL9VVbx1pVpepx4Cy',
       name: 'Erwin Schrödinger',

@@ -29,7 +29,7 @@ export class HistoryService {
         }
       });
 
-      observer.error(new Error('log not found'));
+      observer.next(null);
       observer.complete();
     });
   }
