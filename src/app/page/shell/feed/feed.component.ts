@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Subject, Observable, pipe } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 
 import { ThemeService } from '@alexandria/service/theme/theme.service';
@@ -16,9 +16,6 @@ import { TrendingKind } from '@alexandria/enum/trending-kind.enum';
 import { IHorizontalItemProps } from '@alexandria/common/interface/horizontal-item.interface';
 import { AuthService } from '@alexandria/service/auth/auth.service';
 import { IUser } from '@alexandria/domain/entity/user.entity';
-import { Store } from '@ngrx/store';
-import { ThemeKind } from '@alexandria/enum/theme.enum';
-import { toggle } from '@alexandria/common/store/action/theme.action';
 import { Config } from '@alexandria/config/alexandria.config';
 
 @Component({
@@ -40,8 +37,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   constructor(private themeService: ThemeService, public adService: AdsService, private title: Title,
               private historyService: HistoryService, public notificationService: NotificationsService,
-              public trendingService: TrendingService, public authService: AuthService,
-              private store: Store<{theme: ThemeKind}>) {
+              public trendingService: TrendingService, public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -66,10 +62,6 @@ export class FeedComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subject.next();
     this.subject.complete();
-  }
-
-  onClick(): void {
-    this.store.dispatch(toggle());
   }
 
   private loadAds(): void {
