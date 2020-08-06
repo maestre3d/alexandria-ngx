@@ -31,9 +31,8 @@
   </form>
 
   <!-- Custom errors -->
-  <ng-container *ngIf="isCredIncorrect">
-    <span class="animate__animated animate__fadeIn text-sm font-medium text-red-700 mb-6 truncate-line">
-      Incorrect username or password
-    </span>
-  </ng-container>
+  <span *ngIf="errMessage !== null"
+    class="animate__animated animate__fadeIn text-sm font-medium text-red-700 mb-6 max-w-full px-8">
+    {{errMessage}}
+  </span>
 </div>

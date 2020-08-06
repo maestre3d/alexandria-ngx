@@ -21,7 +21,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
   private cognitoUser: CognitoUser;
   // UI
   public isHandling = false;
-  public isCredIncorrect = false;
+  public errMessage = null;
   public isPwdHidding = true;
   // Sign In Form
   public isSignIn = true;
@@ -47,26 +47,25 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
       const username = this.signInFormGroup.get('username').value;
       const password = this.signInFormGroup.get('password').value;
 
-      this.cognitoUser = this.auth.getCognitoUser(username);
-      // cognitoUser.getSignInUserSession();
-
+      this.cognitoUser = this.auth.generateUser(username);
+      this.cognitoUser.setAuthenticationFlowType('USER_PASSWORD_AUTH');
       this.cognitoUser.authenticateUser(new AuthenticationDetails({
         Username: username,
         Password: password
       }), {
         onSuccess: (session, isMFA) => {
           this.isHandling = false;
-          console.log(this.cognitoUser.getSignInUserSession());
+          this.errMessage = null;
         },
         newPasswordRequired: (userAttr, reqAttr) => {
           this.onForceChangePassword(reqAttr);
         },
         mfaRequired: (name, params) => {
           this.isHandling = false;
+          this.errMessage = null;
         },
         onFailure: (err) => {
-          console.error(err);
-          this.isCredIncorrect = true;
+          this.errMessage = err.message;
           this.isHandling = false;
         }
       });
@@ -74,6 +73,8 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
   }
 
   onForceChangePassword(reqAttr: any): void {
+    // User created using AWS Cognito AdminAPI
+    // Needs to change password, open a dialog to get an external input
     const dialogRef = this.dialog.open(TemporalPasswordDialogComponent, {
       ariaLabel: 'Change temporary password',
       data: { password: '' }
@@ -84,9 +85,10 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
         this.cognitoUser.completeNewPasswordChallenge(newPassword, reqAttr, {
           onSuccess: s => {
             this.isHandling = false;
+            this.errMessage = null;
           },
           onFailure: err => {
-            console.error(err);
+            this.errMessage = err.message;
             this.isHandling = false;
           }
         });
