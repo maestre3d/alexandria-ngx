@@ -31,10 +31,10 @@
       <!-- Form Switch -->
       <div class="flex flex-col items-center w-full bg-container rounded-xl md:shadow-lg p-6 my-6 text-sm" style="color: var(--color-accent);">
         <ng-container *ngIf="isSignIn; else signInTemplate">
-            <p>Need an account? <a class="ml-1 text-blue font-bold" routerLink="/accounts/signup">Sign Up</a></p>
+            <p>Need an account? <a class="ml-1 text-blue font-bold" routerLink="/accounts/signup" [queryParamsHandling]="'merge'">Sign Up</a></p>
         </ng-container>
         <ng-template #signInTemplate>
-            <p>Already have an account? <a class="ml-1 text-blue font-bold" routerLink="/accounts/authenticate">Sign In</a></p>
+            <p>Already have an account? <a class="ml-1 text-blue font-bold" routerLink="/accounts/authenticate" [queryParamsHandling]="'merge'">Sign In</a></p>
         </ng-template>
         
       </div>
