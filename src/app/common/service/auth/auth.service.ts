@@ -37,13 +37,27 @@ export class AuthService {
 
   refreshSession(token: string): any {
     const cognitoUser = this.getCurrentUser();
-    cognitoUser.refreshSession(new CognitoRefreshToken({RefreshToken: token}), (err, res) => {
-      if (res) {
-        return res;
-      }
+    if (cognitoUser !== null) {
+      cognitoUser.refreshSession(new CognitoRefreshToken({RefreshToken: token}), (err, res) => {
+        if (res) {
+          return res;
+        }
 
-      return null;
-    });
+        return null;
+      });
+    }
+
+    return null;
+  }
+
+  logOut(): any {
+    const cognitoUser = this.getCurrentUser();
+    console.log(cognitoUser);
+    if (cognitoUser !== null) {
+      return cognitoUser.signOut();
+    }
+
+    return null;
   }
 
   getLogged(): Observable<IUser> {
