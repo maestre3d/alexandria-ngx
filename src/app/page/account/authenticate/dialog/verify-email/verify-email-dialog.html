@@ -1,0 +1,25 @@
+<h1 mat-dialog-title class="font-black text-xl font-body">Security step</h1>
+<div mat-dialog-content>
+  <p class="mb-4">We noticed you haven't verified your email, we suggest you to kindly verify it now.</p>
+  <mat-form-field class="w-full" appearance="outline">
+    <mat-label>Verification Code</mat-label>
+    <input matInput placeholder="Enter your verification code" tabindex="1" [formControl]="codeForm"
+      [type]="isPwdHidding ? 'password' : 'number'">
+    <button mat-button *ngIf="codeForm.value" matSuffix mat-icon-button type="button"
+      [attr.aria-pressed]="isPwdHidding" [attr.aria-label]="'Hide verification code'" (click)="isPwdHidding = !isPwdHidding">
+      <mat-icon color="accent">{{isPwdHidding ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="flex flex-col w-full justify-end items-end">
+    <button mat-stroked-button color="accent">Resend code</button>
+  </div>
+</div>
+<div mat-dialog-actions class="flex flex-row justify-evenly" style="padding-bottom: 1.25rem;">
+  <button mat-button (click)="onNoClick()" aria-label="Cancel email verification" aria-details="Cancel the current email verification operation" tabindex="3">
+    Skip
+  </button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="codeForm.value" cdkFocusInitial aria-label="Proceed email verification"
+    aria-details="Proceed with the current verify email operation" tabindex="2">
+    Confirm email
+  </button>
+</div>

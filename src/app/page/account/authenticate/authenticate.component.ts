@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TemporalPasswordDialogComponent } from './dialog/temporal-password/temporal-password-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { VerifyEmailDialogComponent } from './dialog/verify-email/verify-email-dialog.component';
 
 @Component({
   selector: 'app-authenticate',
@@ -69,6 +70,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
           this.onForceChangePassword(reqAttr);
         },
         mfaRequired: (name, params) => {
+          // Call MFA method like newPassChallenge one
           this.isHandling = false;
           this.errMessage = null;
         },
@@ -105,7 +107,60 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     });
   }
 
-  onAuthenticate(): void {
-    this.router.navigateByUrl(this.redirectURL);
+  private onAuthenticate(): void {
+    const isEmailVerified: boolean = this.cognitoUser.getSignInUserSession().getIdToken().decodePayload().email_verified;
+    if (!isEmailVerified) {
+      // If email is not verified, promp a dialog and send a verification code
+      this.cognitoUser.getAttributeVerificationCode('email', {
+        onSuccess: () => {
+          this.router.navigateByUrl(this.redirectURL);
+        },
+        onFailure: err => {
+          this.errMessage = err.message;
+        },
+        inputVerificationCode: data => {
+          this.onEmailVerify();
+        }
+      });
+    } else {
+      this.router.navigateByUrl(this.redirectURL);
+    }
+  }
+
+  private onEmailVerify(): void {
+    const dialogRef = this.dialog.open(VerifyEmailDialogComponent, {
+      ariaLabel: 'Change temporary password'
+    });
+    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((code: string) => {
+      if (!code || code === '') {
+        // User ignored
+        this.router.navigateByUrl(this.redirectURL);
+        return;
+      }
+      // Handle verify
+      this.cognitoUser.verifyAttribute('email', code, {
+        onSuccess: s => {
+          this.router.navigateByUrl(this.redirectURL);
+        },
+        onFailure: err => {
+          this.errMessage = err.message;
+        }
+      });
+    });
+  }
+
+  onForgotPassword(): void {
+    this.cognitoUser = this.auth.generateUser('INSERT_USER_HERE');
+    this.cognitoUser.forgotPassword({
+      inputVerificationCode: code => {
+
+      },
+      onSuccess: data => {
+
+      },
+      onFailure: err => {
+
+      }
+    });
   }
 }

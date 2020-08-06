@@ -9,7 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class TemporalPasswordDialogComponent implements OnInit {
   public passwordForm = new FormControl('', [
-    Validators.required, Validators.minLength(8), 
+    Validators.required, Validators.minLength(8),
     Validators.pattern('((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})')
   ]);
   public isPwdHidding = true;

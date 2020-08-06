@@ -7,16 +7,18 @@ import { SharedModule } from '@alexandria/common/shared.module';
 import { MatDividerModule } from '@angular/material/divider';
 import { TemporalPasswordDialogComponent } from './dialog/temporal-password/temporal-password-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { VerifyEmailDialogComponent } from './dialog/verify-email/verify-email-dialog.component';
 
 
 @NgModule({
-  declarations: [AuthenticateComponent, TemporalPasswordDialogComponent],
+  declarations: [AuthenticateComponent, TemporalPasswordDialogComponent, VerifyEmailDialogComponent],
   imports: [
     CommonModule,
     SharedModule,
     MatDividerModule,
     MatDialogModule,
     AuthenticateRoutingModule
-  ]
+  ],
+  entryComponents: []
 })
 export class AuthenticateModule { }
