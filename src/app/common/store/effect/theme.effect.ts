@@ -16,8 +16,7 @@ export class ThemeEffects {
                     catchError(() => of({type: '[Theme Service] Theme change failed'}))
                 )
             )
-        )
-    );
+    ));
 
     public injectTheme$ = createEffect(() => this.actions$.pipe(
         ofType(inject),
