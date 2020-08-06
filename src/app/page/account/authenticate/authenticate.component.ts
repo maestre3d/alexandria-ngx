@@ -39,7 +39,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     this.title.setTitle(`Sign In • ${Config.Name}`);
     this.route.queryParamMap.pipe(takeUntil(this.subject$)).subscribe(params => {
       // Redirect to given query or redirect to home by default
-      return this.redirectURL = params.get('redirectURL') || '%2F';
+      return this.redirectURL = params.get('redirectURL') || '/';
     });
   }
 
