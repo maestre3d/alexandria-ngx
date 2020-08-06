@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUser } from '@alexandria/domain/entity/user.entity';
-import { CognitoUserPool, CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
+import { CognitoUserPool, CognitoUser, CognitoUserSession, CognitoRefreshToken } from 'amazon-cognito-identity-js';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -20,11 +20,8 @@ export class AuthService {
     });
   }
 
-  getPool(): Observable<CognitoUserPool> {
-    return new Observable(observer => {
-      observer.next(this.userPool);
-      observer.complete();
-    });
+  getPool(): CognitoUserPool {
+    return this.userPool;
   }
 
   getCurrentUser(): CognitoUser {
@@ -35,6 +32,17 @@ export class AuthService {
     return new CognitoUser({
       Username: username,
       Pool: this.userPool
+    });
+  }
+
+  refreshSession(token: string): any {
+    const cognitoUser = this.getCurrentUser();
+    cognitoUser.refreshSession(new CognitoRefreshToken({RefreshToken: token}), (err, res) => {
+      if (res) {
+        return res;
+      }
+
+      return null;
     });
   }
 
@@ -102,10 +110,10 @@ export class AuthService {
             observer.complete();
           });
         });
+      } else {
+        observer.next(null);
+        observer.complete();
       }
-
-      observer.next(null);
-      observer.complete();
     });
   }
 }

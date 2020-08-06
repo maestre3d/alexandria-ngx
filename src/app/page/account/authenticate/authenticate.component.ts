@@ -8,6 +8,7 @@ import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import { MatDialog } from '@angular/material/dialog';
 import { TemporalPasswordDialogComponent } from './dialog/temporal-password/temporal-password-dialog.component';
 import { takeUntil } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-authenticate',
@@ -19,6 +20,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
   private subject$: Subject<void> = new Subject();
   // Data
   private cognitoUser: CognitoUser;
+  private redirectURL: string = null;
   // UI
   public isHandling = false;
   public errMessage = null;
@@ -30,10 +32,15 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
-  constructor(private title: Title, public dialog: MatDialog, private auth: AuthService) {}
+  constructor(private title: Title, public dialog: MatDialog, private auth: AuthService,
+              private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.title.setTitle(`Sign In • ${Config.Name}`);
+    this.route.queryParamMap.pipe(takeUntil(this.subject$)).subscribe(params => {
+      // Redirect to given query or redirect to home by default
+      return this.redirectURL = params.get('redirectURL') || '%2F';
+    });
   }
 
   ngOnDestroy(): void {
@@ -56,6 +63,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
         onSuccess: (session, isMFA) => {
           this.isHandling = false;
           this.errMessage = null;
+          this.onAuthenticate();
         },
         newPasswordRequired: (userAttr, reqAttr) => {
           this.onForceChangePassword(reqAttr);
@@ -86,6 +94,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
           onSuccess: s => {
             this.isHandling = false;
             this.errMessage = null;
+            this.onAuthenticate();
           },
           onFailure: err => {
             this.errMessage = err.message;
@@ -94,5 +103,9 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  onAuthenticate(): void {
+    this.router.navigateByUrl(this.redirectURL);
   }
 }
