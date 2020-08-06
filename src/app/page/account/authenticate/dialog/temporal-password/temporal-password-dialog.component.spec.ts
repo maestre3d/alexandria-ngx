@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TemporalPasswordDialogComponent } from './temporal-password-dialog.component';
 
-describe('TemporalPasswordComponent', () => {
+describe('TemporalPasswordDialogComponent', () => {
   let component: TemporalPasswordDialogComponent;
   let fixture: ComponentFixture<TemporalPasswordDialogComponent>;
 
