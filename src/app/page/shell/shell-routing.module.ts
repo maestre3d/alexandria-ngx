@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ShellComponent } from './shell.component';
+import { CredentialGuard } from '@alexandria/common/guard/credential.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +15,18 @@ const routes: Routes = [
       {
         path: 'search',
         loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+      },
+      {
+        path: 'notification',
+        canActivate: [CredentialGuard],
+      },
+      {
+        path: 'me',
+        canActivate: [CredentialGuard],
+      },
+      {
+        path: 'collection',
+        canActivate: [CredentialGuard],
       },
       {
         path: '**',
