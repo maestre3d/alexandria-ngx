@@ -8,7 +8,7 @@
         <span class="font-black text-2xl font-display">{{appName}}</span>
       </a>
       <div>
-        <mat-form-field appearance="outline" style="width: 300px;" [floatLabel]="'never'">
+        <mat-form-field id="searchField" appearance="outline" style="width: 300px;" [floatLabel]="'never'">
           <!-- <mat-label>Search</mat-label> -->
           <input matInput type="text" placeholder="Art, astrophysics, finance ..." [(ngModel)]="searchValue"
             (keyup)="onQuery($event)">
