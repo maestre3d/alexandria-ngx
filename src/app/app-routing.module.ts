@@ -10,7 +10,6 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [CredentialGuard],
     loadChildren: () => import('./page/shell/shell.module').then(m => m.ShellModule)
   },
   {
