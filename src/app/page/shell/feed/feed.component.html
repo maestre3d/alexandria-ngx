@@ -12,7 +12,8 @@
 
   <!-- Ads section -->
   <ng-container *ngIf="ads$ | async as ads">
-    <section title="Advertising section" aria-label="Advertising section" aria-details="Check out new content made for you"
+    <section title="Advertising section" aria-label="Advertising section"
+      aria-details="Check out new content made for you"
       class="flex flex-col flex-no-wrap w-full mt-4 md:mt-8 animate__animated animate__fadeIn">
       <app-list-vertical-card [props]="ads"></app-list-vertical-card>
     </section>
@@ -20,11 +21,14 @@
 
   <!-- History -->
   <ng-container *ngIf="history$ | async as history">
-    <section title="History section" aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
+    <section title="History section" aria-label="Get back in section"
+      aria-details="Get back in into your most recent consumed content"
       class="flex flex-col flex-no-wrap mt-12 animate__animated animate__fadeIn">
       <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
         <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Get back in</h2>
-        <button mat-stroked-button color="primary" (click)="onClick()">More</button>
+        <a mat-stroked-button color="primary" routerLink="/collection" [queryParams]="{id: user.id}"
+          aria-label="Go to history log button" aria-details="Press to go to history log collection page"
+          class="rounded-full" rel="canonical">More</a>
       </div>
       <app-list-vertical-item [props]="history"></app-list-vertical-item>
     </section>
@@ -36,7 +40,9 @@
       class="flex flex-col flex-no-wrap mt-8 animate__animated animate__fadeIn">
       <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
         <h2 class="w-1/2 truncate-line text-2xl font-display font-black">News</h2>
-        <a mat-stroked-button color="primary" routerLink="/notification" class="rounded-full" rel="canonical">More</a>
+        <a mat-stroked-button color="primary" routerLink="/notification" class="rounded-full"
+          aria-label="Go to notification button" aria-details="Press to go to notification page"
+          rel="canonical">More</a>
       </div>
       <app-list-horizontal-item [props]="news"></app-list-horizontal-item>
     </section>
@@ -44,11 +50,13 @@
 
   <!-- Trending -->
   <ng-container *ngIf="trending$ | async as trending">
-    <section title="Trending section" aria-label="Get back in section" aria-details="Get back in into your most recent consumed content"
+    <section title="Trending section" aria-label="Get back in section"
+      aria-details="Get back in into your most recent consumed content"
       class="flex flex-col flex-no-wrap mt-8 animate__animated animate__fadeIn">
       <div class="flex flex-row flex-no-wrap justify-between items-center w-full max-w-full">
         <h2 class="w-1/2 truncate-line text-2xl font-display font-black">Trending</h2>
-        <a mat-stroked-button color="primary" routerLink="/trending" class="rounded-full">More</a>
+        <a mat-stroked-button color="primary" routerLink="/trending" aria-label="Go to trending button"
+          aria-details="Press to go to trending page" class="rounded-full">More</a>
       </div>
       <app-list-vertical-item [props]="trending"></app-list-vertical-item>
     </section>
