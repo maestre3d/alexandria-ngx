@@ -44,7 +44,7 @@ export class TemporalPasswordDialogComponent implements OnInit {
       onSuccess: s => {
         this.isHandling = false;
         this.errorMsg = null;
-        this.dialogRef.close('ok');
+        this.dialogRef.close(true);
       },
       onFailure: err => {
         this.isHandling = false;
