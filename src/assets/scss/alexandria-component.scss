@@ -5,3 +5,23 @@ button, .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
 ::ng-deep .mat-menu-panel {
     border-radius: 16px !important;
 }
+
+::ng-deep .mat-form-field-subscript-wrapper {
+    position: inherit !important;
+}
+
+/* Small (sm) */
+@media (min-width: 640px) { /* ... */ }
+
+/* Medium (md) */
+@media (min-width: 768px) {
+    .dialog {
+        max-width: 24rem !important;
+    }
+}
+
+/* Large (lg) */
+@media (min-width: 1024px) { /* ... */ }
+
+/* Extra Large (xl) */
+@media (min-width: 1280px) { /* ... */ }
