@@ -27,7 +27,9 @@
       Sign In
     </button>
     <span class="mb-4"></span>
-    <button type="button" mat-button color="accent">Forgot password?</button>
+    <button type="button" mat-button color="accent" [disabled]="!signInFormGroup.get('username').valid"
+      aria-label="Forgot password button" aria-details="Press if you have forgotten your password, requires username"
+      (click)="onForgotPassword()">Forgot password?</button>
   </form>
 
   <!-- Custom errors -->

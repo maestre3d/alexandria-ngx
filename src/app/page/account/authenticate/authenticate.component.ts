@@ -10,6 +10,8 @@ import { TemporalPasswordDialogComponent } from './dialog/temporal-password/temp
 import { takeUntil } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { VerifyEmailDialogComponent } from './dialog/verify-email/verify-email-dialog.component';
+import { IEmailVerify } from './interface/email-verify.interface';
+import { ResetPasswordDialogComponent } from './dialog/reset-password/reset-password-dialog.component';
 
 @Component({
   selector: 'app-authenticate',
@@ -112,9 +114,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     if (!isEmailVerified) {
       // If email is not verified, promp a dialog and send a verification code
       this.cognitoUser.getAttributeVerificationCode('email', {
-        onSuccess: () => {
-          this.router.navigateByUrl(this.redirectURL);
-        },
+        onSuccess: () => {},
         onFailure: err => {
           this.errMessage = err.message;
         },
@@ -129,7 +129,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
 
   private onEmailVerify(): void {
     const dialogRef = this.dialog.open(VerifyEmailDialogComponent, {
-      ariaLabel: 'Change temporary password'
+      ariaLabel: 'Verify email'
     });
     dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((code: string) => {
       if (!code || code === '') {
@@ -150,7 +150,18 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
   }
 
   onForgotPassword(): void {
-    this.cognitoUser = this.auth.generateUser('INSERT_USER_HERE');
+    this.cognitoUser = this.auth.generateUser(this.signInFormGroup.get('username').value);
+    const dialogRef = this.dialog.open(ResetPasswordDialogComponent, {
+      ariaLabel: 'Forgot password',
+      data: this.cognitoUser,
+      panelClass: ['dialog']
+    });
+    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((res: IEmailVerify) => {
+      console.log(res);
+      // Handle verify
+    });
+    /*
+    this.cognitoUser = this.auth.generateUser(this.signInFormGroup.get('username').value);
     this.cognitoUser.forgotPassword({
       inputVerificationCode: code => {
 
@@ -161,6 +172,6 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
       onFailure: err => {
 
       }
-    });
+    });*/
   }
 }
