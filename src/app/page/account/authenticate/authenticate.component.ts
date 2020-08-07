@@ -32,7 +32,10 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
   public isSignIn = true;
   public signInFormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    password: new FormControl('', [
+      Validators.required, Validators.minLength(8),
+      Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
+    ])
   });
 
   constructor(private title: Title, public dialog: MatDialog, private auth: AuthService,
@@ -89,22 +92,13 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     // Needs to change password, open a dialog to get an external input
     const dialogRef = this.dialog.open(TemporalPasswordDialogComponent, {
       ariaLabel: 'Change temporary password',
-      data: { password: '' }
+      data: { cognitoUser: this.cognitoUser, reqAttributes: reqAttr},
+      panelClass: ['dialog']
     });
 
-    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((newPassword: string) => {
-      if (newPassword !== '') {
-        this.cognitoUser.completeNewPasswordChallenge(newPassword, reqAttr, {
-          onSuccess: s => {
-            this.isHandling = false;
-            this.errMessage = null;
-            this.onAuthenticate();
-          },
-          onFailure: err => {
-            this.errMessage = err.message;
-            this.isHandling = false;
-          }
-        });
+    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((ok: string) => {
+      if (ok === 'ok') {
+        this.onAuthenticate();
       }
     });
   }
@@ -129,7 +123,8 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
 
   private onEmailVerify(): void {
     const dialogRef = this.dialog.open(VerifyEmailDialogComponent, {
-      ariaLabel: 'Verify email'
+      ariaLabel: 'Verify email',
+      panelClass: ['dialog']
     });
     dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((code: string) => {
       if (!code || code === '') {
@@ -151,27 +146,10 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
 
   onForgotPassword(): void {
     this.cognitoUser = this.auth.generateUser(this.signInFormGroup.get('username').value);
-    const dialogRef = this.dialog.open(ResetPasswordDialogComponent, {
+    this.dialog.open(ResetPasswordDialogComponent, {
       ariaLabel: 'Forgot password',
       data: this.cognitoUser,
       panelClass: ['dialog']
     });
-    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((res: IEmailVerify) => {
-      console.log(res);
-      // Handle verify
-    });
-    /*
-    this.cognitoUser = this.auth.generateUser(this.signInFormGroup.get('username').value);
-    this.cognitoUser.forgotPassword({
-      inputVerificationCode: code => {
-
-      },
-      onSuccess: data => {
-
-      },
-      onFailure: err => {
-
-      }
-    });*/
   }
 }
