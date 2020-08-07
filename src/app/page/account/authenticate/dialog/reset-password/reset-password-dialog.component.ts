@@ -26,6 +26,7 @@ export class ResetPasswordDialogComponent implements OnInit, AfterViewInit {
   public isCodeHidding = true;
   public isPwdHidding = true;
   public isConfirmHidding = true;
+  public isHandling = false;
   public errorMsg = null;
 
   constructor(public dialogRef: MatDialogRef<ResetPasswordDialogComponent>,
@@ -39,21 +40,6 @@ export class ResetPasswordDialogComponent implements OnInit, AfterViewInit {
     this.requestPasswordReset();
   }
 
-  onConfirm(): void {
-    this.cognitoUser.confirmPassword(this.formGroup.get('code').value, this.formGroup.get('password').value, {
-      onSuccess: () => {
-        this.dialogRef.close();
-      },
-      onFailure: err => {
-        this.errorMsg = err.message;
-      }
-    });
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   requestPasswordReset(): void {
     this.cognitoUser.forgotPassword({
       inputVerificationCode: code => {
@@ -64,6 +50,24 @@ export class ResetPasswordDialogComponent implements OnInit, AfterViewInit {
         this.errorMsg = err.message;
       }
     });
+  }
+
+  onConfirm(): void {
+    this.isHandling = true;
+    this.cognitoUser.confirmPassword(this.formGroup.get('code').value, this.formGroup.get('password').value, {
+      onSuccess: () => {
+        this.isHandling = false;
+        this.dialogRef.close();
+      },
+      onFailure: err => {
+        this.isHandling = false;
+        this.errorMsg = err.message;
+      }
+    });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
