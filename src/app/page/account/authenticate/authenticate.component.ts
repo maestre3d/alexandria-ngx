@@ -96,8 +96,8 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
       panelClass: ['dialog']
     });
 
-    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((ok: string) => {
-      if (ok === 'ok') {
+    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((ok: boolean) => {
+      if (ok) {
         this.onAuthenticate();
       }
     });
@@ -107,41 +107,17 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     const isEmailVerified: boolean = this.cognitoUser.getSignInUserSession().getIdToken().decodePayload().email_verified;
     if (!isEmailVerified) {
       // If email is not verified, promp a dialog and send a verification code
-      this.cognitoUser.getAttributeVerificationCode('email', {
-        onSuccess: () => {},
-        onFailure: err => {
-          this.errMessage = err.message;
-        },
-        inputVerificationCode: data => {
-          this.onEmailVerify();
-        }
+      const dialogRef = this.dialog.open(VerifyEmailDialogComponent, {
+        ariaLabel: 'Verify email',
+        data: this.cognitoUser,
+        panelClass: ['dialog']
+      });
+      dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe(() => {
+        this.router.navigateByUrl(this.redirectURL);
       });
     } else {
       this.router.navigateByUrl(this.redirectURL);
     }
-  }
-
-  private onEmailVerify(): void {
-    const dialogRef = this.dialog.open(VerifyEmailDialogComponent, {
-      ariaLabel: 'Verify email',
-      panelClass: ['dialog']
-    });
-    dialogRef.afterClosed().pipe(takeUntil(this.subject$)).subscribe((code: string) => {
-      if (!code || code === '') {
-        // User ignored
-        this.router.navigateByUrl(this.redirectURL);
-        return;
-      }
-      // Handle verify
-      this.cognitoUser.verifyAttribute('email', code, {
-        onSuccess: s => {
-          this.router.navigateByUrl(this.redirectURL);
-        },
-        onFailure: err => {
-          this.errMessage = err.message;
-        }
-      });
-    });
   }
 
   onForgotPassword(): void {
