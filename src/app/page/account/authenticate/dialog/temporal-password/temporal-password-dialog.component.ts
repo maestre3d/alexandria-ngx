@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
-import { ICognitoRef } from '../../interface/cognito-ref.interface';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
 @Component({
   selector: 'app-temporal-password-dialog',
@@ -15,7 +15,7 @@ export class TemporalPasswordDialogComponent implements OnInit {
   public isPwdHidding = true;
 
   constructor(public dialogRef: MatDialogRef<TemporalPasswordDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: ICognitoRef) { }
+              @Inject(MAT_DIALOG_DATA) public cognitoUser: CognitoUser) { }
 
   ngOnInit(): void {
   }
